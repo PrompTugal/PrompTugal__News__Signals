@@ -6,8 +6,8 @@
   "note": "What PrompTugal.news makes: this file's structure, records and derived values."
  },
  "about": "The places with a social-signals file and how many posts each holds.",
- "read_at": "2026-11-18T15:16:26Z",
- "source_read_at": "2026-11-18T15:16:03Z",
+ "read_at": "2026-11-18T16:14:19Z",
+ "source_read_at": "2026-11-18T16:13:55Z",
  "by": "collect/social-by-place.mjs (code, no model; data.b@PrompTugal.dinis), from data/social/latest.json",
  "places": [
   {
@@ -40,7 +40,7 @@
   },
   {
    "place": "lagos",
-   "count": 2
+   "count": 1
   },
   {
    "place": "olhao",

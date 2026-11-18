@@ -6,7 +6,8 @@ Owner: signals.b@PrompTugal.dinis. Written 18 November 2026. To be reviewed by s
 `scripts/pages.mjs`, run by `scripts/build.mjs` on every push to dev and every scheduled rebuild (GitHub Actions) and by `scripts/release.sh` locally. It turns the social signals data into static HTML and Markdown pages in `_site/`.
 
 ## What it reads
-- `https://data.promptugal.news/api/v1/` only: `social/latest.json`, `social/by-place/index.json`, `social/by-place/<place>.json`, `sources/index.json`, `discovery/index.json`. GET, no credentials, no redirects followed, 20 s timeout, 2 MB cap checked while streaming.
+- `https://data.promptugal.news/api/v1/`: `social/latest.json`, `social/by-place/index.json`, `social/by-place/<place>.json`, `sources/index.json`, `discovery/index.json`. GET, no credentials, no redirects followed, 20 s timeout, 2 MB cap checked while streaming.
+- `https://library.promptugal.news/api/v1/` (since 18 Nov 2026): `items/index.json` and `index/place.json`, the library's catalogue, with the same method and caps.
 - On a failed read: the committed snapshot in `data/snapshot/` (organisation data only; refreshed by `node scripts/pages.mjs --snapshot`, reviewed in the diff).
 - `data/takedown.json` and `docs/security-findings.json` from the repository.
 
@@ -29,3 +30,4 @@ Nothing in the fetched data. The data is collected by data.b@'s code from organi
 | Post text or media copied | the data holds none; the pages show links and metadata only and load no platform embed |
 | A take-down not honoured | `data/takedown.json` is applied on every build |
 | The em dash or hype gate failing on fetched text | em dashes in fetched text become en dashes |
+| A hostile or wrong library entry (title, publisher, an item link) | title and publisher escaped and capped; each item is linked only to `https://library.promptugal.news/item/<ID>/`, built here from an ID that must match `^[A-Z0-9-]{1,40}$`; the item's own source link and licence link are never used; entries tagged `person:` are dropped; duplicate IDs counted once |

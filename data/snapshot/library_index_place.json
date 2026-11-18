@@ -1,0 +1,32 @@
+{
+ "license": {
+  "name": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0/",
+  "holder": "PrompTugal.news",
+  "note": "What the library makes: the catalogue, its cards, indexes and graph. Each item keeps its source's licence, linked on its card."
+ },
+ "index": "place",
+ "entries": {
+  "place:lisbon": {
+   "label": "Lisbon",
+   "items": [
+    "WS26-2026-0008",
+    "WS26-2026-0038",
+    "WS26-2026-0043",
+    "WS26-2026-0046"
+   ]
+  },
+  "place:portugal": {
+   "label": "Portugal",
+   "items": [
+    "WS26-2026-0014",
+    "WS26-2026-0015",
+    "WS26-2026-0016",
+    "WS26-2026-0019",
+    "WS26-2026-0048",
+    "WS26-2026-0049",
+    "WS26-2026-0050"
+   ]
+  }
+ }
+}

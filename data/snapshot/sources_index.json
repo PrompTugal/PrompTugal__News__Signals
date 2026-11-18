@@ -7,8 +7,8 @@
  },
  "about": "Every source PrompTugal knows of, read or not. For each one we do not read, the reason, quoted from its terms or robots.txt with the page and the date read. We respect whatever a source says; a request on the record is drafted by outreach@ and sent by a person, and the answer is kept here as written.",
  "counts": {
-  "read": 16,
-  "not-read": 41,
+  "read": 18,
+  "not-read": 74,
   "asked": 0,
   "allowed": 0,
   "refused": 0,
@@ -24,6 +24,16 @@
     "faro"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/adsb-faro.json"
+  },
+  {
+   "id": "base-gov-pt",
+   "name": "Public contracts (Portal BASE)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/base-gov-pt.json"
   },
   {
    "id": "events-pt",
@@ -590,6 +600,354 @@
     "algarve"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/telegram-algarvevents.json"
+  },
+  {
+   "id": "cordis",
+   "name": "CORDIS (EU research projects)",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cordis.json"
+  },
+  {
+   "id": "cncs-certpt",
+   "name": "CNCS and CERT.PT (Centro Nacional de Cibersegurança)",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cncs-certpt.json"
+  },
+  {
+   "id": "cnpd-decisions",
+   "name": "CNPD (Comissão Nacional de Protecção de Dados) decisions",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cnpd-decisions.json"
+  },
+  {
+   "id": "enisa",
+   "name": "ENISA (European Union Agency for Cybersecurity)",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "eu"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/enisa.json"
+  },
+  {
+   "id": "euvd",
+   "name": "EUVD, European Vulnerability Database",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "eu"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/euvd.json"
+  },
+  {
+   "id": "nvd",
+   "name": "NVD (National Vulnerability Database)",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/nvd.json"
+  },
+  {
+   "id": "cve-org",
+   "name": "CVE Program (cve.org)",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cve-org.json"
+  },
+  {
+   "id": "cisa-kev",
+   "name": "CISA Known Exploited Vulnerabilities (KEV) catalogue",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cisa-kev.json"
+  },
+  {
+   "id": "shadowserver",
+   "name": "Shadowserver Foundation (public dashboard and reports)",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/shadowserver.json"
+  },
+  {
+   "id": "cloudflare-radar",
+   "name": "Cloudflare Radar",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cloudflare-radar.json"
+  },
+  {
+   "id": "ripestat",
+   "name": "RIPEstat (RIPE NCC)",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ripestat.json"
+  },
+  {
+   "id": "ioda",
+   "name": "IODA, Internet Outage Detection and Analysis (Georgia Tech)",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ioda.json"
+  },
+  {
+   "id": "abusech-urlhaus",
+   "name": "abuse.ch URLhaus",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/abusech-urlhaus.json"
+  },
+  {
+   "id": "abusech-threatfox",
+   "name": "abuse.ch ThreatFox",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/abusech-threatfox.json"
+  },
+  {
+   "id": "blog-mt-newsletter",
+   "name": "MT newsletter (matosinhos.tech)",
+   "kind": "newsletter",
+   "status": "not-read",
+   "places": [
+    "matosinhos",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-mt-newsletter.json"
+  },
+  {
+   "id": "blog-matosinhos-tech",
+   "name": "matosinhos.tech",
+   "kind": "newsletter",
+   "status": "not-read",
+   "places": [
+    "matosinhos",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-matosinhos-tech.json"
+  },
+  {
+   "id": "blog-beyond-the-mainframe",
+   "name": "Beyond the Mainframe (Laika Ventures)",
+   "kind": "newsletter",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "lisbon"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-beyond-the-mainframe.json"
+  },
+  {
+   "id": "blog-start-lisbon",
+   "name": "START Lisbon's Newsletter",
+   "kind": "newsletter",
+   "status": "not-read",
+   "places": [
+    "lisbon"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-start-lisbon.json"
+  },
+  {
+   "id": "blog-henrique-cruz",
+   "name": "Henrique's Newsletter (Henrique Cruz)",
+   "kind": "newsletter",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-henrique-cruz.json"
+  },
+  {
+   "id": "blog-aventar",
+   "name": "Aventar",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-aventar.json"
+  },
+  {
+   "id": "blog-blasfemias",
+   "name": "Blasfémias",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-blasfemias.json"
+  },
+  {
+   "id": "blog-o-insurgente",
+   "name": "O Insurgente",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-o-insurgente.json"
+  },
+  {
+   "id": "blog-delito-de-opiniao",
+   "name": "Delito de Opinião",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-delito-de-opiniao.json"
+  },
+  {
+   "id": "blog-ladroes-de-bicicletas",
+   "name": "Ladrões de Bicicletas",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-ladroes-de-bicicletas.json"
+  },
+  {
+   "id": "blog-causa-nossa",
+   "name": "Causa Nossa",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-causa-nossa.json"
+  },
+  {
+   "id": "blog-portugal-contemporaneo",
+   "name": "Portugal Contemporâneo",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-portugal-contemporaneo.json"
+  },
+  {
+   "id": "blog-pplware",
+   "name": "Pplware",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-pplware.json"
+  },
+  {
+   "id": "blog-tugatech",
+   "name": "TugaTech",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-tugatech.json"
+  },
+  {
+   "id": "blog-shifter",
+   "name": "Shifter",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-shifter.json"
+  },
+  {
+   "id": "blog-portugalist",
+   "name": "Portugalist",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "lisbon",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-portugalist.json"
+  },
+  {
+   "id": "blog-sul-informacao",
+   "name": "Sul Informação",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-sul-informacao.json"
+  },
+  {
+   "id": "blog-unbabel",
+   "name": "Unbabel blog",
+   "kind": "blog",
+   "status": "not-read",
+   "places": [
+    "lisbon"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/blog-unbabel.json"
+  },
+  {
+   "id": "impic-dados-gov-pt",
+   "name": "IMPIC open data of the Portal BASE contracts (dados.gov.pt)",
+   "kind": "open data",
+   "status": "read",
+   "places": [
+    "lisboa",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/impic-dados-gov-pt.json"
+  },
+  {
+   "id": "base-gov-pt-portal",
+   "name": "Portal BASE (base.gov.pt), its own search and pages",
+   "kind": "public portal",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/base-gov-pt-portal.json"
   }
  ]
 }

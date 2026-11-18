@@ -9,6 +9,9 @@ import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 
 const API = 'https://data.promptugal.news/api/v1/';
+// The library's catalogue (Dinis, 18 Nov 2026, 16:00: "read the library as your catalogue too"; "always link, never copy").
+const LIB = 'https://library.promptugal.news/api/v1/', LIB_SITE = 'https://library.promptugal.news';
+const LIB_PATHS = ['items/index.json', 'index/place.json'];
 const SITE = 'https://signals.promptugal.news';
 const REPO = 'https://github.com/PrompTugal/PrompTugal__News__Signals';
 const OUT = resolve('_site');
@@ -17,21 +20,21 @@ const MAX_BYTES = 2_000_000, MAX_POSTS = 500, TIMEOUT_MS = 20_000;
 const VERSION = process.env.SITE_VERSION || 'dev';
 
 // ---------- reading the API ----------
-async function getJSON(path) {
+async function getJSON(path, base = API) {
   const ac = new AbortController(); const t = setTimeout(() => ac.abort(), TIMEOUT_MS);
   try {
-    const r = await fetch(API + path, { redirect: 'error', signal: ac.signal, headers: { 'User-Agent': 'signals.promptugal.news build (PrompTugal.news)' } });
+    const r = await fetch(base + path, { redirect: 'error', signal: ac.signal, headers: { 'User-Agent': 'signals.promptugal.news build (PrompTugal.news)' } });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const reader = r.body.getReader(); const chunks = []; let n = 0;
     for (;;) { const { done, value } = await reader.read(); if (done) break; n += value.length; if (n > MAX_BYTES) { ac.abort(); throw new Error('too large'); } chunks.push(value); }
     return JSON.parse(Buffer.concat(chunks).toString('utf8'));
   } finally { clearTimeout(t); }
 }
-const snapName = p => p.replace(/[^a-z0-9.-]+/gi, '_');
-async function read(path, notes) {
-  try { return await getJSON(path); }
+const snapName = (p, base = API) => (base === LIB ? 'library_' : '') + p.replace(/[^a-z0-9.-]+/gi, '_');
+async function read(path, notes, base = API) {
+  try { return await getJSON(path, base); }
   catch (e) {
-    const f = join(SNAP, snapName(path));
+    const f = join(SNAP, snapName(path, base));
     if (!existsSync(f)) { notes.push(`${path}: not read (${e.message}) and no snapshot`); return null; }
     notes.push(`${path}: not read (${e.message}); the committed snapshot was used`);
     return JSON.parse(readFileSync(f, 'utf8'));
@@ -152,7 +155,8 @@ async function snapshot() {
   const idx = await getJSON('social/by-place/index.json');
   for (const p of (idx.places || [])) if (okSlug(p.place, 60)) paths.push(`social/by-place/${p.place}.json`);
   for (const p of paths) writeFileSync(join(SNAP, snapName(p)), JSON.stringify(await getJSON(p), null, 1) + '\n');
-  console.log(`snapshot: ${paths.length} files in ${SNAP}/`);
+  for (const p of LIB_PATHS) writeFileSync(join(SNAP, snapName(p, LIB)), JSON.stringify(await getJSON(p, LIB), null, 1) + '\n');
+  console.log(`snapshot: ${paths.length + LIB_PATHS.length} files in ${SNAP}/`);
 }
 
 async function main() {
@@ -165,6 +169,22 @@ async function main() {
   const placeIdx = await read('social/by-place/index.json', notes) || { places: [] };
   const register = await read('sources/index.json', notes) || { entries: [], counts: {} };
   const discovery = await read('discovery/index.json', notes) || { answers: [] };
+  // the library: items linked by their library page only (never the source's link), publisher and title as catalogued
+  const libItems = await read('items/index.json', notes, LIB), libPlace = await read('index/place.json', notes, LIB);
+  const lib = new Map();
+  for (const x of (Array.isArray(libItems?.items) ? libItems.items : []).slice(0, 2000)) {
+    if (!x || typeof x.id !== 'string' || !/^[A-Z0-9-]{1,40}$/.test(x.id) || lib.has(x.id) || !clean(x.title)) continue;
+    // an item about a person is left out here until a person's entry is checked against the widened line (18 Nov 2026, 15:35)
+    const tagsOf = v => (Array.isArray(v) ? v : []).filter(a => typeof a === 'string');
+    if ([...tagsOf(x.about), ...tagsOf(x.tags)].some(a => a.startsWith('person:'))) continue;
+    const about = tagsOf(x.about);
+    lib.set(x.id, { id: x.id, title: clean(x.title, 140), kind: clean(x.kind, 40), publisher: clean(x.publisher, 100), about, page: `${LIB_SITE}/item/${x.id}/` });
+  }
+  const libFor = ids => [...new Set(ids)].map(id => lib.get(id)).filter(Boolean);
+  const libPlaceIds = p => { const e = libPlace?.entries; const k = 'place:' + p; return e && Object.hasOwn(e, k) && Array.isArray(e[k].items) ? e[k].items : []; };
+  const LIB_PLACE = { lisboa: 'lisbon' };   // the library's place names where they differ from ours
+  const libSection = (items, what) => items.length ? `<h2>In the library</h2><p>${items.length} items the <a href="${LIB_SITE}/">PrompTugal.news library</a> holds ${what}, each linked to its library card, where the source and its licence are shown (source: library.promptugal.news <a href="${LIB}items/index.json">items/index.json</a>; the catalogue is CC BY 4.0, each item keeps its source's licence).</p><ul class="lib">${items.map(i => `<li><a href="${esc(i.page)}">${esc(i.title)}</a> <span class="kind">${esc(i.kind)}</span> <span class="acc">${esc(i.publisher)}</span></li>`).join('')}</ul>` : '';
+  const libMD = items => items.length ? ['', '## In the library', ...items.map(i => `- [${mdText(i.title)}](${i.page}), ${mdText(i.kind)}, ${mdText(i.publisher)}`)] : [];
   let blocked = []; try { blocked = JSON.parse(readFileSync('data/takedown.json', 'utf8')).entries || []; } catch (e) { throw new Error('data/takedown.json is missing or not JSON: ' + e.message); }
   const blockedAcc = new Set(blocked.filter(b => b.account).map(b => `${b.platform}:${b.account}`)), blockedUrl = new Set(blocked.filter(b => b.url).map(b => b.url));
   const readAt = when(latest.read_at); const state = { readAt: readAt ? fmt(readAt) : 'at an unknown time', fallback: notes.some(n => n.startsWith('social/latest.json')) };
@@ -218,9 +238,10 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
     const ps = byPlace && Array.isArray(byPlace.posts) ? byPlace.posts.slice(0, MAX_POSTS).map(r => { const u = postLink(r); return posts.find(p => p.url === u); }).filter(Boolean) : posts.filter(p => p.places.includes(pl));
     const d = disc.get(pl);
     const found = d && d.ok ? `<h2>Events found through Perplexity</h2><p>On ${esc(clean(d.date, 10))}, Perplexity (${esc(clean(d.model, 40))}, through OpenRouter) named ${Number(d.items) || 0} events in ${esc(placeName(pl))} and cited ${Number(d.citations) || 0} pages (source: data.promptugal.news <a href="${API}discovery/index.json">discovery/index.json</a>). Found through Perplexity: each is a claim to check, shown with its evidence on <a href="https://events.promptugal.news/" rel="noopener">events.promptugal.news</a>; nothing from the answer is published here as content.</p>` : '';
-    const body = `<p class="lede">Posts by organisations' official accounts that name ${esc(placeName(pl))}, or (when a post names no place) by an organisation that covers it. Source: data.promptugal.news <a href="${API}social/by-place/${pl}.json">social/by-place/${pl}.json</a>.</p>${list(ps)}${found}`;
+    const libItemsHere = libFor(libPlaceIds(Object.hasOwn(LIB_PLACE, pl) ? LIB_PLACE[pl] : pl));
+    const body = `<p class="lede">Posts by organisations' official accounts that name ${esc(placeName(pl))}, or (when a post names no place) by an organisation that covers it. Source: data.promptugal.news <a href="${API}social/by-place/${pl}.json">social/by-place/${pl}.json</a>.</p>${list(ps)}${found}${libSection(libItemsHere, `about ${esc(placeName(pl))}`)}`;
     write(`places/${pl}/`, shell({ rel: `places/${pl}/`, title: `${placeName(pl)}: signals | PrompTugal.news Signals`, desc: `What organisations are posting about ${placeName(pl)}, by link.`, h1: placeName(pl), body, state, current: 'places/' }),
-      md(placeName(pl), ps.map(postMD), state), placeName(pl), 'place');
+      md(placeName(pl), [...ps.map(postMD), ...libMD(libItemsHere)], state), placeName(pl), 'place');
   }
   write('places/', shell({ rel: 'places/', title: 'Places | PrompTugal.news Signals', desc: 'Signals by place.', h1: 'Places', state, current: 'places/',
     body: `<ul class="cols">${placeList.map(p => `<li><a href="/places/${p}/">${esc(placeName(p))}</a> <span class="n">${posts.filter(x => x.places.includes(p)).length}</span></li>`).join('')}</ul><p class="small">The number is posts that name the place in their text (source: social/latest.json); a place page also lists posts by organisations that cover it.</p>` }),
@@ -230,9 +251,10 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
   const topicList = [...new Set([...Object.keys(TOPICS), ...posts.flatMap(p => p.topics)])];
   for (const t of topicList) {
     const ps = posts.filter(p => p.topics.includes(t));
-    const body = `<p class="lede">Posts by organisations' official accounts whose text matched the topic ${esc(topicName(t))} (matched by the collector's keywords, by code, no model). Source: data.promptugal.news <a href="${API}social/latest.json">social/latest.json</a>.</p>${list(ps)}`;
+    const libT = t === 'web-summit' ? [...lib.values()].filter(i => i.about.includes('event:web-summit-lisbon-2026')) : [];
+    const body = `<p class="lede">Posts by organisations' official accounts whose text matched the topic ${esc(topicName(t))} (matched by the collector's keywords, by code, no model). Source: data.promptugal.news <a href="${API}social/latest.json">social/latest.json</a>.</p>${list(ps)}${libSection(libT, 'about Web Summit Lisbon 2026')}`;
     write(`topics/${t}/`, shell({ rel: `topics/${t}/`, title: `${topicName(t)}: signals | PrompTugal.news Signals`, desc: `What organisations are posting about ${topicName(t)} in Portugal, by link.`, h1: topicName(t), body, state, current: 'topics/' }),
-      md(topicName(t), ps.map(postMD), state), topicName(t), 'topic');
+      md(topicName(t), [...ps.map(postMD), ...libMD(libT)], state), topicName(t), 'topic');
   }
   write('topics/', shell({ rel: 'topics/', title: 'Topics | PrompTugal.news Signals', desc: 'Signals by topic.', h1: 'Topics', state, current: 'topics/',
     body: `<ul class="cols">${topicList.map(t => `<li><a href="/topics/${t}/">${esc(topicName(t))}</a> <span class="n">${posts.filter(p => p.topics.includes(t)).length}</span></li>`).join('')}</ul>` }),
@@ -264,6 +286,8 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
 <li>Every post carries its licence: "the platform's terms", linked, with the organisation as holder. What we make (these pages, the structure of the data) is <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
 <li>A post is a signal to check, not a verified fact. The topics and places it is "evidence for" are matched by keywords, by code.</li>
 <li>Found through Perplexity: events named by Perplexity (through OpenRouter) are evidence only, shown with their links on events.promptugal.news and credited.</li></ul>
+<h2>The library</h2>
+<p>The second source read when this site is built: the catalogue of <a href="${LIB_SITE}/">library.promptugal.news</a> (<a href="${LIB}items/index.json">items/index.json</a> and <a href="${LIB}index/place.json">index/place.json</a>), library.b@PrompTugal.dinis's. Read at every build (every push and every 6 hours), with the same checks as the data; a committed snapshot is used if a read fails. We show each item's title, kind and publisher and link only to its library card, which shows the source and its licence. The catalogue is CC BY 4.0; each item keeps its source's licence. ${lib.size} items read at this build.</p>
 <h2>When it was read</h2>
 <p>Social data read by the collector ${esc(state.readAt)}; collected every 6 hours. This site rebuilds every 6 hours and the front page also refreshes from the API in your browser. ${notes.length ? `This build: ${notes.map(esc).join('; ')}.` : 'This build read every file live.'}</p>
 <p>Dropped by this build's checks: ${Object.entries(dropped).map(([k, v]) => `${v} for ${k.replace('_', ' ')}`).join(', ')}.</p>

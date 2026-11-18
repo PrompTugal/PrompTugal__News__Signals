@@ -54,6 +54,15 @@
    "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the first release",
    "fix": "the commit after 66690d9 on dev: \"AppSec post-review fixes\"; the handle in the link must equal the account",
    "state": "fixed"
+  },
+  {
+   "title": "Library items tagged with a person were still listed (only the tag was removed)",
+   "severity": "medium",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-18",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before release",
+   "fix": "the same commit that added the library section: an item with a person: entry in about or tags is left out",
+   "state": "fixed"
   }
  ]
 }
