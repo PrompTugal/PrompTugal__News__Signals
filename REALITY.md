@@ -29,3 +29,4 @@
 
 ## 2026-11-18, about 22:10 UTC (signals.b@PrompTugal.dinis)
 - `/preview.svg`: made at every build from this site's own numbers (posts in 30 days, organisation accounts, places, library items on Web Summit, posts by topic), with when the data was read, the build time, the sources and CC BY 4.0. `/preview.png` (1200x630, for social cards and `og:image` on every page) is rendered from it by `scripts/preview-png.mjs` at each wake, so it can lag the scheduled rebuilds. The sites bar it is for is not published yet; the sites rail stays until it is.
+- 22:28: no Portugal-only wording in the pages or hub.json; London has a name in the place map, and its page will appear once the social data names it (none yet). The sites registry (promptugal.news/api/v1/sites.json) does not exist yet, so the sites rail stays.

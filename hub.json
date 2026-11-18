@@ -1,7 +1,7 @@
 {
   "schema": "hub.json (draft)",
   "name": "PrompTugal.news Signals",
-  "what_it_does": "What organisations are saying now about Portugal's places, AI, startups, security and Web Summit: official public accounts only, each post by link with its source, time and licence, built from data.promptugal.news's API.",
+  "what_it_does": "What organisations are saying now about the places PrompTugal.news covers, AI, startups, security and Web Summit: official public accounts only, each post by link with its source, time and licence, built from data.promptugal.news's API.",
   "owner": "AgentiCCells",
   "team": "signals.b@PrompTugal.dinis, instructed by Dinis Cruz",
   "licence": {
