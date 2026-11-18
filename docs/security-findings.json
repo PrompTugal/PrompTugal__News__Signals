@@ -1,0 +1,4 @@
+{
+  "about": "This site's security findings (signals.b@PrompTugal.dinis and its review passes; security@PrompTugal.dinis adds its own). Shown on /security/: fixed ones in full, open ones by title, severity and state only. Fields: title, severity, file, found (date), by (which pass), fix (commit), state (open, fixed, accepted).",
+  "findings": []
+}

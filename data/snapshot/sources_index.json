@@ -1,0 +1,595 @@
+{
+ "license": {
+  "name": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0/",
+  "holder": "PrompTugal.news",
+  "note": "What PrompTugal.news makes: this file's structure, records and derived values."
+ },
+ "about": "Every source PrompTugal knows of, read or not. For each one we do not read, the reason, quoted from its terms or robots.txt with the page and the date read. We respect whatever a source says; a request on the record is drafted by outreach@ and sent by a person, and the answer is kept here as written.",
+ "counts": {
+  "read": 16,
+  "not-read": 41,
+  "asked": 0,
+  "allowed": 0,
+  "refused": 0,
+  "no-answer": 0
+ },
+ "entries": [
+  {
+   "id": "adsb-faro",
+   "name": "Flights around Faro airport",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "faro"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/adsb-faro.json"
+  },
+  {
+   "id": "events-pt",
+   "name": "Events in Portugal, by place",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/events-pt.json"
+  },
+  {
+   "id": "ipma-city-forecasts",
+   "name": "IPMA daily forecasts by place",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ipma-city-forecasts.json"
+  },
+  {
+   "id": "ipma-fire-risk",
+   "name": "IPMA fire risk",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ipma-fire-risk.json"
+  },
+  {
+   "id": "ipma-observations",
+   "name": "IPMA station observations",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ipma-observations.json"
+  },
+  {
+   "id": "ipma-sea",
+   "name": "IPMA sea forecast",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ipma-sea.json"
+  },
+  {
+   "id": "ipma-uv",
+   "name": "IPMA UV index",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ipma-uv.json"
+  },
+  {
+   "id": "ipma-warnings",
+   "name": "IPMA weather warnings",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ipma-warnings.json"
+  },
+  {
+   "id": "meteoalarm-pt",
+   "name": "MeteoAlarm CAP feed for Portugal",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/meteoalarm-pt.json"
+  },
+  {
+   "id": "social",
+   "name": "Social signals: organisations' public posts, by link",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/social.json"
+  },
+  {
+   "id": "storm-charles-archive",
+   "name": "Storm Charles archive",
+   "kind": "archive",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/storm-charles-archive.json"
+  },
+  {
+   "id": "google-news",
+   "name": "Google News (search RSS feeds)",
+   "kind": "search or AI service",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/google-news.json"
+  },
+  {
+   "id": "x-twitter",
+   "name": "X (Twitter)",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/x-twitter.json"
+  },
+  {
+   "id": "meta",
+   "name": "Meta (Instagram and Facebook)",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/meta.json"
+  },
+  {
+   "id": "linkedin",
+   "name": "LinkedIn",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/linkedin.json"
+  },
+  {
+   "id": "tiktok",
+   "name": "TikTok",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/tiktok.json"
+  },
+  {
+   "id": "bluesky",
+   "name": "Bluesky (AT Protocol public API)",
+   "kind": "social network",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/bluesky.json"
+  },
+  {
+   "id": "mastodon",
+   "name": "Mastodon (mastodon.social as the example instance)",
+   "kind": "social network",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/mastodon.json"
+  },
+  {
+   "id": "youtube",
+   "name": "YouTube (Data API)",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/youtube.json"
+  },
+  {
+   "id": "perplexity",
+   "name": "Perplexity",
+   "kind": "search or AI service",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/perplexity.json"
+  },
+  {
+   "id": "ana",
+   "name": "ANA Aeroportos de Portugal",
+   "kind": "airport operator",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "lisboa",
+    "faro"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ana.json"
+  },
+  {
+   "id": "turismo-portugal",
+   "name": "Turismo de Portugal (visitportugal.com)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/turismo-portugal.json"
+  },
+  {
+   "id": "visitalgarve",
+   "name": "Região de Turismo do Algarve (visitalgarve.pt)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/visitalgarve.json"
+  },
+  {
+   "id": "visitlisboa",
+   "name": "Visit Lisboa (visitlisboa.com)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "lisboa"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/visitlisboa.json"
+  },
+  {
+   "id": "ccdr-algarve",
+   "name": "CCDR Algarve",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ccdr-algarve.json"
+  },
+  {
+   "id": "ansr",
+   "name": "ANSR (Autoridade Nacional de Segurança Rodoviária)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ansr.json"
+  },
+  {
+   "id": "cp",
+   "name": "CP - Comboios de Portugal",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cp.json"
+  },
+  {
+   "id": "aps-algarve",
+   "name": "APS - Administração dos Portos de Sines e do Algarve (Porto de Portimão)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/aps-algarve.json"
+  },
+  {
+   "id": "ualg",
+   "name": "Universidade do Algarve (ualg.pt agenda)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ualg.json"
+  },
+  {
+   "id": "cm-lisboa-open-data",
+   "name": "Câmara Municipal de Lisboa open data (dados.cm-lisboa.pt / Agenda LX)",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "lisboa"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-lisboa-open-data.json"
+  },
+  {
+   "id": "cm-faro",
+   "name": "Câmara Municipal de Faro",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve",
+    "faro"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-faro.json"
+  },
+  {
+   "id": "cm-loule",
+   "name": "Câmara Municipal de Loulé",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve",
+    "loule"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-loule.json"
+  },
+  {
+   "id": "cm-portimao",
+   "name": "Câmara Municipal de Portimão",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve",
+    "portimao"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-portimao.json"
+  },
+  {
+   "id": "eventbrite",
+   "name": "Eventbrite",
+   "kind": "event platform",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/eventbrite.json"
+  },
+  {
+   "id": "luma",
+   "name": "Luma",
+   "kind": "event platform",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/luma.json"
+  },
+  {
+   "id": "meetup",
+   "name": "Meetup",
+   "kind": "event platform",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/meetup.json"
+  },
+  {
+   "id": "sideevents-guide",
+   "name": "sideevents.guide",
+   "kind": "event platform",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/sideevents-guide.json"
+  },
+  {
+   "id": "lisboa-pt",
+   "name": "Câmara Municipal de Lisboa (lisboa.pt)",
+   "kind": "agenda",
+   "status": "not-read",
+   "places": [
+    "lisboa"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/lisboa-pt.json"
+  },
+  {
+   "id": "cm-silves",
+   "name": "Câmara Municipal de Silves",
+   "kind": "agenda",
+   "status": "not-read",
+   "places": [
+    "silves"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-silves.json"
+  },
+  {
+   "id": "cm-tavira",
+   "name": "Câmara Municipal de Tavira",
+   "kind": "agenda",
+   "status": "read",
+   "places": [
+    "tavira"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-tavira.json"
+  },
+  {
+   "id": "cm-albufeira",
+   "name": "Câmara Municipal de Albufeira",
+   "kind": "agenda",
+   "status": "not-read",
+   "places": [
+    "albufeira"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-albufeira.json"
+  },
+  {
+   "id": "algarvecircle",
+   "name": "Algarve Circle",
+   "kind": "events guide",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/algarvecircle.json"
+  },
+  {
+   "id": "algarveatlas",
+   "name": "Algarve Atlas",
+   "kind": "events guide",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/algarveatlas.json"
+  },
+  {
+   "id": "cm-castromarim",
+   "name": "Câmara Municipal de Castro Marim",
+   "kind": "agenda",
+   "status": "not-read",
+   "places": [
+    "castro-marim"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cm-castromarim.json"
+  },
+  {
+   "id": "agendalx",
+   "name": "Agenda Cultural de Lisboa (Agenda LX)",
+   "kind": "agenda",
+   "status": "read",
+   "places": [
+    "lisboa"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/agendalx.json"
+  },
+  {
+   "id": "teatro-das-figuras",
+   "name": "Teatro das Figuras (Faro)",
+   "kind": "agenda",
+   "status": "read",
+   "places": [
+    "faro"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/teatro-das-figuras.json"
+  },
+  {
+   "id": "autodromo-algarve",
+   "name": "Autódromo Internacional do Algarve (race calendar)",
+   "kind": "agenda",
+   "status": "not-read",
+   "places": [
+    "portimao"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/autodromo-algarve.json"
+  },
+  {
+   "id": "portugalmotogp",
+   "name": "portugalmotogp.com (independent MotoGP Portugal fan guide and ticket reseller)",
+   "kind": "events guide",
+   "status": "not-read",
+   "places": [
+    "portimao"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/portugalmotogp.json"
+  },
+  {
+   "id": "portugal-tech-week",
+   "name": "Portugal Tech Week 2026",
+   "kind": "agenda",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/portugal-tech-week.json"
+  },
+  {
+   "id": "algarve-evolution",
+   "name": "Algarve Evolution",
+   "kind": "agenda",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/algarve-evolution.json"
+  },
+  {
+   "id": "theportugalnews",
+   "name": "The Portugal News",
+   "kind": "news outlet",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/theportugalnews.json"
+  },
+  {
+   "id": "odiariodeportugal",
+   "name": "O Diário de Portugal",
+   "kind": "news outlet",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/odiariodeportugal.json"
+  },
+  {
+   "id": "facebook-autodromo",
+   "name": "Autódromo Internacional do Algarve on Facebook",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/facebook-autodromo.json"
+  },
+  {
+   "id": "x-motogp",
+   "name": "MotoGP on X",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/x-motogp.json"
+  },
+  {
+   "id": "meetup-start-algarve",
+   "name": "Start Algarve on Meetup",
+   "kind": "event platform",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/meetup-start-algarve.json"
+  },
+  {
+   "id": "eventbrite-portimao-digital-nomads",
+   "name": "Portimão Digital Nomads on Eventbrite",
+   "kind": "event platform",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/eventbrite-portimao-digital-nomads.json"
+  },
+  {
+   "id": "telegram-algarvevents",
+   "name": "algarvevents (public Telegram channel)",
+   "kind": "social network",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/telegram-algarvevents.json"
+  }
+ ]
+}

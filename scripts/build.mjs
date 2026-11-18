@@ -2,9 +2,12 @@
 // SITE_VERSION is set by CI only (v0.1.N); a local build says "dev".
 import { cpSync, rmSync, readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 const version = process.env.SITE_VERSION || 'dev';
 rmSync('_site', { recursive: true, force: true });
 cpSync('src', '_site', { recursive: true });
+// The pages from data.promptugal.news's API (scripts/pages.mjs, signals.b@PrompTugal.dinis, 18 Nov 2026), before the version stamp.
+execFileSync(process.execPath, ['scripts/pages.mjs'], { stdio: 'inherit', env: { ...process.env, SITE_VERSION: version } });
 const walk = d => readdirSync(d).flatMap(f => { const p = join(d, f); return statSync(p).isDirectory() ? walk(p) : [p]; });
 for (const f of walk('_site')) {
   if (!/\.(html|js|css|json|md|txt)$/.test(f)) continue;

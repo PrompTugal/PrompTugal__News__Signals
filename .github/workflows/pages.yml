@@ -6,6 +6,10 @@ on:
   push:
     branches: [dev]
   workflow_dispatch:
+  # A scheduled rebuild so the pages follow the data without a push (Dinis, 18 Nov 2026: "we should have a scheduled
+  # rebuild"), 30 minutes after data.promptugal.news's social collection (00, 06, 12 and 18 UTC at :17). No new permission.
+  schedule:
+    - cron: '47 */6 * * *'
 permissions:
   contents: read
 concurrency:
@@ -33,6 +37,8 @@ jobs:
         run: |
           last=$(git tag --list "v${VERSION_BASE}.*" | sed "s/^v${VERSION_BASE}\.//" | grep -E '^[0-9]+$' | sort -n | tail -1 || true)
           if [ -z "$last" ]; then next=0; else next=$((last + 1)); fi
+          # a scheduled rebuild keeps the released version (it deploys new data, not new code)
+          if [ "${{ github.event_name }}" = "schedule" ] && [ -n "$last" ]; then next=$last; fi
           echo "version=v${VERSION_BASE}.${next}" >> "$GITHUB_OUTPUT"
           echo "Version: v${VERSION_BASE}.${next}"
       - id: mode
@@ -78,7 +84,8 @@ jobs:
         uses: actions/deploy-pages@v4
   tag:
     needs: [build, deploy]
-    if: ${{ always() && needs.build.result == 'success' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') }}
+    # A scheduled rebuild deploys new data under the same commit: it makes no new version tag.
+    if: ${{ always() && github.event_name != 'schedule' && needs.build.result == 'success' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

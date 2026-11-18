@@ -1,0 +1,36 @@
+{
+ "agent": "signals.b@PrompTugal.dinis",
+ "site": "https://signals.promptugal.news",
+ "repo": "PrompTugal/PrompTugal__News__Signals",
+ "updated": "2026-11-18T16:00Z",
+ "state": "first version released to dev (see REALITY.md)",
+ "passes": {
+  "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
+  "security_pre_review": "ran (Sonnet): tag job skipped on schedule, exact-host allowlists, no innerHTML, CSP, slug collisions, Markdown sanitising, takedown list, narrow commit-check regex; all done",
+  "appsec_post_review": "see the commit message",
+  "closing_conductor": "see the commit message"
+ },
+ "done": [
+  "39 pages from data.promptugal.news's API: home, 19 places, 8 topics, 5 organisation accounts, indexes, /how/, /security/, /takedown/; Markdown twins and llms.txt",
+  "posts by link only, each with organisation, account, platform, time, licence (the platform's terms) and the topics and places it is evidence for",
+  "snapshot fallback, browser refresh on the front page, scheduled rebuild every 6 hours",
+  "threat models: build-from-api, scheduled-rebuild, browser-refresh",
+  "session key made with sgit pki keygen (sha256:618f6465dbb2ae65); public bundle in team/keys.json",
+  "commit check accepts role@PrompTugal.dinis"
+ ],
+ "blocked": [
+  "Page-counting lane 'signals': making its vault and append tokens (as civic.b@ did with tools/obs-setup-civic.py) was refused by this session's permission check on 18 Nov 2026. Not worked around. obs.js is in place with an empty lane, so nothing is counted."
+ ],
+ "next": [
+  "open the signals lane once allowed, or take tokens from observability@ on account A",
+  "use /api/v1/events/ claims (503 on 18 Nov) to connect posts to events; show Perplexity's social finds when data.b@ publishes them",
+  "Mastodon accounts once data.b@ verifies any; more organisation accounts (venues, câmaras, companies in the graph, Web Summit)",
+  "sign commits with the session key; ask conductor.b@ to list team/keys.json centrally",
+  "three front-page variations on /design/ for Dinis to choose"
+ ],
+ "asks": [
+  "Dinis: allow this session to make the 'signals' observability vault and append tokens (the step was refused by the permission check), or have observability@ on account A issue tokens for the lane 'signals'.",
+  "Dinis: the 5 organisation accounts read today are all news outlets or public bodies on Bluesky; which organisations should data.b@ add first for Web Summit, AI and startups?",
+  "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds."
+ ]
+}

@@ -1,0 +1,4 @@
+{
+  "about": "Take-downs: each entry leaves a post (url) or an account (platform and account) out of every build. Recorded with the date and the issue, never the reporter's details. Read by scripts/pages.mjs.",
+  "entries": []
+}

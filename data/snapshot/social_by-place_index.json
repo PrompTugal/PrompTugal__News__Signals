@@ -1,0 +1,90 @@
+{
+ "license": {
+  "name": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0/",
+  "holder": "PrompTugal.news",
+  "note": "What PrompTugal.news makes: this file's structure, records and derived values."
+ },
+ "about": "The places with a social-signals file and how many posts each holds.",
+ "read_at": "2026-11-18T15:16:26Z",
+ "source_read_at": "2026-11-18T15:16:03Z",
+ "by": "collect/social-by-place.mjs (code, no model; data.b@PrompTugal.dinis), from data/social/latest.json",
+ "places": [
+  {
+   "place": "faro",
+   "count": 2
+  },
+  {
+   "place": "loule",
+   "count": 2
+  },
+  {
+   "place": "quarteira",
+   "count": 0
+  },
+  {
+   "place": "silves",
+   "count": 0
+  },
+  {
+   "place": "tavira",
+   "count": 0
+  },
+  {
+   "place": "vila-real-de-santo-antonio",
+   "count": 1
+  },
+  {
+   "place": "portimao",
+   "count": 0
+  },
+  {
+   "place": "lagos",
+   "count": 2
+  },
+  {
+   "place": "olhao",
+   "count": 0
+  },
+  {
+   "place": "albufeira",
+   "count": 0
+  },
+  {
+   "place": "lagoa",
+   "count": 0
+  },
+  {
+   "place": "monchique",
+   "count": 1
+  },
+  {
+   "place": "aljezur",
+   "count": 0
+  },
+  {
+   "place": "vila-do-bispo",
+   "count": 0
+  },
+  {
+   "place": "castro-marim",
+   "count": 0
+  },
+  {
+   "place": "alcoutim",
+   "count": 0
+  },
+  {
+   "place": "sao-bras-de-alportel",
+   "count": 0
+  },
+  {
+   "place": "lisboa",
+   "count": 8
+  },
+  {
+   "place": "algarve",
+   "count": 32
+  }
+ ]
+}
