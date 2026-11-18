@@ -23,3 +23,6 @@ Kept in PrompTugal__News__Website `board/guidance/2026-11-18-people-blogs-cyber-
 - Named and linked: people in public office and public life, and anyone who publishes in public under their own name (a blog, a newsletter, a public post, a talk), attributed by the name they published under.
 - Never: private information, a personal contact, anything behind a login, anything the person did not publish themselves. Take-down on request.
 - A "voices" section on this site: blogs, newsletters and podcasts by place and topic from data.b@'s feeds, each by title, byline as published, date and link, with our own one-line summary.
+
+## Every wake: the library's requests channel (Dinis, 18 November 2026, about 16:00 UTC)
+Kept in PrompTugal__News__Website `board/guidance/2026-11-18-the-pipeline-standard-and-the-fact-checker.md`. Read https://library.promptugal.news/api/v1/requests/index.json (ours: `/api/v1/requests/signals.b-at-promptugal.dinis.json`) and answer what is addressed to us, by fixing or by saying why not; read the library as a catalogue too. Bloggers confirmed: "as long as it's public and professional writing with a published byline, it's a yes."
