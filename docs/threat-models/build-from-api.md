@@ -7,6 +7,7 @@ Owner: signals.b@PrompTugal.dinis. Written 18 November 2026. To be reviewed by s
 
 ## What it reads
 - `https://data.promptugal.news/api/v1/`: `social/latest.json`, `social/by-place/index.json`, `social/by-place/<place>.json`, `sources/index.json`, `discovery/index.json`. GET, no credentials, no redirects followed, 20 s timeout, 2 MB cap checked while streaming.
+- `https://data.promptugal.news/api/v1/github-pt/latest.json` (since 18 Nov 2026): organisations' public repositories and releases, with the same caps.
 - `https://library.promptugal.news/api/v1/` (since 18 Nov 2026): `items/index.json` and `index/place.json`, the library's catalogue, with the same method and caps.
 - On a failed read: the committed snapshot in `data/snapshot/` (organisation data only; refreshed by `node scripts/pages.mjs --snapshot`, reviewed in the diff).
 - `data/takedown.json` and `docs/security-findings.json` from the repository.
@@ -33,3 +34,4 @@ Nothing in the fetched data. The data is collected by data.b@'s code from organi
 | A hostile or wrong library entry (title, publisher, an item link) | title and publisher escaped and capped; each item is linked only to `https://library.promptugal.news/item/<ID>/`, built here from an ID that must match `^[A-Z0-9-]{1,40}$`; the item's own source link and licence link are never used; entries tagged `person:` are dropped; duplicate IDs counted once |
 | Fetched text in the provenance lines or in `api/latest.json` | read times pass through a date parser and are written as ISO dates or left out; every string is a checked, cleaned value; JSON is written with JSON.stringify from a fixed field list |
 | A preview image carrying code or metadata | `preview.svg` holds no fetched text; the validator refuses script, foreignObject, image, href, url(), @import and on* attributes; `preview.png` is rendered locally by `scripts/preview-png.mjs` with JavaScript off and keeps only its IHDR, IDAT and IEND chunks |
+| A hostile GitHub entry (an organisation, repository or release) | organisations only, from a fixed set of kinds; login, repository name and tag checked against strict patterns; every link must be `https://github.com/<login>[/<repo>[/releases/tag/...]]`; licence links only to spdx.org, github.com or opensource.org, else the repository; no description or release name shown; stars and forks only as safe integers; a live read far smaller than the snapshot falls back to it; repository names the leak scan would read as secrets are left out and counted |

@@ -15,4 +15,4 @@ Nothing in the fetched data. It runs in the reader's browser under this site's o
 | Third-party script or style | none; a Content-Security-Policy meta tag: `script-src 'self'`, `style-src 'self'`, `connect-src` limited to this site, data.promptugal.news, promptugal.news and the observability endpoints |
 | A huge or slow answer | 15 s timeout, 2 MB cap, 500 items read, 60 shown |
 | A failure leaves a broken page | on any error the built list stays as it is |
-| Tracking the reader | the request sends no credentials; page counting (obs.js) writes only to the "signals" lane, which has no tokens yet, so nothing is sent |
+| Tracking the reader | the refresh request sends no credentials. Page counting (obs.js) is separate: each event is sealed in the browser to the drain's public key and appended to the "signals" lane, with no IP address, cookie or user-agent string; Do Not Track, Global Privacy Control and Pause stop it. The append tokens are public by design: anyone can append noise to the lane, never read it |

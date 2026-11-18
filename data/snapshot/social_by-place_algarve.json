@@ -3,16 +3,107 @@
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
   "holder": "PrompTugal.news",
-  "note": "What PrompTugal.news makes: this file's structure, records and derived values."
+  "note": "What PrompTugal.news makes: this file's structure, records and derived values.",
+  "commercial_use": "allowed",
+  "commercial_note": "With credit to PrompTugal.news; values taken from a source keep that source's licence."
  },
  "place": "algarve",
- "read_at": "2026-11-18T16:14:19Z",
- "source_read_at": "2026-11-18T16:13:55Z",
+ "read_at": "2026-11-18T23:26:36Z",
+ "source_read_at": "2026-11-18T23:26:09Z",
  "by": "collect/social-by-place.mjs (code, no model; data.b@PrompTugal.dinis), from data/social/latest.json",
  "about": "Links to recent public posts by the official accounts of organisations that match this place by name in the post (basis \"text\") or, when the post names no place, that the organisation covers (basis \"account\"). Links and metadata only: the post text and media are not stored. A signal to check, not a verified fact. An empty list means no listed account posted about this place, not that nothing is happening.",
- "source_note": "Read 2026-11-18T16:13:55Z from the public APIs of bluesky and mastodon; accounts in register/social-accounts.json; gaps in https://data.promptugal.news/api/v1/social/latest.json. Terms: Organisations only, official interfaces only, by link. Bluesky: robots.txt of the public API allows crawling it and asks for backoff on 429; the Terms of Service (14 Aug 2025) leave each post's content with its author, so we store link and metadata only and credit the organisation. Mastodon: mastodon.social's terms (effective 2026-08-31) say whoever owns the content retains ownership and allow API access; its robots.txt disallows only /media_proxy/, /interact/ and a domain-blocks path. Licence on each post: the platform's terms, holder the organisation. Not reviewed by a person.",
+ "source_note": "Read 2026-11-18T23:26:09Z from the public APIs of bluesky and mastodon; accounts in register/social-accounts.json; gaps in https://data.promptugal.news/api/v1/social/latest.json. Terms: Organisations only, official interfaces only, by link. Bluesky: robots.txt of the public API allows crawling it and asks for backoff on 429; the Terms of Service (14 Aug 2025) leave each post's content with its author, so we store link and metadata only and credit the organisation. Mastodon: mastodon.social's terms (effective 2026-08-31) say whoever owns the content retains ownership and allow API access; its robots.txt disallows only /media_proxy/, /interact/ and a domain-blocks path. Licence on each post: the platform's terms, holder the organisation. Not reviewed by a person.",
  "count": 32,
  "posts": [
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2m2bmchy42j",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-18T17:08:25.032Z",
+   "topics": [],
+   "places": [
+    "algarve"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-18T23:26:09Z",
+   "place_basis": "text"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lz5amk362s",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-18T16:48:04.563Z",
+   "topics": [],
+   "places": [
+    "lisboa",
+    "algarve"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-18T23:26:09Z",
+   "place_basis": "text"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ly3ujwom2q",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-18T16:29:24.714Z",
+   "topics": [
+    "tourism"
+   ],
+   "places": [
+    "algarve"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-18T23:26:09Z",
+   "place_basis": "text"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lxbwpy3n2q",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-18T16:14:54.282Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-18T23:26:09Z",
+   "place_basis": "account"
+  },
   {
    "platform": "bluesky",
    "url": "https://bsky.app/profile/portugalresident.com/post/3n2lvud4wgp2z",
@@ -32,7 +123,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -54,7 +145,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -77,7 +168,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -99,7 +190,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -121,7 +212,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -143,7 +234,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -165,7 +256,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -185,7 +276,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -207,7 +298,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -227,7 +318,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -247,7 +338,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -269,7 +360,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -289,7 +380,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -311,7 +402,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -333,7 +424,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -355,7 +446,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -378,7 +469,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -398,7 +489,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -418,7 +509,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -441,7 +532,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -461,7 +552,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -486,7 +577,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -506,7 +597,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -528,7 +619,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -548,87 +639,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T16:13:55Z",
-   "place_basis": "account"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2j7spjlup2o",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T14:09:28.385Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T16:13:55Z",
-   "place_basis": "account"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2j6mzc6ko2s",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T13:48:23.176Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T16:13:55Z",
-   "place_basis": "account"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2j5ocyadc2u",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T13:31:13.127Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T16:13:55Z",
-   "place_basis": "account"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2j3cblkom2d",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T12:48:41.885Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "account"
   },
   {
@@ -650,7 +661,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -674,7 +685,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   },
   {
@@ -697,7 +708,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T16:13:55Z",
+   "read_at": "2026-11-18T23:26:09Z",
    "place_basis": "text"
   }
  ]

@@ -16,6 +16,15 @@
     "WS26-2026-0046"
    ]
   },
+  "place:brazil": {
+   "label": "Brazil",
+   "items": [
+    "WS26-2026-0009",
+    "WS26-2026-0010",
+    "WS26-2026-0022",
+    "WS26-2026-0042"
+   ]
+  },
   "place:portugal": {
    "label": "Portugal",
    "items": [
@@ -23,8 +32,59 @@
     "WS26-2026-0015",
     "WS26-2026-0016",
     "WS26-2026-0019",
+    "WS26-2026-0030",
+    "WS26-2026-0032",
+    "WS26-2026-0035",
+    "WS26-2026-0046",
+    "WS26-2026-0047",
     "WS26-2026-0048",
     "WS26-2026-0049",
+    "WS26-2026-0050"
+   ]
+  },
+  "place:unicorn-factory-lisboa": {
+   "label": "Unicorn Factory Lisboa",
+   "items": [
+    "WS26-2026-0030"
+   ]
+  },
+  "place:porto": {
+   "label": "Porto",
+   "items": [
+    "WS26-2026-0032"
+   ]
+  },
+  "place:braga": {
+   "label": "Braga",
+   "items": [
+    "WS26-2026-0032"
+   ]
+  },
+  "place:madeira": {
+   "label": "Madeira",
+   "items": [
+    "WS26-2026-0032"
+   ]
+  },
+  "place:algarve": {
+   "label": "Algarve",
+   "items": [
+    "WS26-2026-0048",
+    "WS26-2026-0049",
+    "WS26-2026-0050"
+   ]
+  },
+  "place:loule": {
+   "label": "Loulé",
+   "items": [
+    "WS26-2026-0048",
+    "WS26-2026-0049",
+    "WS26-2026-0050"
+   ]
+  },
+  "place:quarteira": {
+   "label": "Quarteira",
+   "items": [
     "WS26-2026-0050"
    ]
   }

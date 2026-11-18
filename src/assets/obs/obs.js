@@ -3,7 +3,7 @@
 // default lane by signals.b@PrompTugal.dinis on 18 Nov 2026, at Dinis's word ("add observability to all the other sites";
 // and in signals.b@'s session: "set up your tracking lane"). It writes only to the lane "signals" (obs.json lanes.signals);
 // while that lane has no append tokens nothing is sent, no place is looked up, and the footer says page views are not
-// counted yet. Making the lane in this session was refused by its permission check (18 Nov 2026), so the lane is empty.
+// counted yet. Its vault, tokens and drain key were made by tools/obs-setup-signals.py on 18 Nov 2026 (obs.json).
 // PrompTugal.news's page views and reads (observability@PrompTugal.dinis, 6 November 2026, at Dinis Cruz's word:
 // "replicate what we have on web-summit.sgit.ai"). The team site's sender (its assets/obs-dinis.js, by
 // observability@web-summit.dinis, after Jose's assets/telemetry.js and the observability pack), into this site's own

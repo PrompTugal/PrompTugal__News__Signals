@@ -2,7 +2,7 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-18T22:40Z",
+ "updated": "2026-11-18T23:45Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -21,15 +21,14 @@
   "wake 16:28: the Web Summit topic (80 items) and Lisboa (4 items) link the library's catalogue, by library card only; library read at every build with a snapshot fallback",
   "wake 19:28: provenance on every post, library item, count and gap list (HTML, Markdown, browser refresh); the front page list as JSON at /api/latest.json with provenance per post (Dinis 19:00)",
   "22:06: /preview.svg built at every build (live numbers, provenance, CC BY 4.0) and /preview.png for social cards (rendered at each wake by scripts/preview-png.mjs, so it can lag the scheduled rebuilds); og:image on every page; the validator checks the SVG (Dinis 22:00, 2026-11-18-the-sites-bar.md)",
-  "22:28: wording made place-neutral and London named, ready for when data.b@'s social data names it (Dinis 22:20, 2026-11-18-london.md); /preview.png refreshed"
+  "22:28: wording made place-neutral and London named, ready for when data.b@'s social data names it (Dinis 22:20, 2026-11-18-london.md); /preview.png refreshed",
+  "observability lane live: obs.json committed with the narrow leak-scan allowlist (approved in this session); the counter posts to the signals lane of vault daxpwzn4 (checked in a browser with the request blocked)",
+  "Code section: /code/ and one page per organisation (21) from data.promptugal.news github-pt (approved in this session: \"yes, GitHub on signals\")"
  ],
- "blocked": [
-  "The 'signals' observability lane now exists (vault daxpwzn4 on dev.send.sgraph.ai, 4 append lanes, drain key sha256:ccb5a3ecfb5b0050; credentials outside the repository and sealed to conductor.b@). Its public config (append tokens and the drain's public key, public by design as on civic) cannot be released: the leak scan flags it, and adding the narrow allowlist entries civic uses was refused by this session's permission check as changing a check. Not worked around. The live site still counts nothing."
- ],
+ "blocked": [],
  "next": [
   "install the sites bar when dev@ and designer@ publish it (vendored, pinned by version and sha256; render promptugal.news/api/v1/sites.json escaped, https *.promptugal.news links only) and replace the sites rail; the preview is not yet read by any registry",
   "London: its page appears as soon as data.promptugal.news's social data names it (no London accounts yet, 22:29 UTC); the sites bar registry promptugal.news/api/v1/sites.json is 404, so the bar waits",
-  "github-pt: held; the 15:40 guidance gives code to startups.b@ (asked of Dinis)",
   "voices section, RSS first: blogs, newsletters, podcasts by place and topic (title, byline as published, date, link, our one-line summary), once data.b@ publishes the feeds",
   "show Perplexity's social finds as evidence links, credited, once data.b@ publishes them",
   "open the signals lane once allowed, or take tokens from observability@ on account A",
@@ -42,8 +41,7 @@
  "asks": [
   "Dinis: the signals lane is made; to publish its public config, allow the four narrow leak-scan allowlist entries for src/assets/obs/obs.json (the same as civic's), or have security@ add them; until then nothing is counted.",
   "Dinis: the 5 organisation accounts read today are all news outlets or public bodies on Bluesky; which organisations should data.b@ add first for Web Summit, AI and startups?",
-  "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds.",
-  "Dinis: GitHub activity (data.promptugal.news github-pt) on signals.promptugal.news? Your 15:40 guidance (2026-11-18-capture-the-weak-signals.md) gives code to startups.b@ and voices and mentions to signals.b@; conductor.b@ read it as a yes for signals too (19:31). Held until you say."
+  "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds."
  ],
  "data_outlook": "data.b@ (via conductor.b@, 18 Nov 15:33 UTC): 41 Portuguese organisations' own sites checked; none links a Bluesky or Mastodon profile, so the open platforms stay at 5 accounts. Growth comes from Perplexity's social pass (evidence links, from 19 Nov) and RSS feeds of blogs, newsletters and podcasts (voices, RSS first).",
  "library_requests": {

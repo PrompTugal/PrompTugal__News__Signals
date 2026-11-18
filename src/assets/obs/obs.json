@@ -3,16 +3,27 @@
     "name": "CC BY 4.0",
     "url": "https://creativecommons.org/licenses/by/4.0/"
   },
-  "about": "signals.promptugal.news's observability lane (signals.b@PrompTugal.dinis, 18 November 2026, at Dinis's word, kept in PrompTugal__News__Website board/guidance/2026-11-18-five-sites-on-account-b.md and 2026-11-18-keys-issues-rebuilds-observability.md). assets/obs/obs.js writes page views and reads only to lanes.signals. The lane has no append tokens yet: making them in signals.b@'s session was refused by the session's permission check on 18 November 2026, so the list is empty and nothing is sent. The drain key, the endpoint and the vault are read from promptugal.news's published obs.json (shared_from) unless set here.",
+  "about": "signals.promptugal.news's page views and reads, sent by assets/obs/obs.js into this site's own observability vault (daxpwzn4), made by signals.b@PrompTugal.dinis on 18 November 2026 with tools/obs-setup-signals.py, at the word of the person at signals.b@'s session (\"yes, run the observability lane setup\"; \"yes, allow assets/obs/obs.json in the leak scan\") and Dinis's guidance (PrompTugal__News__Website board/guidance/2026-11-18-keys-issues-rebuilds-observability.md). Public on purpose: each append token can only append to its lane, and the key can only encrypt. The drain is conductor.b@PrompTugal.dinis's (credentials sealed to its key).",
   "enabled": true,
   "lane": "signals",
   "lanes": {
-    "signals": []
+    "signals": [
+      "e04f4e67fb22d311014e6bb9384d42201c93100ec0a54caf3b8412909ceb31b4",
+      "f1c69731dfe56b3376e618c6686c1704ca5849e162d1b137618d87fc66ecdef8",
+      "cb2455750e248e60803806f0e9c03178a2077bdc06f8db9f0bd923e01c42be1f",
+      "8ca34d1be8644a37d638d599a22fdd9d2c0b54d650afab2a0e688eb9501c396d"
+    ]
   },
   "shared_from": "https://promptugal.news/assets/obs/obs.json",
   "geo": [
     "https://ipapi.co/json/",
     "https://ipwho.is/"
   ],
-  "what": "This site counts page views and reading time, publicly, as promptugal.news does: no IP address kept, no cookie, no user-agent string, no fingerprint. Do Not Track, Global Privacy Control and Pause in the footer turn it off. Not counted yet: the signals lane has no tokens. What is counted: https://promptugal.news/newsroom/observability/index.html"
+  "what": "This site counts page views and reading time, publicly, as promptugal.news does: the page, the referring site (host only), the time to the minute, the site version, a random id that ends with the tab, the screen size class, the browser's language and time zone, and the country, region and city. To find the place, the browser asks ipapi.co (or ipwho.is), which see the reader's IP address; this site keeps no IP address, no cookie, no user-agent string and no fingerprint. Do Not Track, Global Privacy Control and Pause in the footer turn it off. What is counted: https://promptugal.news/newsroom/observability/index.html",
+  "endpoint": "https://dev.send.sgraph.ai",
+  "vault_id": "daxpwzn4",
+  "recipient": {
+    "fingerprint": "sha256:ccb5a3ecfb5b0050",
+    "encrypt": "-----BEGIN PUBLIC KEY-----\nMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAoQEZkcYWdH47PEqpLu8e\nG6HRE7phYO98Ax5N/AHpicKiNil0LnMGrnPSKDLuVkHXhTSvHMns1h+ufgDnz7MC\nOgym2r+z3IgNjkUvUooTLr635Wl0DuyCw8ORNjEfN+iktKreyDJfkrWrsI89zFAN\nlJdeQ65sFbAzR45j90pGvITMTieNEqSz1Z+IX5+udRTEzYXhjJXDbypeX/vNvWOX\nAxgvJic9IXzJdmfoL8TNBkEJw1p/XNssi5h8VFttPBxfXy9lmDsQ3iElhByiZkUL\nrswPSRVSs5QhG5EO/Okc5HALfpqsL+LPD7Jy/dAoCaiV4yWhuz1l2d7Izteeifal\nsHz3SQBWkPLOq4WJwQX68qc2ofWZTeSJas+LjsG/npsVrr5bAtcdhS4j8a2DNYkf\noucE6kRucEOo/ZduFo9uz2ABZmz48FE9Wz4ufL+8egxz3qBdLR+PmvmOC7GHRN4E\nKSWUZMBKSgLCLL3endsIPtfOhUvwib0rO0op0vhHlQrWiorMLP+s850TiHnY8M+y\nuKBNYq4Em3giUXbIYTKM8w1kjD/+9RetkdyGaaEMTE4+YAlpbTJwoeuG2gKdxdHG\nrU3P4oYCBk54ScbXgQOswvkAGDVRjYj1XrvidNMReAsoGzuwgyWOX4L/2lsKF0Ty\nu11SZyXd2iqacXO3DS+fprMCAwEAAQ==\n-----END PUBLIC KEY-----\n"
+  }
 }

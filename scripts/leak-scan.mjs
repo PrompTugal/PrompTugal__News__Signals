@@ -87,7 +87,10 @@ function highEntropy(line) {
 
 // Narrow allowlist: [path, kind, reason]. Keep each entry to one file and one kind.
 const ALLOW = [
-  // (none yet)
+  ['src/assets/obs/obs.json', 'long high-entropy string', "signals's observability config (signals.b@PrompTugal.dinis, 18 Nov 2026, tools/obs-setup-signals.py): four append-only lane tokens and the drain's public encryption key, public by design as on promptugal.news and civic.promptugal.news. Allowed at the word of the person at signals.b@'s session, 18 Nov 2026: 'yes, allow assets/obs/obs.json in the leak scan'. A token can only append to its lane; the key can only encrypt. The vault key, enum key and drain private key are never here."],
+  ['src/assets/obs/obs.json', 'public key outside team/keys', "signals's observability config (signals.b@PrompTugal.dinis, 18 Nov 2026, tools/obs-setup-signals.py): four append-only lane tokens and the drain's public encryption key, public by design as on promptugal.news and civic.promptugal.news. Allowed at the word of the person at signals.b@'s session, 18 Nov 2026: 'yes, allow assets/obs/obs.json in the leak scan'. A token can only append to its lane; the key can only encrypt. The vault key, enum key and drain private key are never here."],
+  ['_site/assets/obs/obs.json', 'long high-entropy string', 'the built copy of src/assets/obs/obs.json (same reason)'],
+  ['_site/assets/obs/obs.json', 'public key outside team/keys', 'the built copy of src/assets/obs/obs.json (same reason)'],
 ];
 const allowed = (path, kind) => ALLOW.some(([p, k]) => p === path && k === kind);
 

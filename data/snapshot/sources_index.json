@@ -3,12 +3,14 @@
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
   "holder": "PrompTugal.news",
-  "note": "What PrompTugal.news makes: this file's structure, records and derived values."
+  "note": "What PrompTugal.news makes: this file's structure, records and derived values.",
+  "commercial_use": "allowed",
+  "commercial_note": "With credit to PrompTugal.news; values taken from a source keep that source's licence."
  },
  "about": "Every source PrompTugal knows of, read or not. For each one we do not read, the reason, quoted from its terms or robots.txt with the page and the date read. We respect whatever a source says; a request on the record is drafted by outreach@ and sent by a person, and the answer is kept here as written.",
  "counts": {
-  "read": 18,
-  "not-read": 74,
+  "read": 31,
+  "not-read": 129,
   "asked": 0,
   "allowed": 0,
   "refused": 0,
@@ -36,6 +38,50 @@
    "url": "https://data.promptugal.news/api/v1/sources/base-gov-pt.json"
   },
   {
+   "id": "cams",
+   "name": "Public live cameras: where they are and whether they are up",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cams.json"
+  },
+  {
+   "id": "cisa-kev",
+   "name": "Known exploited vulnerabilities (CISA KEV)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/cisa-kev.json"
+  },
+  {
+   "id": "ea-flood",
+   "name": "London flood warnings and Thames levels (Environment Agency)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ea-flood.json"
+  },
+  {
+   "id": "eurostat-tourism",
+   "name": "Tourist nights by where guests live: Portugal, Algarve, Lisbon, London (Eurostat)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "europe",
+    "portugal",
+    "algarve",
+    "lisboa",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/eurostat-tourism.json"
+  },
+  {
    "id": "events-pt",
    "name": "Events in Portugal, by place",
    "kind": "open-data API",
@@ -44,6 +90,16 @@
     "portugal"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/events-pt.json"
+  },
+  {
+   "id": "github-pt",
+   "name": "Code from Portuguese organisations on GitHub",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/github-pt.json"
   },
   {
    "id": "ipma-city-forecasts",
@@ -116,6 +172,26 @@
    "url": "https://data.promptugal.news/api/v1/sources/meteoalarm-pt.json"
   },
   {
+   "id": "nvd-cve",
+   "name": "CVEs published or modified in the last 24 hours (NVD)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/nvd-cve.json"
+  },
+  {
+   "id": "open-meteo-london",
+   "name": "London forecast (Open-Meteo)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/open-meteo-london.json"
+  },
+  {
    "id": "social",
    "name": "Social signals: organisations' public posts, by link",
    "kind": "open-data API",
@@ -124,6 +200,16 @@
     "portugal"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/social.json"
+  },
+  {
+   "id": "tfl-jamcams",
+   "name": "London traffic cameras (TfL JamCams)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/tfl-jamcams.json"
   },
   {
    "id": "storm-charles-archive",
@@ -657,7 +743,7 @@
    "id": "nvd",
    "name": "NVD (National Vulnerability Database)",
    "kind": "cyber data source",
-   "status": "not-read",
+   "status": "read",
    "places": [
     "portugal"
    ],
@@ -672,16 +758,6 @@
     "portugal"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/cve-org.json"
-  },
-  {
-   "id": "cisa-kev",
-   "name": "CISA Known Exploited Vulnerabilities (KEV) catalogue",
-   "kind": "cyber data source",
-   "status": "not-read",
-   "places": [
-    "portugal"
-   ],
-   "url": "https://data.promptugal.news/api/v1/sources/cisa-kev.json"
   },
   {
    "id": "shadowserver",
@@ -948,6 +1024,667 @@
     "portugal"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/base-gov-pt-portal.json"
+  },
+  {
+   "id": "apl-tejo-live",
+   "name": "Porto de Lisboa, Tejo Live",
+   "kind": "public live camera",
+   "status": "read",
+   "places": [
+    "lisboa"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/apl-tejo-live.json"
+  },
+  {
+   "id": "aemtg-praia-da-rocha",
+   "name": "Ondas em Direto, Praia da Rocha (AEMTG)",
+   "kind": "public live camera",
+   "status": "read",
+   "places": [
+    "portimao"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/aemtg-praia-da-rocha.json"
+  },
+  {
+   "id": "meo-beachcam",
+   "name": "MEO BeachCam",
+   "kind": "public live camera",
+   "status": "not-read",
+   "places": [
+    "faro",
+    "castro-marim",
+    "portimao",
+    "lagoa",
+    "silves",
+    "albufeira",
+    "loule",
+    "lagos",
+    "aljezur",
+    "vila-do-bispo"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/meo-beachcam.json"
+  },
+  {
+   "id": "github-api",
+   "name": "GitHub REST API (public organisations, repositories and releases)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/github-api.json"
+  },
+  {
+   "id": "tfl-unified-api",
+   "name": "TfL Unified API (open data)",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/tfl-unified-api.json"
+  },
+  {
+   "id": "adsb-lol-london-airports",
+   "name": "adsb.lol around Heathrow, Gatwick, London City, Stansted and Luton",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/adsb-lol-london-airports.json"
+  },
+  {
+   "id": "london-datastore",
+   "name": "London Datastore (Greater London Authority)",
+   "kind": "open-data portal",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/london-datastore.json"
+  },
+  {
+   "id": "contracts-finder",
+   "name": "Contracts Finder (UK government procurement notices)",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/contracts-finder.json"
+  },
+  {
+   "id": "data-police-uk",
+   "name": "data.police.uk (street-level crime and outcomes)",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/data-police-uk.json"
+  },
+  {
+   "id": "laqn",
+   "name": "London Air Quality Network (King's College London, Environmental Research Group)",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/laqn.json"
+  },
+  {
+   "id": "defra-uk-air",
+   "name": "DEFRA UK-AIR",
+   "kind": "open-data portal",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/defra-uk-air.json"
+  },
+  {
+   "id": "ncsc-advisories",
+   "name": "NCSC (UK National Cyber Security Centre) advisories",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ncsc-advisories.json"
+  },
+  {
+   "id": "london-gov-uk-events",
+   "name": "London.gov.uk (Greater London Authority) events and what's on",
+   "kind": "events agenda",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/london-gov-uk-events.json"
+  },
+  {
+   "id": "city-of-london-corporation",
+   "name": "City of London Corporation events",
+   "kind": "events agenda",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/city-of-london-corporation.json"
+  },
+  {
+   "id": "southbank-centre",
+   "name": "Southbank Centre what's on",
+   "kind": "events agenda",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/southbank-centre.json"
+  },
+  {
+   "id": "barbican",
+   "name": "Barbican what's on",
+   "kind": "events agenda",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/barbican.json"
+  },
+  {
+   "id": "camden-council",
+   "name": "Camden Council events and public data",
+   "kind": "events agenda",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/camden-council.json"
+  },
+  {
+   "id": "bbc-london",
+   "name": "BBC News London",
+   "kind": "news feed",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/bbc-london.json"
+  },
+  {
+   "id": "londonist",
+   "name": "Londonist",
+   "kind": "news feed",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/londonist.json"
+  },
+  {
+   "id": "london-centric",
+   "name": "London Centric",
+   "kind": "news feed",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/london-centric.json"
+  },
+  {
+   "id": "the-guardian-london",
+   "name": "The Guardian London coverage",
+   "kind": "news feed",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/the-guardian-london.json"
+  },
+  {
+   "id": "on-london",
+   "name": "On London",
+   "kind": "news feed",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/on-london.json"
+  },
+  {
+   "id": "met-office-datahub",
+   "name": "Met Office Weather DataHub",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/met-office-datahub.json"
+  },
+  {
+   "id": "national-rail-darwin",
+   "name": "National Rail Darwin data feeds",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/national-rail-darwin.json"
+  },
+  {
+   "id": "companies-house",
+   "name": "Companies House API",
+   "kind": "open-data API",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/companies-house.json"
+  },
+  {
+   "id": "heathrow-airport",
+   "name": "Heathrow Airport flight information and statistics",
+   "kind": "airport data",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/heathrow-airport.json"
+  },
+  {
+   "id": "gatwick-airport",
+   "name": "Gatwick Airport flight information and statistics",
+   "kind": "airport data",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/gatwick-airport.json"
+  },
+  {
+   "id": "stansted-airport",
+   "name": "London Stansted Airport flight information",
+   "kind": "airport data",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/stansted-airport.json"
+  },
+  {
+   "id": "london-luton-airport",
+   "name": "London Luton Airport flight information",
+   "kind": "airport data",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/london-luton-airport.json"
+  },
+  {
+   "id": "london-city-airport",
+   "name": "London City Airport flight information",
+   "kind": "airport data",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/london-city-airport.json"
+  },
+  {
+   "id": "ana-airports-portugal",
+   "name": "ANA Aeroportos de Portugal (Lisbon, Faro, Porto)",
+   "kind": "airport data",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ana-airports-portugal.json"
+  },
+  {
+   "id": "ine-tourism-by-residence",
+   "name": "INE Portugal: guests and nights by country of residence",
+   "kind": "statistics",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ine-tourism-by-residence.json"
+  },
+  {
+   "id": "turismo-portugal-travelbi",
+   "name": "Turismo de Portugal TravelBI statistics by market",
+   "kind": "statistics",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/turismo-portugal-travelbi.json"
+  },
+  {
+   "id": "ons-travel-trends",
+   "name": "ONS Travel trends (UK residents' visits abroad by country)",
+   "kind": "statistics",
+   "status": "not-read",
+   "places": [
+    "london",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ons-travel-trends.json"
+  },
+  {
+   "id": "ecmwf-open-data",
+   "name": "ECMWF Open Data (IFS and AIFS real-time forecasts)",
+   "kind": "weather forecast data",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ecmwf-open-data.json"
+  },
+  {
+   "id": "eurostat-api",
+   "name": "Eurostat dissemination API (JSON-stat 2.0 and SDMX 2.1/3.0)",
+   "kind": "official statistics API",
+   "status": "read",
+   "places": [
+    "europe",
+    "portugal",
+    "algarve",
+    "lisboa",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/eurostat-api.json"
+  },
+  {
+   "id": "eu-open-data-portal",
+   "name": "data.europa.eu (European Data Portal and EU Open Data Portal) search API",
+   "kind": "open data catalogue",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/eu-open-data-portal.json"
+  },
+  {
+   "id": "eea-air-quality-download",
+   "name": "EEA air quality download service (Parquet, E1a up-to-date measurements)",
+   "kind": "environmental data API",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/eea-air-quality-download.json"
+  },
+  {
+   "id": "ted-api",
+   "name": "TED (Tenders Electronic Daily) API v3 search",
+   "kind": "public procurement API",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ted-api.json"
+  },
+  {
+   "id": "eu-fts",
+   "name": "EU Financial Transparency System (FTS)",
+   "kind": "public money data",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/eu-fts.json"
+  },
+  {
+   "id": "meteoalarm-eu",
+   "name": "EUMETNET MeteoAlarm feeds (all participating countries)",
+   "kind": "weather warnings feed",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/meteoalarm-eu.json"
+  },
+  {
+   "id": "copernicus-cds",
+   "name": "Copernicus Climate Change Service, Climate Data Store (CDS) API",
+   "kind": "climate data API (needs an account and key)",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/copernicus-cds.json"
+  },
+  {
+   "id": "copernicus-cams",
+   "name": "Copernicus Atmosphere Monitoring Service (CAMS), Atmosphere Data Store",
+   "kind": "air quality forecast API (needs an account and key)",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/copernicus-cams.json"
+  },
+  {
+   "id": "copernicus-marine",
+   "name": "Copernicus Marine Service (CMEMS) data store",
+   "kind": "ocean data (needs an account)",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/copernicus-marine.json"
+  },
+  {
+   "id": "copernicus-efas",
+   "name": "European Flood Awareness System (EFAS), Copernicus Emergency Management Service",
+   "kind": "flood forecasts",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/copernicus-efas.json"
+  },
+  {
+   "id": "copernicus-edo",
+   "name": "European Drought Observatory (EDO), Copernicus Emergency Management Service",
+   "kind": "drought indicators",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/copernicus-edo.json"
+  },
+  {
+   "id": "copernicus-land",
+   "name": "Copernicus Land Monitoring Service (CLMS)",
+   "kind": "land cover data",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal",
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/copernicus-land.json"
+  },
+  {
+   "id": "jrc-pvgis",
+   "name": "JRC Photovoltaic Geographical Information System (PVGIS) API",
+   "kind": "solar radiation data",
+   "status": "not-read",
+   "places": [
+    "europe",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/jrc-pvgis.json"
+  },
+  {
+   "id": "aguasdoalgarve-disponibilidades-hidricas",
+   "name": "Águas do Algarve: Disponibilidades Hídricas (reservoir storage table)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/aguasdoalgarve-disponibilidades-hidricas.json"
+  },
+  {
+   "id": "apa-monitorizacao-agrometeorologica-hidrologica",
+   "name": "APA / Comissão Permanente da Seca: monthly agrometeorological and hydrological monitoring report (PDF)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/apa-monitorizacao-agrometeorologica-hidrologica.json"
+  },
+  {
+   "id": "snirh-apa",
+   "name": "SNIRH: Sistema Nacional de Informação de Recursos Hídricos (APA)",
+   "kind": "public portal",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/snirh-apa.json"
+  },
+  {
+   "id": "dadosgov-atlas-agua-albufeiras-barragem",
+   "name": "dados.gov.pt: Atlas da Água - Albufeiras (Barragem) (APA, dam coordinates)",
+   "kind": "open-data portal",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/dadosgov-atlas-agua-albufeiras-barragem.json"
+  },
+  {
+   "id": "dadosgov-albufeiras-aguas-publicas-pc",
+   "name": "dados.gov.pt: Albufeiras de águas públicas de Portugal continental (APA, INSPIRE polygons)",
+   "kind": "open-data portal",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/dadosgov-albufeiras-aguas-publicas-pc.json"
+  },
+  {
+   "id": "dadosgov-paap-nivel-pleno-armazenamento",
+   "name": "dados.gov.pt: Programas Especiais de Albufeiras (PAAP) - Nível de pleno armazenamento (APA)",
+   "kind": "open-data portal",
+   "status": "not-read",
+   "places": [
+    "portugal",
+    "algarve"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/dadosgov-paap-nivel-pleno-armazenamento.json"
+  },
+  {
+   "id": "dgadr-albufeiras-hidroagricolas",
+   "name": "DGADR: storage in hydro-agricultural reservoirs (weekly)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/dgadr-albufeiras-hidroagricolas.json"
+  },
+  {
+   "id": "edia-alqueva-dados",
+   "name": "EDIA: Dados Alqueva (level and volume of Alqueva)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/edia-alqueva-dados.json"
+  },
+  {
+   "id": "copernicus-edo-drought",
+   "name": "Copernicus European and Global Drought Observatories (EDO/GDO)",
+   "kind": "open data",
+   "status": "not-read",
+   "places": [
+    "eu",
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/copernicus-edo-drought.json"
+  },
+  {
+   "id": "london-datastore-london-reservoir-levels",
+   "name": "London Datastore: London Reservoir Levels (Thames Water via Environment Agency)",
+   "kind": "open-data portal",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/london-datastore-london-reservoir-levels.json"
+  },
+  {
+   "id": "ea-water-situation-reports-thames",
+   "name": "Environment Agency: Water situation reports, Thames area (monthly)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ea-water-situation-reports-thames.json"
+  },
+  {
+   "id": "thames-water-reservoir-levels",
+   "name": "Thames Water: Water resources in your area (reservoir levels and rainfall)",
+   "kind": "public body",
+   "status": "not-read",
+   "places": [
+    "london"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/thames-water-reservoir-levels.json"
+  },
+  {
+   "id": "ukceh-water-resources-portal",
+   "name": "UKCEH: UK Water Resources Portal",
+   "kind": "public portal",
+   "status": "not-read",
+   "places": [
+    "london",
+    "uk"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/ukceh-water-resources-portal.json"
   }
  ]
 }

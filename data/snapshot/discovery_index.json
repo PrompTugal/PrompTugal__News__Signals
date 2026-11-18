@@ -3,7 +3,9 @@
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
   "holder": "PrompTugal.news",
-  "note": "What PrompTugal.news makes: this file's structure, records and derived values."
+  "note": "What PrompTugal.news makes: this file's structure, records and derived values.",
+  "commercial_use": "allowed",
+  "commercial_note": "With credit to PrompTugal.news; values taken from a source keep that source's licence."
  },
  "about": "Events discovery, phase 1: one question a day per place to Perplexity (sonar) through OpenRouter, each answer kept with its model, time, prompt, cited URLs and cost. Evidence only, not content.",
  "answers": [

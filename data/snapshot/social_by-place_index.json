@@ -3,11 +3,13 @@
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
   "holder": "PrompTugal.news",
-  "note": "What PrompTugal.news makes: this file's structure, records and derived values."
+  "note": "What PrompTugal.news makes: this file's structure, records and derived values.",
+  "commercial_use": "allowed",
+  "commercial_note": "With credit to PrompTugal.news; values taken from a source keep that source's licence."
  },
  "about": "The places with a social-signals file and how many posts each holds.",
- "read_at": "2026-11-18T16:14:19Z",
- "source_read_at": "2026-11-18T16:13:55Z",
+ "read_at": "2026-11-18T23:26:36Z",
+ "source_read_at": "2026-11-18T23:26:09Z",
  "by": "collect/social-by-place.mjs (code, no model; data.b@PrompTugal.dinis), from data/social/latest.json",
  "places": [
   {
