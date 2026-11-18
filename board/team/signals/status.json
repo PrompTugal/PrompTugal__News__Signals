@@ -2,7 +2,7 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-18T15:55Z",
+ "updated": "2026-11-18T15:40Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -23,6 +23,7 @@
   "The 'signals' observability lane now exists (vault daxpwzn4 on dev.send.sgraph.ai, 4 append lanes, drain key sha256:ccb5a3ecfb5b0050; credentials outside the repository and sealed to conductor.b@). Its public config (append tokens and the drain's public key, public by design as on civic) cannot be released: the leak scan flags it, and adding the narrow allowlist entries civic uses was refused by this session's permission check as changing a check. Not worked around. The live site still counts nothing."
  ],
  "next": [
+  "a 'voices' section (blogs, newsletters, podcasts by place and topic: title, byline as published, date, link, our one-line summary) once data.b@ publishes the feeds (no feeds endpoint on 18 Nov 15:35 UTC)",
   "open the signals lane once allowed, or take tokens from observability@ on account A",
   "use /api/v1/events/ claims (503 on 18 Nov) to connect posts to events; show Perplexity's social finds when data.b@ publishes them",
   "Mastodon accounts once data.b@ verifies any; more organisation accounts (venues, câmaras, companies in the graph, Web Summit)",

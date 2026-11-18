@@ -14,3 +14,12 @@ What organisations are saying now about the places and topics PrompTugal.news co
 - Posts shown by link or the platform's own embed, never copied text or media.
 - Each post with its account, platform, time, licence "the platform's terms" and the evidence it supports. Perplexity finds credited.
 - Pages: home (latest signals), one per place, one per topic, one per organisation account, /how/, /security/, the take-down disclaimer; masthead and sites rail as the other sites.
+
+## The line widens (Dinis, 18 November 2026, about 15:25 to 15:35 UTC)
+Kept in PrompTugal__News__Website `board/guidance/2026-11-18-people-blogs-cyber-and-simulated-payments.md`.
+
+> "The blog is a person, so we name them ... It's not just organization ... if it's public individuals, surely if it's members of government, surely it's public office ... we need to draw the line on, yes, if it feels like private information, but if somebody published something publicly, we should be linking them ... never a personal contact."
+
+- Named and linked: people in public office and public life, and anyone who publishes in public under their own name (a blog, a newsletter, a public post, a talk), attributed by the name they published under.
+- Never: private information, a personal contact, anything behind a login, anything the person did not publish themselves. Take-down on request.
+- A "voices" section on this site: blogs, newsletters and podcasts by place and topic from data.b@'s feeds, each by title, byline as published, date and link, with our own one-line summary.
