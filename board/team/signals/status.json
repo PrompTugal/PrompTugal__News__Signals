@@ -2,13 +2,13 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-18T16:00Z",
+ "updated": "2026-11-18T15:40Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
   "security_pre_review": "ran (Sonnet): tag job skipped on schedule, exact-host allowlists, no innerHTML, CSP, slug collisions, Markdown sanitising, takedown list, narrow commit-check regex; all done",
-  "appsec_post_review": "see the commit message",
-  "closing_conductor": "see the commit message"
+  "appsec_post_review": "ran (Sonnet): no XSS, path traversal or secret; 3 medium and 3 low found and fixed before release (docs/security-findings.json, shown on /security/); default branch confirmed dev, so the schedule fires",
+  "closing_conductor": "ran: status, debrief, REALITY.md, report to conductor.b@"
  },
  "done": [
   "39 pages from data.promptugal.news's API: home, 19 places, 8 topics, 5 organisation accounts, indexes, /how/, /security/, /takedown/; Markdown twins and llms.txt",

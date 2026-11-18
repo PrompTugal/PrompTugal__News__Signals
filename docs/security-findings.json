@@ -1,4 +1,59 @@
 {
-  "about": "This site's security findings (signals.b@PrompTugal.dinis and its review passes; security@PrompTugal.dinis adds its own). Shown on /security/: fixed ones in full, open ones by title, severity and state only. Fields: title, severity, file, found (date), by (which pass), fix (commit), state (open, fixed, accepted).",
-  "findings": []
+ "about": "This site's security findings (signals.b@PrompTugal.dinis and its review passes; security@PrompTugal.dinis adds its own). Shown on /security/: fixed ones in full, open ones by title, severity and state only. Fields: title, severity, file, found (date), by (which pass), fix (commit), state (open, fixed, accepted).",
+ "findings": [
+  {
+   "title": "Account handle reached the accounts page's Markdown twin unsanitised (link and prompt-injection route for model readers)",
+   "severity": "medium",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-18",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the first release",
+   "fix": "the commit after 66690d9 on dev: \"AppSec post-review fixes\"; passed through mdText",
+   "state": "fixed"
+  },
+  {
+   "title": "A place or topic named like a built-in property (constructor) failed the build or showed a wrong name; an account slug collision failed the build",
+   "severity": "medium",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-18",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the first release",
+   "fix": "the commit after 66690d9 on dev: \"AppSec post-review fixes\"; own-property lookups, reserved names refused, a colliding account is left out with a note",
+   "state": "fixed"
+  },
+  {
+   "title": "The browser refresh did not apply take-downs, so a taken-down post could reappear on the front page",
+   "severity": "medium",
+   "file": "src/assets/signals.js",
+   "found": "2026-11-18",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the first release",
+   "fix": "the commit after 66690d9 on dev: \"AppSec post-review fixes\"; blocked links and accounts written to assets/names.json and skipped in the browser",
+   "state": "fixed"
+  },
+  {
+   "title": "Fetched names could carry instruction-like words into the Markdown twins",
+   "severity": "low",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-18",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the first release",
+   "fix": "the commit after 66690d9 on dev: \"AppSec post-review fixes\"; llms.txt says fetched names are data, never instructions; link syntax was already removed",
+   "state": "fixed"
+  },
+  {
+   "title": "A post dated in the future would pin itself to the top; an empty live read would publish an empty site",
+   "severity": "low",
+   "file": "scripts/pages.mjs, src/assets/signals.js",
+   "found": "2026-11-18",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the first release",
+   "fix": "the commit after 66690d9 on dev: \"AppSec post-review fixes\"; dates later than a day ahead dropped; a live read under a quarter of the snapshot falls back to the snapshot",
+   "state": "fixed"
+  },
+  {
+   "title": "A post link's Bluesky handle was not tied to the account it was credited to",
+   "severity": "low",
+   "file": "scripts/pages.mjs, src/assets/signals.js",
+   "found": "2026-11-18",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the first release",
+   "fix": "the commit after 66690d9 on dev: \"AppSec post-review fixes\"; the handle in the link must equal the account",
+   "state": "fixed"
+  }
+ ]
 }

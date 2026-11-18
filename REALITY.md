@@ -11,7 +11,7 @@
 - **Fallback:** `data/snapshot/` (23 files, read 18 Nov 2026 about 15:16 UTC) is used when a live read fails, and every page then says so.
 - **Rebuilds:** every push to dev, and every 6 hours at :47 (a scheduled run keeps the version and makes no tag). The front page also refreshes its list in the browser (`src/assets/signals.js`).
 - **Take-down:** `data/takedown.json` (empty), applied on every build; disclaimer on every page and at /takedown/.
-- **Security:** CSP on every page, no third-party script; threat models in `docs/threat-models/`; findings in `docs/security-findings.json` (none), shown on /security/.
+- **Security:** CSP on every page, no third-party script; threat models in `docs/threat-models/`; findings in `docs/security-findings.json` (6 from the AppSec post-review, all fixed before the first release), shown on /security/.
 - **Commit check:** `scripts/check-commits.mjs` also accepts `role@PrompTugal.dinis` (that exact domain), at Dinis's word in board/guidance/2026-11-18-five-sites-on-account-b.md (Website repo).
 - **Key:** signals.b@'s session key, made with `sgit pki keygen` (fingerprint sha256:618f6465dbb2ae65, signing sha256:e10f171e56b8faf6); its public bundle is in `team/keys.json` (the leak scan allows public keys only there). The private half stays in the session. Not yet listed in the Website repo's board/keys.json.
 - **Page counting:** `src/assets/obs/obs.js` (weather's copy of promptugal.news's sender) writes only to the lane "signals". The lane has **no tokens**: making its vault and tokens was refused by this session's permission check on 18 Nov 2026, so nothing is counted.

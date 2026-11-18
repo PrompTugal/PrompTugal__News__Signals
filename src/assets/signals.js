@@ -27,11 +27,14 @@
     if (text.length > MAX_BYTES) return
     const d = JSON.parse(text), pName = { bluesky: 'Bluesky', mastodon: 'Mastodon' }
     const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k) ? o[k] : null
+    const blockedUrls = new Set(Array.isArray(names.blocked_urls) ? names.blocked_urls : []), blockedAcc = new Set(Array.isArray(names.blocked_accounts) ? names.blocked_accounts : [])
     const seen = new Set(), posts = []
     for (const r of (Array.isArray(d.posts) ? d.posts : []).slice(0, 500)) {
       if (!r || typeof r !== 'object') continue
       const url = postLink(r), l = r.license || {}, lx = parse(l.url), at = new Date(r.posted_at), kind = clean(r.kind, 40), account = clean(r.account, 100).toLowerCase()
       if (!url || seen.has(url) || !lx || !LICENCE_HOSTS.has(lx.hostname) || !clean(l.name) || !KINDS.has(kind) || !clean(r.organisation) || isNaN(at)) continue
+      if (blockedUrls.has(url) || blockedAcc.has(r.platform + ':' + account) || at > Date.now() + 86400000) continue   // take-downs and future dates, as the build
+      if (r.platform === 'bluesky' && new URL(url).pathname.split('/')[2].toLowerCase() !== account) continue
       const accSlug = own(names.accounts, r.platform + ':' + account)   // only accounts this build knows have a page
       seen.add(url); posts.push({ r, url, lx, at, kind, account, accSlug })
     }
