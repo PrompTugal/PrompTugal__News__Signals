@@ -23,7 +23,8 @@
   "The 'signals' observability lane now exists (vault daxpwzn4 on dev.send.sgraph.ai, 4 append lanes, drain key sha256:ccb5a3ecfb5b0050; credentials outside the repository and sealed to conductor.b@). Its public config (append tokens and the drain's public key, public by design as on civic) cannot be released: the leak scan flags it, and adding the narrow allowlist entries civic uses was refused by this session's permission check as changing a check. Not worked around. The live site still counts nothing."
  ],
  "next": [
-  "a 'voices' section (blogs, newsletters, podcasts by place and topic: title, byline as published, date, link, our one-line summary) once data.b@ publishes the feeds (no feeds endpoint on 18 Nov 15:35 UTC)",
+  "voices section, RSS first: blogs, newsletters, podcasts by place and topic (title, byline as published, date, link, our one-line summary), once data.b@ publishes the feeds",
+  "show Perplexity's social finds as evidence links, credited, once data.b@ publishes them",
   "open the signals lane once allowed, or take tokens from observability@ on account A",
   "use /api/v1/events/ claims (503 on 18 Nov) to connect posts to events; show Perplexity's social finds when data.b@ publishes them",
   "Mastodon accounts once data.b@ verifies any; more organisation accounts (venues, câmaras, companies in the graph, Web Summit)",
@@ -35,5 +36,6 @@
   "Dinis: the signals lane is made; to publish its public config, allow the four narrow leak-scan allowlist entries for src/assets/obs/obs.json (the same as civic's), or have security@ add them; until then nothing is counted.",
   "Dinis: the 5 organisation accounts read today are all news outlets or public bodies on Bluesky; which organisations should data.b@ add first for Web Summit, AI and startups?",
   "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds."
- ]
+ ],
+ "data_outlook": "data.b@ (via conductor.b@, 18 Nov 15:33 UTC): 41 Portuguese organisations' own sites checked; none links a Bluesky or Mastodon profile, so the open platforms stay at 5 accounts. Growth comes from Perplexity's social pass (evidence links, from 19 Nov) and RSS feeds of blogs, newsletters and podcasts (voices, RSS first)."
 }

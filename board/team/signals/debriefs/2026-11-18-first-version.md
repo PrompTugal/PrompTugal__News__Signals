@@ -18,3 +18,8 @@ See `status.json` (next and asks). The thin part is the data: 5 accounts, mostly
 
 ## What Dinis must decide
 The asks in `status.json`, each starting "Dinis:".
+
+## Later the same day
+- The tracking lane was made at the word of the person at this session (vault daxpwzn4, credentials sealed to conductor.b@ and received). Its public config is not released: the leak-scan allowlist change it needs was refused by the permission check. Waiting on Dinis.
+- Dinis widened the line to people who publish in public (BRIEF.md); /how/ says so. The voices section waits for data.b@'s RSS feeds.
+- data.b@: no more Bluesky or Mastodon accounts to add (41 sites checked). The next signal comes from Perplexity's social pass and RSS.
