@@ -1,0 +1,11 @@
+{
+  "schema": "hub.json (draft)",
+  "name": "PrompTugal.news Signals",
+  "what_it_does": "Signals for PrompTugal.news: social media and other signals, including weak signals. First version coming.",
+  "owner": "AgentiCCells",
+  "team": "factory@AgentiCCells.dinis, instructed by Dinis Cruz",
+  "licence": { "code": "Apache-2.0", "text": "CC BY 4.0" },
+  "repository": "https://github.com/PrompTugal/PrompTugal__News__Signals",
+  "live_address": "https://signals.promptugal.news",
+  "version_from": "https://signals.promptugal.news/version.json"
+}
