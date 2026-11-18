@@ -32,6 +32,17 @@ for (const f of [...files, 'hub.json', 'README.md']) {
     }
   }
 }
+// The preview for the sites bar (signals.b@PrompTugal.dinis, 18 Nov 2026): an image only, never code (security pre-review).
+if (existsSync('_site/preview.svg')) {
+  const s = readFileSync('_site/preview.svg', 'utf8');
+  if (!/^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/.test(s)) fail('_site/preview.svg: must start with <svg xmlns="http://www.w3.org/2000/svg"');
+  for (const bad of [/<script/i, /<foreignObject/i, /<image/i, /\bhref\s*=/i, /url\s*\(/i, /@import/i, /\son[a-z]+\s*=/i]) if (bad.test(s)) fail(`_site/preview.svg: forbidden ${bad}`);
+  s.split('\n').forEach((line, i) => { if (line.includes('\u2014')) fail(`_site/preview.svg:${i + 1}: em dash`); const m = line.match(hype); if (m) fail(`_site/preview.svg:${i + 1}: hype word "${m[0]}"`); });
+}
+for (const f of files.filter(f => f.endsWith('.html'))) for (const m of readFileSync(f, 'utf8').matchAll(/<meta property="og:image" content="([^"]*)"/g)) {
+  if (m[1] !== 'https://signals.promptugal.news/preview.png') fail(`${f}: og:image must be https://signals.promptugal.news/preview.png`);
+  if (!existsSync('_site/preview.png')) fail(`${f}: og:image points at /preview.png, which is not built`);
+}
 if (!existsSync('_site/version.json')) fail('no version.json');
 if (!existsSync('_site/index.html')) fail('no index.html');
 try {

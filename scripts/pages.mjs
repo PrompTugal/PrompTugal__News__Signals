@@ -111,6 +111,8 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <link rel="alternate" type="text/markdown" href="/${esc(rel)}index.md">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
+<meta property="og:image" content="https://signals.promptugal.news/preview.png">
+<meta property="og:title" content="${esc(title)}">
 <link rel="stylesheet" href="/assets/signals.css">
 <script defer src="/assets/signals.js"></script>
 <script defer src="/assets/obs/obs.js" data-lane="signals"></script>
@@ -332,6 +334,32 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
     md('Take-down', [`Open a public issue: ${REPO}/issues/new or see https://promptugal.news/report/`], state), 'Take-down', 'takedown');
 
   // llms.txt and a small data file for the browser refresh's place and topic names
+  // /preview.svg: an infographic of this site's own live numbers, for the sites bar (Dinis, 18 Nov 2026, 22:00,
+  // 2026-11-18-the-sites-bar.md). Only integers, fixed words and dates go in: no fetched text at all.
+  {
+    const n = v => String(Math.max(0, Math.trunc(Number(v) || 0)));
+    const count = t => posts.filter(p => p.topics.includes(t)).length;
+    const libWS = [...lib.values()].filter(i => i.about.includes('event:web-summit-lisbon-2026')).length;
+    const figs = [[posts.length, 'posts in 30 days'], [accounts.size, 'organisation accounts'], [placeList.length, 'places'], [libWS, 'library items on Web Summit']];
+    const tops = [['AI', count('ai')], ['Security', count('security')], ['Web Summit', count('web-summit')], ['Startups', count('startups')]];
+    const x = (s) => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&apos;' }[c]));
+    const svgOut = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="PrompTugal.news Signals: ${n(posts.length)} posts from ${n(accounts.size)} organisation accounts">
+<rect width="1200" height="630" fill="#f6f3ec"/>
+<rect x="0" y="0" width="1200" height="12" fill="#c52830"/>
+<text x="60" y="100" font-family="Georgia, serif" font-size="56" font-weight="700" fill="#121317">PrompTugal.news</text>
+<rect x="545" y="56" width="170" height="56" rx="4" fill="#c52830"/><text x="630" y="96" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#ffffff">Signals</text>
+<text x="60" y="150" font-family="Arial, sans-serif" font-size="26" fill="#121317">What organisations are saying now, by link</text>
+${figs.map(([v, l], i) => `<text x="${60 + i * 280}" y="270" font-family="Arial, sans-serif" font-size="72" font-weight="700" fill="#121317">${n(v)}</text><text x="${60 + i * 280}" y="310" font-family="Arial, sans-serif" font-size="22" fill="#666860">${x(l)}</text>`).join('\n')}
+<line x1="60" y1="360" x2="1140" y2="360" stroke="#d8d4cb" stroke-width="2"/>
+<text x="60" y="410" font-family="Arial, sans-serif" font-size="24" fill="#121317">Posts by topic: ${tops.map(([t, v]) => `${x(t)} ${n(v)}`).join(' · ')}</text>
+<text x="60" y="500" font-family="Arial, sans-serif" font-size="20" fill="#666860">Counts of posts that passed this site's checks. Data read ${x(state.readAt)}${state.fallback ? ' (from the last snapshot)' : ''}; built ${x(fmt(BUILT))}.</text>
+<text x="60" y="532" font-family="Arial, sans-serif" font-size="20" fill="#666860">Sources: data.promptugal.news (social/latest.json), library.promptugal.news (items). By signals.b@PrompTugal.dinis's build.</text>
+<text x="60" y="590" font-family="Arial, sans-serif" font-size="20" fill="#006600">signals.promptugal.news · CC BY 4.0 · version ${x(VERSION)}</text>
+</svg>
+`;
+    writeFileSync(join(OUT, 'preview.svg'), svgOut);
+  }
+
   // the latest list as JSON, built only from the checked values above (never the fetched objects)
   mkdirSync(join(OUT, 'api'), { recursive: true });
   writeFileSync(join(OUT, 'api', 'latest.json'), JSON.stringify({

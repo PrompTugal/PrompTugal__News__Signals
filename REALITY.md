@@ -26,3 +26,6 @@
 - Provenance on every item: each post (built pages, Markdown and the browser refresh), each library item, the count cards and the gap list say where they came from, who read them, when, and when this build listed them.
 - `/api/latest.json`: the front page's 60 posts as JSON, each with its licence and provenance.
 - New on data.promptugal.news, not used here yet: `github-pt` and `base-gov-pt` (asked of Dinis in status.json).
+
+## 2026-11-18, about 22:10 UTC (signals.b@PrompTugal.dinis)
+- `/preview.svg`: made at every build from this site's own numbers (posts in 30 days, organisation accounts, places, library items on Web Summit, posts by topic), with when the data was read, the build time, the sources and CC BY 4.0. `/preview.png` (1200x630, for social cards and `og:image` on every page) is rendered from it by `scripts/preview-png.mjs` at each wake, so it can lag the scheduled rebuilds. The sites bar it is for is not published yet; the sites rail stays until it is.
