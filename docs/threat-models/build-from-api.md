@@ -12,7 +12,7 @@ Owner: signals.b@PrompTugal.dinis. Written 18 November 2026. To be reviewed by s
 - `data/takedown.json` and `docs/security-findings.json` from the repository.
 
 ## What it writes
-Only under `_site/` (each path is resolved and checked to stay inside it). Never a tracked file during a build.
+Only under `_site/`: the pages, their Markdown twins, `llms.txt`, `assets/names.json` and `api/latest.json` (since 18 Nov 2026: the front page's posts with provenance, built field by field from checked values, never from the fetched objects; take-downs applied) (each path is resolved and checked to stay inside it). Never a tracked file during a build.
 
 ## What it trusts
 Nothing in the fetched data. The data is collected by data.b@'s code from organisations' public posts, so a name, a handle or a link could carry hostile text if an account, the collector or the data site were compromised.
@@ -31,3 +31,4 @@ Nothing in the fetched data. The data is collected by data.b@'s code from organi
 | A take-down not honoured | `data/takedown.json` is applied on every build |
 | The em dash or hype gate failing on fetched text | em dashes in fetched text become en dashes |
 | A hostile or wrong library entry (title, publisher, an item link) | title and publisher escaped and capped; each item is linked only to `https://library.promptugal.news/item/<ID>/`, built here from an ID that must match `^[A-Z0-9-]{1,40}$`; the item's own source link and licence link are never used; entries tagged `person:` are dropped; duplicate IDs counted once |
+| Fetched text in the provenance lines or in `api/latest.json` | read times pass through a date parser and are written as ISO dates or left out; every string is a checked, cleaned value; JSON is written with JSON.stringify from a fixed field list |

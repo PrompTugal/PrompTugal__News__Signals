@@ -52,3 +52,4 @@ summary{cursor:pointer;font-weight:600}
 footer{border-top:3px double var(--ink);padding:1rem 0 2rem;font-size:.9rem}
 footer p{margin:.3rem 0}
 @media (max-width:600px){h1{font-size:1.6rem}.tools{margin-left:0}}
+.prov{font-size:.8rem;color:var(--muted)}

@@ -11,7 +11,7 @@
 - **Fallback:** `data/snapshot/` (23 files, read 18 Nov 2026 about 15:16 UTC) is used when a live read fails, and every page then says so.
 - **Rebuilds:** every push to dev, and every 6 hours at :47 (a scheduled run keeps the version and makes no tag). The front page also refreshes its list in the browser (`src/assets/signals.js`).
 - **Take-down:** `data/takedown.json` (empty), applied on every build; disclaimer on every page and at /takedown/.
-- **Security:** CSP on every page, no third-party script; threat models in `docs/threat-models/`; findings in `docs/security-findings.json` (7 from AppSec post-reviews, all fixed before release), shown on /security/.
+- **Security:** CSP on every page, no third-party script; threat models in `docs/threat-models/`; findings in `docs/security-findings.json` (8 from AppSec post-reviews, all fixed before release), shown on /security/.
 - **Commit check:** `scripts/check-commits.mjs` also accepts `role@PrompTugal.dinis` (that exact domain), at Dinis's word in board/guidance/2026-11-18-five-sites-on-account-b.md (Website repo).
 - **Key:** signals.b@'s session key, made with `sgit pki keygen` (fingerprint sha256:618f6465dbb2ae65, signing sha256:e10f171e56b8faf6); its public bundle is in `team/keys.json` (the leak scan allows public keys only there). The private half stays in the session. Listed in the Website repo's board/keys.json by conductor.b@ (18 Nov 2026).
 - **Page counting:** `src/assets/obs/obs.js` (weather's copy of promptugal.news's sender) writes only to the lane "signals". The lane was made on 18 Nov 2026 with `tools/obs-setup-signals.py` (vault daxpwzn4, 4 append lanes, drain key sha256:ccb5a3ecfb5b0050; credentials outside the repository, sealed to conductor.b@). Its public config is **not in the repository**: the leak scan flags the public tokens, and the allowlist change was refused by the session's permission check. So the live site counts nothing yet.
@@ -21,3 +21,8 @@
 ## 2026-11-18, 16:28 wake (signals.b@PrompTugal.dinis)
 - The library's catalogue (library.promptugal.news `items/index.json`, `index/place.json`) is read at every build. /topics/web-summit/ lists the 80 items about Web Summit Lisbon 2026 and /places/lisboa/ the 4 items about Lisbon, each by title, kind and publisher, linked only to its library card. Snapshot in `data/snapshot/library_*.json` (read 18 Nov 2026 about 16:40 UTC).
 - The library's requests channel was read at this wake: nothing addressed to signals.b@.
+
+## 2026-11-18, 19:28 wake (signals.b@PrompTugal.dinis)
+- Provenance on every item: each post (built pages, Markdown and the browser refresh), each library item, the count cards and the gap list say where they came from, who read them, when, and when this build listed them.
+- `/api/latest.json`: the front page's 60 posts as JSON, each with its licence and provenance.
+- New on data.promptugal.news, not used here yet: `github-pt` and `base-gov-pt` (asked of Dinis in status.json).

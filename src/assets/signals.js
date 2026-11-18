@@ -15,6 +15,7 @@
     if (p.platform === 'bluesky') return x.hostname === 'bsky.app' && /^\/profile\/[a-z0-9.:-]{1,100}\/post\/[a-z0-9]{1,20}$/i.test(x.pathname) ? x.href : null
     if (p.platform === 'mastodon') return MASTODON_HOSTS.has(x.hostname) && /^\/@[A-Za-z0-9_]{1,30}\/\d{1,25}$/.test(x.pathname) ? x.href : null
     return null }
+  const isoDate = v => { if (typeof v !== 'string' || !/^\d{4}-\d\d-\d\dT/.test(v)) return null; const d = new Date(v); return isNaN(d) || d < Date.UTC(2020, 0, 1) || d > Date.now() + 86400000 ? null : d }
   const fmt = d => d.toLocaleString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + ' UTC'
   const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e }
   const link = (href, text, cls) => { const a = el('a', cls, text); a.href = href; return a }
@@ -53,7 +54,9 @@
       for (const x of (Array.isArray(r.topics) ? r.topics : []).slice(0, 10)) { const n = typeof x === 'string' && own(names.topics, x); if (n) tags.push(link('/topics/' + x + '/', n, 'chip')) }
       for (const x of (Array.isArray(r.places) ? r.places : []).slice(0, 10)) { const n = typeof x === 'string' && own(names.places, x); if (n) tags.push(link('/places/' + x + '/', n, 'chip place')) }
       if (tags.length) ev.append(...tags); else ev.textContent = 'Evidence for: no topic or place of ours matched (a general signal).'
-      li.append(who, meta, ev); ol.append(li)
+      const rx = isoDate(r.read_at), prov = el('p', 'prov', 'Provenance: read through ' + plat + "'s public API by data.b@PrompTugal.dinis's collector" + (rx ? ' at ' + fmt(rx) : '') + ', published in ')
+      prov.append(link(API, 'social/latest.json'), '; fetched by your browser from data.promptugal.news at ' + fmt(new Date()) + '.')
+      li.append(who, meta, ev, prov); ol.append(li)
     }
     box.replaceChildren(ol)
     const note = document.getElementById('live-note'); const ra = new Date(d.read_at)

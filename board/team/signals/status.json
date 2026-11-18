@@ -2,7 +2,7 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-18T16:45Z",
+ "updated": "2026-11-18T19:45Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -18,12 +18,14 @@
   "session key made with sgit pki keygen (sha256:618f6465dbb2ae65); public bundle in team/keys.json",
   "commit check accepts role@PrompTugal.dinis",
   "observability lane made with tools/obs-setup-signals.py; credentials sealed to conductor.b@",
-  "wake 16:28: the Web Summit topic (80 items) and Lisboa (4 items) link the library's catalogue, by library card only; library read at every build with a snapshot fallback"
+  "wake 16:28: the Web Summit topic (80 items) and Lisboa (4 items) link the library's catalogue, by library card only; library read at every build with a snapshot fallback",
+  "wake 19:28: provenance on every post, library item, count and gap list (HTML, Markdown, browser refresh); the front page list as JSON at /api/latest.json with provenance per post (Dinis 19:00)"
  ],
  "blocked": [
   "The 'signals' observability lane now exists (vault daxpwzn4 on dev.send.sgraph.ai, 4 append lanes, drain key sha256:ccb5a3ecfb5b0050; credentials outside the repository and sealed to conductor.b@). Its public config (append tokens and the drain's public key, public by design as on civic) cannot be released: the leak scan flags it, and adding the narrow allowlist entries civic uses was refused by this session's permission check as changing a check. Not worked around. The live site still counts nothing."
  ],
  "next": [
+  "github-pt (new on data.promptugal.news): organisations' public repositories as weak signals for topics (AI, security, startups), organisations only; waiting on Dinis since the brief scopes this site to posts",
   "voices section, RSS first: blogs, newsletters, podcasts by place and topic (title, byline as published, date, link, our one-line summary), once data.b@ publishes the feeds",
   "show Perplexity's social finds as evidence links, credited, once data.b@ publishes them",
   "open the signals lane once allowed, or take tokens from observability@ on account A",
@@ -36,13 +38,14 @@
  "asks": [
   "Dinis: the signals lane is made; to publish its public config, allow the four narrow leak-scan allowlist entries for src/assets/obs/obs.json (the same as civic's), or have security@ add them; until then nothing is counted.",
   "Dinis: the 5 organisation accounts read today are all news outlets or public bodies on Bluesky; which organisations should data.b@ add first for Web Summit, AI and startups?",
-  "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds."
+  "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds.",
+  "Dinis: may signals.promptugal.news show organisations' public GitHub activity (data.promptugal.news github-pt) as weak signals beside their posts, or is that startups.b@'s alone?"
  ],
  "data_outlook": "data.b@ (via conductor.b@, 18 Nov 15:33 UTC): 41 Portuguese organisations' own sites checked; none links a Bluesky or Mastodon profile, so the open platforms stay at 5 accounts. Growth comes from Perplexity's social pass (evidence links, from 19 Nov) and RSS feeds of blogs, newsletters and podcasts (voices, RSS first).",
  "library_requests": {
-  "read_at": "2026-11-18T16:40Z",
+  "read_at": "2026-11-18T19:29Z",
   "url": "https://library.promptugal.news/api/v1/requests/index.json",
-  "for_signals_b": "none (our file: HTTP 404; requests addressed to signals in the index: [])",
+  "for_signals_b": "none",
   "practice": "read at every wake, at Dinis's word (Website repo board/guidance/2026-11-18-the-pipeline-standard-and-the-fact-checker.md); answer by fixing or by saying why not"
  }
 }
