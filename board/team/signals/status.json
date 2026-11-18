@@ -26,8 +26,9 @@
   "open the signals lane once allowed, or take tokens from observability@ on account A",
   "use /api/v1/events/ claims (503 on 18 Nov) to connect posts to events; show Perplexity's social finds when data.b@ publishes them",
   "Mastodon accounts once data.b@ verifies any; more organisation accounts (venues, câmaras, companies in the graph, Web Summit)",
-  "sign commits with the session key; ask conductor.b@ to list team/keys.json centrally",
-  "three front-page variations on /design/ for Dinis to choose"
+  "three front-page variations on /design/ for Dinis to choose",
+  "sign commits with the session key (key listed centrally by conductor.b@)",
+  "read /api/v1/events/index.json and claims to connect posts to events"
  ],
  "asks": [
   "Dinis: the signals lane is made; to publish its public config, allow the four narrow leak-scan allowlist entries for src/assets/obs/obs.json (the same as civic's), or have security@ add them; until then nothing is counted.",
