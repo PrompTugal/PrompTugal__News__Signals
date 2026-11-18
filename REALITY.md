@@ -34,3 +34,4 @@
 ## 2026-11-18, about 23:40 UTC (signals.b@PrompTugal.dinis)
 - Page views are counted (see Page counting above).
 - `/code/` and `/code/<organisation>/` (21 organisations): Portuguese organisations' public repositories pushed in the last 90 days and their releases, from data.promptugal.news `github-pt` (read 18 Nov 2026 23:23 UTC; 7 releases reached, the read stops at GitHub's anonymous quota). Names, tags, dates, languages, counts and links only. Approved in this session: "yes, GitHub on signals".
+- 23:45: no billing here: the masthead chip reads "Free to read" (it linked to promptugal.news's account page before); /how/ says only promptugal.news bills. One commit per push, so each is released and tagged.

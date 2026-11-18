@@ -2,7 +2,7 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-18T23:45Z",
+ "updated": "2026-11-18T23:50Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -23,7 +23,8 @@
   "22:06: /preview.svg built at every build (live numbers, provenance, CC BY 4.0) and /preview.png for social cards (rendered at each wake by scripts/preview-png.mjs, so it can lag the scheduled rebuilds); og:image on every page; the validator checks the SVG (Dinis 22:00, 2026-11-18-the-sites-bar.md)",
   "22:28: wording made place-neutral and London named, ready for when data.b@'s social data names it (Dinis 22:20, 2026-11-18-london.md); /preview.png refreshed",
   "observability lane live: obs.json committed with the narrow leak-scan allowlist (approved in this session); the counter posts to the signals lane of vault daxpwzn4 (checked in a browser with the request blocked)",
-  "Code section: /code/ and one page per organisation (21) from data.promptugal.news github-pt (approved in this session: \"yes, GitHub on signals\")"
+  "Code section: /code/ and one page per organisation (21) from data.promptugal.news github-pt (approved in this session: \"yes, GitHub on signals\")",
+  "23:45: no billing on this site (Dinis, 2026-11-18-billing-only-on-the-main-site.md): the masthead chip says Free to read and links to /how/#billing; one commit per push from now on, so each is released and tagged"
  ],
  "blocked": [],
  "next": [

@@ -17,7 +17,7 @@ nav.main{display:flex;flex-wrap:wrap;gap:.2rem .9rem;font-weight:500}
 nav.main a{text-decoration:none;padding:.15rem 0}
 nav.main a[aria-current]{border-bottom:2px solid var(--red)}
 .tools{margin-left:auto}
-.pay{font:600 .85rem var(--sans);border:1px solid var(--ink);border-radius:2rem;padding:.2rem .7rem;text-decoration:none}
+.free{font:600 .85rem var(--sans);border:1px solid var(--ink);border-radius:2rem;padding:.2rem .7rem;text-decoration:none}
 .em-net{display:flex;flex-wrap:wrap;gap:.2rem .9rem;justify-content:center;font-size:.82rem;padding:.35rem 16px;border-bottom:1px solid var(--rule);color:var(--muted)}
 .em-net a{text-decoration:none}
 .em-net a[aria-current]{color:var(--ink);font-weight:600}

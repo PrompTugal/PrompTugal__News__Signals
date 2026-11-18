@@ -122,7 +122,7 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <header class="mast"><div class="wrap">
 <a class="brand" href="/" aria-label="PrompTugal.news Signals, front page"><img class="light" src="/assets/brand/promptugal-wordmark-light.svg" alt="PrompTugal.news" width="184" height="30"><img class="dark" src="/assets/brand/promptugal-wordmark-dark.svg" alt="" width="184" height="30"><span class="sub">Signals</span></a>
 <nav class="main" aria-label="Sections">${NAV.map(([h, l]) => `<a href="/${h}"${current === h ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav>
-<div class="tools"><a class="pay" href="https://promptugal.news/account/">Pay for what you read</a></div>
+<div class="tools"><a class="free" href="/how/#billing">Free to read</a></div>
 </div></header>
 <nav class="em-net" aria-label="The PrompTugal.news sites"><span>Also from PrompTugal.news</span>${SITES.map(([h, l]) => h === 'signals' ? `<a href="/" aria-current="page">${l}</a>` : `<a href="https://${h}.promptugal.news/" rel="noopener">${l}</a>`).join('')}</nav>
 <div class="strip"><div class="wrap"><span><strong>Independent.</strong> Organisations' public posts, by link. A signal to check, not a verified fact.</span><span>Data read ${esc(state.readAt)}${state.fallback ? ' (from the last snapshot: the live read failed)' : ''}</span></div></div>
@@ -296,6 +296,8 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
 <li>Every post carries its licence: "the platform's terms", linked, with the organisation as holder. What we make (these pages, the structure of the data) is <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</li>
 <li>A post is a signal to check, not a verified fact. The topics and places it is "evidence for" are matched by keywords, by code.</li>
 <li>Found through Perplexity: events named by Perplexity (through OpenRouter) are evidence only, shown with their links on events.promptugal.news and credited.</li></ul>
+<h2 id="billing">Free to read</h2>
+<p>This site carries no billing, no meter and no adverts: only promptugal.news bills (Dinis Cruz, 18 November 2026). Everything here is free to read, with its licence and provenance.</p>
 <h2>Provenance on every item</h2>
 <p>Every post and every library item on this site says where it came from, who read it, when, and when this build listed it (Dinis Cruz, 18 November 2026: "every single piece of information on the website has to have a piece of provenance"). The front page's list is also published as JSON with the same provenance on each post: <a href="/api/latest.json">/api/latest.json</a>.</p>
 <h2>Code on GitHub</h2>
