@@ -1,68 +1,69 @@
 {
- "agent": "signals.b@PrompTugal.dinis",
- "site": "https://signals.promptugal.news",
- "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-19T01:52Z",
- "state": "first version released to dev (see REALITY.md)",
- "passes": {
-  "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
-  "security_pre_review": "ran (Sonnet): tag job skipped on schedule, exact-host allowlists, no innerHTML, CSP, slug collisions, Markdown sanitising, takedown list, narrow commit-check regex; all done",
-  "appsec_post_review": "ran (Sonnet): no XSS, path traversal or secret; 3 medium and 3 low found and fixed before release (docs/security-findings.json, shown on /security/); default branch confirmed dev, so the schedule fires",
-  "closing_conductor": "ran: status, debrief, REALITY.md, report to conductor.b@"
- },
- "done": [
-  "39 pages from data.promptugal.news's API: home, 19 places, 8 topics, 5 organisation accounts, indexes, /how/, /security/, /takedown/; Markdown twins and llms.txt",
-  "posts by link only, each with organisation, account, platform, time, licence (the platform's terms) and the topics and places it is evidence for",
-  "snapshot fallback, browser refresh on the front page, scheduled rebuild every 6 hours",
-  "threat models: build-from-api, scheduled-rebuild, browser-refresh",
-  "session key made with sgit pki keygen (sha256:618f6465dbb2ae65); public bundle in team/keys.json",
-  "commit check accepts role@PrompTugal.dinis",
-  "observability lane made with tools/obs-setup-signals.py; credentials sealed to conductor.b@",
-  "wake 16:28: the Web Summit topic (80 items) and Lisboa (4 items) link the library's catalogue, by library card only; library read at every build with a snapshot fallback",
-  "wake 19:28: provenance on every post, library item, count and gap list (HTML, Markdown, browser refresh); the front page list as JSON at /api/latest.json with provenance per post (Dinis 19:00)",
-  "22:06: /preview.svg built at every build (live numbers, provenance, CC BY 4.0) and /preview.png for social cards (rendered at each wake by scripts/preview-png.mjs, so it can lag the scheduled rebuilds); og:image on every page; the validator checks the SVG (Dinis 22:00, 2026-11-18-the-sites-bar.md)",
-  "22:28: wording made place-neutral and London named, ready for when data.b@'s social data names it (Dinis 22:20, 2026-11-18-london.md); /preview.png refreshed",
-  "observability lane live: obs.json committed with the narrow leak-scan allowlist (approved in this session); the counter posts to the signals lane of vault daxpwzn4 (checked in a browser with the request blocked)",
-  "Code section: /code/ and one page per organisation (21) from data.promptugal.news github-pt (approved in this session: \"yes, GitHub on signals\")",
-  "23:45: no billing on this site (Dinis, 2026-11-18-billing-only-on-the-main-site.md): the masthead chip says Free to read and links to /how/#billing; one commit per push from now on, so each is released and tagged",
-  "sites bar 1.1.0 installed (19 Nov ~01:00 UTC): vendored and checked by sha256 at every build against the registry, rendered first in <body> from promptugal.news/api/v1/sites.json, the old rail removed; /preview.svg 320x180 from designer@'s template; the 1200x630 infographic moved to /card.svg (source of /preview.png)",
-  "signed commits on (19 Nov ~01:40 UTC): an SSH signing key (ECDSA P-256) published with this session's ID in team/keys.json; every commit signed with it (repo-local gpg.ssh.program); scripts/check-signatures.mjs in release.sh and CI fails an unsigned commit, one signed by someone other than its Agent:, or one naming another Claude-Session: (from the commit that adds it on)",
-  "data in the browser (19 Nov ~01:50 UTC, Dinis's 01:13 decision): every list (home, places, topics, accounts) loads the latest file from data.promptugal.news on open and every 10 minutes, replaces the built list only with a newer file that passes the build's checks, shows live or built, its read time and stale; home counts update; no cookie, no referrer; CSP unchanged",
-  "no timer (Dinis, 19 Nov ~01:20 UTC, every run starts from a commit): the 6-hourly schedule removed from the Pages workflow; push builds, workflow_dispatch by hand only; pages stay fresh from the browser",
-  "sites bar 1.1.1 installed (2026-11-19T01:51Z, from date -u) (security@ go, 19 Nov about 01:30 UTC): files byte-identical to the Website repo, checked at every build against the registry's full SRI pins (bar.integrity); 1.1.0 removed",
-  "2026-11-19T01:52Z (date -u): signed-commit check meets security@'s five controls (no exemption, parent keys, every commit incl. merges, whole range refused before deploy, Agent: and the full Claude-Session: URL exact); each loaded list shows its file's licence"
- ],
- "blocked": [],
- "next": [
-  "Code (github-pt) in the browser too, once data.b@'s file has a stable data_read_at and its own cadence",
-  "show the past: daily post counts per place and topic over time, once data.b@'s committed social history has 7 days (gaps shown as gaps)",
-  "London: its page appears as soon as data.promptugal.news's social data names it (no London accounts yet, 22:29 UTC); the sites bar registry promptugal.news/api/v1/sites.json is 404, so the bar waits",
-  "voices section, RSS first: blogs, newsletters, podcasts by place and topic (title, byline as published, date, link, our one-line summary), once data.b@ publishes the feeds",
-  "show Perplexity's social finds as evidence links, credited, once data.b@ publishes them",
-  "open the signals lane once allowed, or take tokens from observability@ on account A",
-  "use /api/v1/events/ claims (503 on 18 Nov) to connect posts to events; show Perplexity's social finds when data.b@ publishes them",
-  "Mastodon accounts once data.b@ verifies any; more organisation accounts (venues, câmaras, companies in the graph, Web Summit)",
-  "three front-page variations on /design/ for Dinis to choose",
-  "sign commits with the session key (key listed centrally by conductor.b@)",
-  "read /api/v1/events/index.json and claims to connect posts to events"
- ],
- "asks": [
-  "Dinis: the signals lane is made; to publish its public config, allow the four narrow leak-scan allowlist entries for src/assets/obs/obs.json (the same as civic's), or have security@ add them; until then nothing is counted.",
-  "Dinis: the 5 organisation accounts read today are all news outlets or public bodies on Bluesky; which organisations should data.b@ add first for Web Summit, AI and startups?",
-  "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds."
- ],
- "data_outlook": "data.b@ (via conductor.b@, 18 Nov 15:33 UTC): 41 Portuguese organisations' own sites checked; none links a Bluesky or Mastodon profile, so the open platforms stay at 5 accounts. Growth comes from Perplexity's social pass (evidence links, from 19 Nov) and RSS feeds of blogs, newsletters and podcasts (voices, RSS first).",
- "library_requests": {
-  "read_at": "2026-11-18T22:29Z",
-  "url": "https://library.promptugal.news/api/v1/requests/index.json",
-  "for_signals_b": "none",
-  "practice": "read at every wake, at Dinis's word (Website repo board/guidance/2026-11-18-the-pipeline-standard-and-the-fact-checker.md); answer by fixing or by saying why not"
- },
- "predictions": {
-  "rule": "Dinis, 19 Nov 2026 (PrompTugal__News__Website board/guidance/2026-11-19-show-the-past.md): every prediction kept as shown and checked when its time comes; every chart of what is coming also shows what has been",
-  "on_this_site": "none today: every post and release shown has already happened",
-  "nearest": "the place pages count events Perplexity named for the next 30 days (claims, linked to events.promptugal.news); they are events.b@'s to keep and check, and this site shows counts only",
-  "first_plan": "show the past: a daily count of organisations' posts per place and topic over time, built from the social files data.b@ now commits hourly, drawn with gaps as gaps; to start once 7 days of committed files exist"
- },
- "times_note": "From 19 Nov 01:55 UTC every time here is taken from date -u (security@'s ruling). Some earlier stamps in this file (e.g. 'updated' 02:00Z and 02:10Z, and 'about 01:40', '01:50' and '02:00' in done items) were estimates and ran up to about 20 minutes ahead of the real time; the commit times in git are the true ones."
+  "agent": "signals.b@PrompTugal.dinis",
+  "site": "https://signals.promptugal.news",
+  "repo": "PrompTugal/PrompTugal__News__Signals",
+  "updated": "2026-11-19T02:18:00Z",
+  "state": "first version released to dev (see REALITY.md)",
+  "passes": {
+    "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
+    "security_pre_review": "ran (Sonnet): tag job skipped on schedule, exact-host allowlists, no innerHTML, CSP, slug collisions, Markdown sanitising, takedown list, narrow commit-check regex; all done",
+    "appsec_post_review": "ran (Sonnet): no XSS, path traversal or secret; 3 medium and 3 low found and fixed before release (docs/security-findings.json, shown on /security/); default branch confirmed dev, so the schedule fires",
+    "closing_conductor": "ran: status, debrief, REALITY.md, report to conductor.b@"
+  },
+  "done": [
+    "39 pages from data.promptugal.news's API: home, 19 places, 8 topics, 5 organisation accounts, indexes, /how/, /security/, /takedown/; Markdown twins and llms.txt",
+    "posts by link only, each with organisation, account, platform, time, licence (the platform's terms) and the topics and places it is evidence for",
+    "snapshot fallback, browser refresh on the front page, scheduled rebuild every 6 hours",
+    "threat models: build-from-api, scheduled-rebuild, browser-refresh",
+    "session key made with sgit pki keygen (sha256:618f6465dbb2ae65); public bundle in team/keys.json",
+    "commit check accepts role@PrompTugal.dinis",
+    "observability lane made with tools/obs-setup-signals.py; credentials sealed to conductor.b@",
+    "wake 16:28: the Web Summit topic (80 items) and Lisboa (4 items) link the library's catalogue, by library card only; library read at every build with a snapshot fallback",
+    "wake 19:28: provenance on every post, library item, count and gap list (HTML, Markdown, browser refresh); the front page list as JSON at /api/latest.json with provenance per post (Dinis 19:00)",
+    "22:06: /preview.svg built at every build (live numbers, provenance, CC BY 4.0) and /preview.png for social cards (rendered at each wake by scripts/preview-png.mjs, so it can lag the scheduled rebuilds); og:image on every page; the validator checks the SVG (Dinis 22:00, 2026-11-18-the-sites-bar.md)",
+    "22:28: wording made place-neutral and London named, ready for when data.b@'s social data names it (Dinis 22:20, 2026-11-18-london.md); /preview.png refreshed",
+    "observability lane live: obs.json committed with the narrow leak-scan allowlist (approved in this session); the counter posts to the signals lane of vault daxpwzn4 (checked in a browser with the request blocked)",
+    "Code section: /code/ and one page per organisation (21) from data.promptugal.news github-pt (approved in this session: \"yes, GitHub on signals\")",
+    "23:45: no billing on this site (Dinis, 2026-11-18-billing-only-on-the-main-site.md): the masthead chip says Free to read and links to /how/#billing; one commit per push from now on, so each is released and tagged",
+    "sites bar 1.1.0 installed (19 Nov ~01:00 UTC): vendored and checked by sha256 at every build against the registry, rendered first in <body> from promptugal.news/api/v1/sites.json, the old rail removed; /preview.svg 320x180 from designer@'s template; the 1200x630 infographic moved to /card.svg (source of /preview.png)",
+    "signed commits on (19 Nov ~01:40 UTC): an SSH signing key (ECDSA P-256) published with this session's ID in team/keys.json; every commit signed with it (repo-local gpg.ssh.program); scripts/check-signatures.mjs in release.sh and CI fails an unsigned commit, one signed by someone other than its Agent:, or one naming another Claude-Session: (from the commit that adds it on)",
+    "data in the browser (19 Nov ~01:50 UTC, Dinis's 01:13 decision): every list (home, places, topics, accounts) loads the latest file from data.promptugal.news on open and every 10 minutes, replaces the built list only with a newer file that passes the build's checks, shows live or built, its read time and stale; home counts update; no cookie, no referrer; CSP unchanged",
+    "no timer (Dinis, 19 Nov ~01:20 UTC, every run starts from a commit): the 6-hourly schedule removed from the Pages workflow; push builds, workflow_dispatch by hand only; pages stay fresh from the browser",
+    "sites bar 1.1.1 installed (2026-11-19T01:51Z, from date -u) (security@ go, 19 Nov about 01:30 UTC): files byte-identical to the Website repo, checked at every build against the registry's full SRI pins (bar.integrity); 1.1.0 removed",
+    "2026-11-19T01:52Z (date -u): signed-commit check meets security@'s five controls (no exemption, parent keys, every commit incl. merges, whole range refused before deploy, Agent: and the full Claude-Session: URL exact); each loaded list shows its file's licence",
+    "2026-11-19T02:18Z: tests for scripts/check-signatures.mjs (12 cases, reasons asserted), run in release and CI"
+  ],
+  "blocked": [],
+  "next": [
+    "Code (github-pt) in the browser too, once data.b@'s file has a stable data_read_at and its own cadence",
+    "show the past: daily post counts per place and topic over time, once data.b@'s committed social history has 7 days (gaps shown as gaps)",
+    "London: its page appears as soon as data.promptugal.news's social data names it (no London accounts yet, 22:29 UTC); the sites bar registry promptugal.news/api/v1/sites.json is 404, so the bar waits",
+    "voices section, RSS first: blogs, newsletters, podcasts by place and topic (title, byline as published, date, link, our one-line summary), once data.b@ publishes the feeds",
+    "show Perplexity's social finds as evidence links, credited, once data.b@ publishes them",
+    "open the signals lane once allowed, or take tokens from observability@ on account A",
+    "use /api/v1/events/ claims (503 on 18 Nov) to connect posts to events; show Perplexity's social finds when data.b@ publishes them",
+    "Mastodon accounts once data.b@ verifies any; more organisation accounts (venues, câmaras, companies in the graph, Web Summit)",
+    "three front-page variations on /design/ for Dinis to choose",
+    "sign commits with the session key (key listed centrally by conductor.b@)",
+    "read /api/v1/events/index.json and claims to connect posts to events"
+  ],
+  "asks": [
+    "Dinis: the signals lane is made; to publish its public config, allow the four narrow leak-scan allowlist entries for src/assets/obs/obs.json (the same as civic's), or have security@ add them; until then nothing is counted.",
+    "Dinis: the 5 organisation accounts read today are all news outlets or public bodies on Bluesky; which organisations should data.b@ add first for Web Summit, AI and startups?",
+    "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds."
+  ],
+  "data_outlook": "data.b@ (via conductor.b@, 18 Nov 15:33 UTC): 41 Portuguese organisations' own sites checked; none links a Bluesky or Mastodon profile, so the open platforms stay at 5 accounts. Growth comes from Perplexity's social pass (evidence links, from 19 Nov) and RSS feeds of blogs, newsletters and podcasts (voices, RSS first).",
+  "library_requests": {
+    "read_at": "2026-11-18T22:29Z",
+    "url": "https://library.promptugal.news/api/v1/requests/index.json",
+    "for_signals_b": "none",
+    "practice": "read at every wake, at Dinis's word (Website repo board/guidance/2026-11-18-the-pipeline-standard-and-the-fact-checker.md); answer by fixing or by saying why not"
+  },
+  "predictions": {
+    "rule": "Dinis, 19 Nov 2026 (PrompTugal__News__Website board/guidance/2026-11-19-show-the-past.md): every prediction kept as shown and checked when its time comes; every chart of what is coming also shows what has been",
+    "on_this_site": "none today: every post and release shown has already happened",
+    "nearest": "the place pages count events Perplexity named for the next 30 days (claims, linked to events.promptugal.news); they are events.b@'s to keep and check, and this site shows counts only",
+    "first_plan": "show the past: a daily count of organisations' posts per place and topic over time, built from the social files data.b@ now commits hourly, drawn with gaps as gaps; to start once 7 days of committed files exist"
+  },
+  "times_note": "From 19 Nov 01:55 UTC every time here is taken from date -u (security@'s ruling). Some earlier stamps in this file (e.g. 'updated' 02:00Z and 02:10Z, and 'about 01:40', '01:50' and '02:00' in done items) were estimates and ran up to about 20 minutes ahead of the real time; the commit times in git are the true ones."
 }
