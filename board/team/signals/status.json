@@ -2,7 +2,7 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-19T04:51:00Z",
+  "updated": "2026-11-19T05:10:00Z",
   "state": "first version released to dev (see REALITY.md)",
   "passes": {
     "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -33,7 +33,8 @@
     "2026-11-19T01:52Z (date -u): signed-commit check meets security@'s five controls (no exemption, parent keys, every commit incl. merges, whole range refused before deploy, Agent: and the full Claude-Session: URL exact); each loaded list shows its file's licence",
     "2026-11-19T02:18Z: tests for scripts/check-signatures.mjs (12 cases, reasons asserted), run in release and CI",
     "2026-11-19T03:21Z: no IP-based location: obs.js sends the country only, from the browser's time zone, no network call; ipapi.co and ipwho.is out of the CSP and obs.json (Dinis, 19 Nov 2026)",
-    "2026-11-19T04:51Z: the shared tz-country table v1.0.0 replaces this site's own; pinned against the registry at build"
+    "2026-11-19T04:51Z: the shared tz-country table v1.0.0 replaces this site's own; pinned against the registry at build",
+    "2026-11-19T05:10Z: tz-country 1.1.0; a newer registry version no longer fails the build (no country / no bar until upgraded)"
   ],
   "blocked": [],
   "next": [
