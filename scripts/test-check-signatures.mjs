@@ -108,6 +108,13 @@ try {
   // the base override is refused under CI
   { const r = spawnSync(process.execPath, [CHECK, base, 'HEAD'], { cwd: repo, encoding: 'utf8', env: { ...ENV, SIGNATURES_TRUSTED_BASE: BASE, CI: 'true' } }); expect('the base override is refused under CI', { ok: r.status === 0, out: (r.stdout || '') + (r.stderr || '') }, false, /SIGNATURES_TRUSTED_BASE is refused in CI/); }
 
+  // control 8: a backdated orphan (dated before the base, signed by its own key) merged in is still refused, by ancestry
+  branch('backdated'); git('checkout', '-q', '--orphan', 'old');
+  run('git', ['-c', 'gpg.format=ssh', '-c', 'gpg.ssh.program=ssh-keygen', '-c', `user.signingkey=${B.f}`, 'commit', '-q', '-S', '--allow-empty', '-m', msg()], { env: { ...ENV, GIT_COMMITTER_DATE: '2020-01-01T00:00:00Z', GIT_AUTHOR_DATE: '2020-01-01T00:00:00Z' } });
+  git('checkout', '-q', 'backdated');
+  run('git', ['-c', 'gpg.format=ssh', '-c', 'gpg.ssh.program=ssh-keygen', '-c', `user.signingkey=${A.f}`, 'merge', '-q', '-S', '--allow-unrelated-histories', '--no-ff', '-m', msg(), 'old']);
+  expect('a backdated orphan merged in is refused', check(base), false, /has no parent \(an orphan commit\)/);
+
   // control 6: a shallow checkout is refused
   branch('good2'); commit({ signWith: A }); commit({ signWith: A });
   const shallow = join(dir, 'shallow'); run('git', ['clone', '-q', '--depth', '1', '--branch', 'good2', `file://${repo}`, shallow]);
@@ -118,5 +125,5 @@ try {
 
 const bad = results.filter(r => !r.pass);
 for (const r of bad) console.error(`FAIL ${r.name}: ${r.out}`);
-if (bad.length || results.length < 19) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
+if (bad.length || results.length < 20) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
 console.log(`OK (${results.length} cases)`);

@@ -54,6 +54,8 @@ jobs:
           node scripts/check-commits.mjs "${last:-$BEFORE}" "$AFTER"
       - name: The leak scan's key rules hold (security@'s ruling, 19 Nov 2026)
         run: node scripts/test-leak-scan.mjs
+      - name: The deciding step refuses what it should (security@'s third ruling)
+        run: scripts/test-deciding-step.sh
       - name: The signature check refuses what it should, for the right reason
         run: node scripts/test-check-signatures.mjs
       - name: Every new commit is signed by its agent's published key (team/keys.json)
@@ -70,23 +72,31 @@ jobs:
       - run: node scripts/validate.mjs
       - name: Leak scan (tracked files and the built site)
         run: node scripts/leak-scan.mjs
-      - name: The deciding security checks, from the last release's copy (security@'s rulings, controls 7 and 8)
-        # Every security check and its config (keys, exemptions, trusted base) comes from the last release tag, never from
-        # the pushed tree; a missing trusted copy fails, with no fallback. The steps above ran the pushed tree's own copies
-        # as tests only. The workflow file itself still comes from the pushed tree: Dinis's branch protection closes that.
+      - name: The deciding security checks, from BEFORE's copy (security@'s rulings, controls 7 and 8)
+        # Every security check and its config (keys, exemptions, trusted base) comes from BEFORE, the commit dev pointed to
+        # before this push, which was already checked; never from the pushed tree, a tag or the trusted base's copy. The run
+        # fails if BEFORE is missing, is not an ancestor of AFTER (a force push), or has no copy of a check. The range starts
+        # at the last release tag below BEFORE, so a push whose own run GitHub dropped is still checked. The steps above ran
+        # the pushed tree's copies as tests only. The workflow file itself still comes from the pushed tree: Dinis's branch
+        # protection closes that. scripts/test-deciding-step.sh tests this block as written here.
         env:
+          BEFORE: ${{ github.event.before }}
           AFTER: ${{ github.sha }}
         run: |
-          test "$(git rev-parse --is-shallow-repository)" = false || { echo "shallow checkout refused" >&2; exit 1; }
-          last=$(git describe --tags --abbrev=0 --match "v${VERSION_BASE}.*" "$AFTER" 2>/dev/null || true)
-          [ -n "$last" ] || { echo "no release tag: no trusted copy" >&2; exit 1; }
+          # deciding-step:begin
+          test "$(git rev-parse --is-shallow-repository)" = false || { echo "deciding: shallow checkout refused" >&2; exit 1; }
+          case "${BEFORE}" in ""|*[!0-9a-f]*|0000000000000000000000000000000000000000) echo "deciding: no BEFORE (a new branch, a manual run or a zero id): refused" >&2; exit 1;; esac
+          git cat-file -e "${BEFORE}^{commit}" 2>/dev/null || { echo "deciding: BEFORE ${BEFORE} is not in this history" >&2; exit 1; }
+          git merge-base --is-ancestor "${BEFORE}" "${AFTER}" || { echo "deciding: BEFORE is not an ancestor of AFTER (a force push): refused" >&2; exit 1; }
+          from=$(git describe --tags --abbrev=0 --match "v${VERSION_BASE}.*" "${BEFORE}" 2>/dev/null || echo "${BEFORE}")
           for f in check-commits.mjs check-signatures.mjs leak-scan.mjs; do
-            git show "refs/tags/${last}:scripts/${f}" > "scripts/${f}.trusted" || { echo "no trusted scripts/${f} at ${last}" >&2; exit 1; }
+            git show "${BEFORE}:scripts/${f}" > "scripts/${f}.trusted" 2>/dev/null || { echo "deciding: BEFORE has no scripts/${f}: refused" >&2; exit 1; }
             mv "scripts/${f}.trusted" "scripts/${f}"
           done
-          node scripts/check-commits.mjs "refs/tags/${last}" "$AFTER"
-          node scripts/check-signatures.mjs "refs/tags/${last}" "$AFTER"
+          node scripts/check-commits.mjs "${from}" "${AFTER}"
+          node scripts/check-signatures.mjs "${from}" "${AFTER}"
           node scripts/leak-scan.mjs
+          # deciding-step:end
       - if: steps.mode.outputs.deploy == 'true'
         uses: actions/configure-pages@v5
       - if: steps.mode.outputs.deploy == 'true'

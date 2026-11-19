@@ -13,6 +13,7 @@ node scripts/leak-scan.mjs
 node scripts/test-leak-scan.mjs
 node scripts/check-commits.mjs origin/dev HEAD
 node scripts/test-check-signatures.mjs
+scripts/test-deciding-step.sh
 node scripts/check-signatures.mjs origin/dev HEAD   # this tree's check, as a test of it
 scripts/check-signatures-trusted.sh origin/dev origin/dev HEAD   # the deployed copy's check: the one that decides
 for i in 1 2 3 4 5; do
