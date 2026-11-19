@@ -9,7 +9,6 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  deployments: read   # the anchor: CI's own record of the last passing deployment (security@'s fourth ruling)
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -73,9 +72,39 @@ jobs:
       - run: node scripts/validate.mjs
       - name: Leak scan (tracked files and the built site)
         run: node scripts/leak-scan.mjs
-      - name: The anchor, the last commit a passing run deployed (security@'s fourth ruling, 948820a7e)
-        # CI's own record, which a pusher cannot write: the sha of the newest successful github-pages deployment, read with
-        # this run's own read-only token. Tags are not used.
+      - if: steps.mode.outputs.deploy == 'true'
+        uses: actions/configure-pages@v5
+      - if: steps.mode.outputs.deploy == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  verify:
+    # Control 9 (security@'s fifth ruling, 16402a95c, from civic): the deciding signature, trailer and leak checks run in
+    # their own job, which runs no pushed code. It checks the pushed tree out as data, takes each check and its config from
+    # the anchor A (the newest successful github-pages deployment, read from GitHub's API with this job's read token),
+    # refuses symlinks on the check paths, clears NODE_OPTIONS, sets GIT_NO_REPLACE_OBJECTS, runs node by absolute path,
+    # and checks A..AFTER. The built site reaches it only as the Pages artifact (data). Deploy and tag need this job.
+    # The workflow file itself still comes from the pushed tree: Dinis's branch protection closes that.
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          path: v
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - if: needs.build.outputs.deploy == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: ${{ runner.temp }}/pages
+      - name: The anchor, the last commit a passing run deployed (security@'s fourth and fifth rulings)
         id: anchor
         env:
           GH_TOKEN: ${{ github.token }}
@@ -88,37 +117,39 @@ jobs:
           done
           echo "anchor=${A}" >> "$GITHUB_OUTPUT"
           echo "anchor: ${A:-none}"
-      - name: The deciding security checks, from the anchor's copy (security@'s rulings, controls 1 to 8)
-        # Every security check and its config (keys, exemptions, trusted base) comes from the anchor A's tree, never from the
-        # pushed tree, a tag or the trusted base's copy, and checks the whole range A..AFTER, so the commits of a push whose
-        # own run was dropped are checked too. The run fails if A is missing, is not an ancestor of AFTER, or has no copy of a
-        # check. The steps above ran the pushed tree's copies as tests only. The workflow file itself still comes from the
-        # pushed tree: Dinis's branch protection closes that. scripts/test-deciding-step.sh tests this block as written here.
+      - name: The deciding security checks, from the anchor's copy (controls 1 to 9)
+        working-directory: v
         env:
           A: ${{ steps.anchor.outputs.anchor }}
           AFTER: ${{ github.sha }}
+          PAGES_TAR: ${{ runner.temp }}/pages/artifact.tar
+          GIT_NO_REPLACE_OBJECTS: '1'
+          NODE_OPTIONS: ''
         run: |
           # deciding-step:begin
+          unset NODE_OPTIONS; export GIT_NO_REPLACE_OBJECTS=1
+          NODE="$(readlink -f "$(command -v node)")"; case "$NODE" in /*) ;; *) echo "deciding: node not found by absolute path" >&2; exit 1;; esac
           test "$(git rev-parse --is-shallow-repository)" = false || { echo "deciding: shallow checkout refused" >&2; exit 1; }
           case "${A}" in ""|*[!0-9a-f]*|0000000000000000000000000000000000000000) echo "deciding: no anchor (no passing deployment on record): refused" >&2; exit 1;; esac
           git cat-file -e "${A}^{commit}" 2>/dev/null || { echo "deciding: the anchor ${A} is not in this history" >&2; exit 1; }
           git merge-base --is-ancestor "${A}" "${AFTER}" || { echo "deciding: the anchor is not an ancestor of AFTER: refused" >&2; exit 1; }
-          for f in check-commits.mjs check-signatures.mjs leak-scan.mjs; do
-            git show "${A}:scripts/${f}" > "scripts/${f}.trusted" 2>/dev/null || { echo "deciding: the anchor has no scripts/${f}: refused" >&2; exit 1; }
-            mv "scripts/${f}.trusted" "scripts/${f}"
-          done
-          node scripts/check-commits.mjs "${A}" "${AFTER}"
-          node scripts/check-signatures.mjs "${A}" "${AFTER}"
-          node scripts/leak-scan.mjs
+          for p in scripts _site; do [ ! -L "$p" ] || { echo "deciding: ${p} is a symlink: refused" >&2; exit 1; }; done
+          # the anchor's whole scripts/ (checks and their config, such as commit-exemptions.json) and its .gitattributes, so no
+          # pushed file sits beside the checks or changes how git shows history (AppSec post-review)
+          rm -rf scripts; mkdir scripts
+          git archive "${A}" scripts | tar -x || { echo "deciding: the anchor has no scripts/: refused" >&2; exit 1; }
+          for f in check-commits.mjs check-signatures.mjs leak-scan.mjs; do [ -f "scripts/${f}" ] && [ ! -L "scripts/${f}" ] || { echo "deciding: the anchor has no scripts/${f}: refused" >&2; exit 1; }; done
+          rm -f .gitattributes; git show "${A}:.gitattributes" > .gitattributes 2>/dev/null || rm -f .gitattributes
+          rm -rf _site; mkdir _site
+          if [ -n "${PAGES_TAR:-}" ] && [ -f "${PAGES_TAR}" ]; then tar -xf "${PAGES_TAR}" -C _site; fi
+          [ -z "$(find _site -type l)" ] || { echo "deciding: the built site holds a symlink: refused" >&2; exit 1; }
+          [ -f _site/index.html ] || { echo "deciding: the built site did not arrive as data" >&2; exit 1; }
+          "$NODE" scripts/check-commits.mjs "${A}" "${AFTER}"
+          "$NODE" scripts/check-signatures.mjs "${A}" "${AFTER}"
+          "$NODE" scripts/leak-scan.mjs
           # deciding-step:end
-      - if: steps.mode.outputs.deploy == 'true'
-        uses: actions/configure-pages@v5
-      - if: steps.mode.outputs.deploy == 'true'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: _site
   deploy:
-    needs: build
+    needs: [build, verify]
     if: needs.build.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     permissions:
@@ -131,8 +162,8 @@ jobs:
       - id: deployment
         uses: actions/deploy-pages@v4
   tag:
-    needs: [build, deploy]
-    if: ${{ always() && needs.build.result == 'success' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') }}
+    needs: [build, verify, deploy]
+    if: ${{ always() && needs.build.result == 'success' && needs.verify.result == 'success' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
