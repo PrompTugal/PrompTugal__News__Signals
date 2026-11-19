@@ -2,7 +2,7 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-19T14:04:00Z",
+  "updated": "2026-11-19T17:43:00Z",
   "state": "handed over: this session is long; the next signals.b@ session starts from board/team/signals/handovers/2026-11-19-0735.md",
   "passes": {
     "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -41,6 +41,7 @@
   ],
   "blocked": [],
   "next": [
+    "London, and the EU through Brussels (Dinis, 19 Nov 2026 about 17:40 UTC, board/guidance/2026-11-19-cameras-as-links-and-the-map.md on promptugal.news): signals has no map yet, and data.promptugal.news has no social data for London or Brussels yet (19 places, all in Portugal, read 17:43 UTC). When it has, add London as a place, and a map with Portugal large and London and Brussels small, built from ontologist@'s data/site/places-registry.json in designer@'s shared look. Cameras do not apply to signals: it shows no video.",
     "Code pages loaded in the browser: designed and pre-reviewed in board/team/signals/handovers/2026-11-19-0735.md; build it, then post-review",
     "Code (github-pt) in the browser too, once data.b@'s file has a stable data_read_at and its own cadence",
     "show the past: daily post counts per place and topic over time, once data.b@'s committed social history has 7 days (gaps shown as gaps)",
