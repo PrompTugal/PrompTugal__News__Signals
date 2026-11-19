@@ -9,7 +9,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 
-const CHECK = join(dirname(fileURLToPath(import.meta.url)), 'check-signatures.mjs');
+const CHECK = join(dirname(fileURLToPath(import.meta.url)), 'check-signatures.mjs'), TRUSTED_RUNNER = join(dirname(fileURLToPath(import.meta.url)), 'check-signatures-trusted.sh');
 // no inherited repository or config from the caller's environment
 const ENV = Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^GIT_(DIR|WORK_TREE|INDEX_FILE|CONFIG|OBJECT_DIRECTORY|ALTERNATE|NAMESPACE|CEILING)/.test(k)));
 const dir = mkdtempSync(join(tmpdir(), 'sigtest-'));
@@ -30,7 +30,10 @@ const commit = ({ signWith, agent, session, allowEmpty = true, env = {} } = {}) 
   run('git', args, { env: { ...ENV, ...env } });
   return git('rev-parse', 'HEAD').trim();
 };
-const check = (from) => { const r = spawnSync(process.execPath, [join(repo, 'scripts/check-signatures.mjs'), from, 'HEAD'], { cwd: repo, encoding: 'utf8', env: ENV }); return { ok: r.status === 0, out: (r.stdout || '') + (r.stderr || '') }; };
+let BASE = '';
+const check = (from) => { const r = spawnSync(process.execPath, [join(repo, 'scripts/check-signatures.mjs'), from, 'HEAD'], { cwd: repo, encoding: 'utf8', env: { ...ENV, SIGNATURES_TRUSTED_BASE: BASE } }); return { ok: r.status === 0, out: (r.stdout || '') + (r.stderr || '') }; };
+// the trusted-copy runner: the check as it stood at <trusted>, never the pushed tree's own copy
+const checkTrusted = (trusted, from) => { const r = spawnSync('bash', [TRUSTED_RUNNER, trusted, from, 'HEAD'], { cwd: repo, encoding: 'utf8', env: { ...ENV, SIGNATURES_TRUSTED_BASE: BASE } }); return { ok: r.status === 0, out: (r.stdout || '') + (r.stderr || '') }; };
 
 const results = [];
 const expect = (name, res, ok, reason) => {
@@ -46,7 +49,7 @@ try {
   mkdirSync(join(repo, 'scripts')); mkdirSync(join(repo, 'team'));
   copyFileSync(CHECK, join(repo, 'scripts/check-signatures.mjs'));
   writeFileSync(join(repo, 'team/keys.json'), keysJson([A]));
-  git('add', '-A'); const base = commit({ signWith: A, allowEmpty: false });
+  git('add', '-A'); const base = commit({ signWith: A, allowEmpty: false }); BASE = base;
   expect('bootstrap commit, signed by the key it publishes', check(`${base}^`), true, /^OK \(1 commits checked/);
   const branch = name => { git('checkout', '-q', '-B', name, base); };
 
@@ -83,11 +86,26 @@ try {
 
   branch('range'); commit({ signWith: A }); commit({}); commit({ signWith: A });
   expect('one bad commit refuses the whole range', check(base), false, /FAILED: 1 problem\(s\); the whole range is refused/);
+
+  // control 6: an orphan commit, signed by the key it publishes in its own tree, merged in with a signed merge
+  branch('orphan'); git('checkout', '-q', '--orphan', 'loose'); git('rm', '-rqf', '.');
+  mkdirSync(join(repo, 'scripts'), { recursive: true }); mkdirSync(join(repo, 'team'), { recursive: true });
+  copyFileSync(CHECK, join(repo, 'scripts/check-signatures.mjs')); writeFileSync(join(repo, 'team/keys.json'), keysJson([B]));
+  git('add', '-A'); commit({ signWith: B, allowEmpty: false }); git('checkout', '-q', 'orphan');
+  run('git', ['-c', 'gpg.format=ssh', '-c', 'gpg.ssh.program=ssh-keygen', '-c', `user.signingkey=${A.f}`, 'merge', '-q', '-S', '--allow-unrelated-histories', '--no-ff', '-X', 'ours', '-m', msg(), 'loose']);
+  expect('an orphan commit merged in is refused', check(base), false, /has no parent \(an orphan commit\)/);
+  git('checkout', '-q', 'loose');
+  expect('a history that does not reach the trusted base is refused', check(`${base}`), false, /does not descend from the trusted base/);
+
+  // control 7: a push that rewrites the checker to pass everything; the trusted copy still refuses its unsigned commit
+  branch('rewrite'); writeFileSync(join(repo, 'scripts/check-signatures.mjs'), "console.log('OK'); process.exit(0)\n"); git('add', '-A'); commit({ allowEmpty: false });
+  expect("the pushed tree's own rewritten checker would pass", check(base), true, /^OK/);
+  expect('the trusted copy refuses the same push', checkTrusted(base, base), false, /not signed by a key in team\/keys\.json \(status N\)/);
 } catch (e) {
   results.push({ name: 'setup', pass: false, out: String(e.stderr || e.message).slice(0, 300) });
 } finally { rmSync(dir, { recursive: true, force: true }); }
 
 const bad = results.filter(r => !r.pass);
 for (const r of bad) console.error(`FAIL ${r.name}: ${r.out}`);
-if (bad.length || results.length < 12) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
+if (bad.length || results.length < 16) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
 console.log(`OK (${results.length} cases)`);

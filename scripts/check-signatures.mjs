@@ -22,8 +22,14 @@ const [beforeArg, afterArg] = process.argv.slice(2);
 const after = afterArg || 'HEAD';
 if (!tryGit('rev-parse', '--verify', '--quiet', `${after}^{commit}`)) { console.error(`check-signatures: unknown commit ${after}`); process.exit(1); }
 
-const first = lines(git('log', '--format=%H', '--diff-filter=A', '--reverse', after, '--', 'scripts/check-signatures.mjs'))[0];
-if (!first) { console.log('OK (check-signatures.mjs is not in this history yet)'); process.exit(0); }
+// The one trusted base: the commit that added this check and published the first key (videos.b@'s pre-review, passed on by
+// conductor.b@ on 19 Nov 2026, 14:01 UTC). It is recorded here, never worked out from the pushed history, so a pushed orphan
+// that adds its own copy of this file cannot become the base. A test repository names its own base in SIGNATURES_TRUSTED_BASE.
+const TRUSTED_BASE = process.env.SIGNATURES_TRUSTED_BASE || '01016393c727abca34e90fdec9cb279f438d2df4';
+if (!/^[0-9a-f]{40}$/.test(TRUSTED_BASE)) { console.error('check-signatures: the trusted base is not a full commit id'); process.exit(1); }
+const isAncestor = (a, b) => { try { execFileSync('git', ['merge-base', '--is-ancestor', a, b], { stdio: 'ignore' }); return true; } catch { return false; } };
+if (!tryGit('rev-parse', '--verify', '--quiet', `${TRUSTED_BASE}^{commit}`) || !isAncestor(TRUSTED_BASE, after)) { console.error(`check-signatures: ${after} does not descend from the trusted base ${TRUSTED_BASE.slice(0, 7)}`); process.exit(1); }
+const first = TRUSTED_BASE;
 const descendants = new Set([first, ...lines(git('rev-list', '--ancestry-path', `${first}..${after}`))]);
 
 // the allowed signers, from the published keys as they stood before each commit (the PEM form is turned back into an SSH key here)
@@ -51,7 +57,10 @@ try {
   const added = lines(git('rev-list', ...(before ? [`${before}..${after}`] : [after])));   // every commit, merges included
   const errors = []; let checked = 0, exempt = 0;
   for (const c of added) {
-    if (!descendants.has(c)) continue;
+    // history from before the check is not checked; anything else must descend from the trusted base, and no commit but the
+    // base may have no parent (an orphan would trust the keys in its own tree)
+    if (c !== first && !git('log', '-1', '--format=%P', c)) { errors.push(`${c.slice(0, 7)}: has no parent (an orphan commit)`); continue; }
+    if (!descendants.has(c)) { if (isAncestor(c, first)) continue; errors.push(`${c.slice(0, 7)}: does not descend from the trusted base (a side history)`); continue; }
     const committer = git('log', '-1', '--format=%ce', c);
     if (CI_COMMITTERS.has(committer)) { exempt++; continue; }
     checked++;

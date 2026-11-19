@@ -13,7 +13,8 @@ node scripts/leak-scan.mjs
 node scripts/test-leak-scan.mjs
 node scripts/check-commits.mjs origin/dev HEAD
 node scripts/test-check-signatures.mjs
-node scripts/check-signatures.mjs origin/dev HEAD
+node scripts/check-signatures.mjs origin/dev HEAD   # this tree's check, as a test of it
+scripts/check-signatures-trusted.sh origin/dev origin/dev HEAD   # the deployed copy's check: the one that decides
 for i in 1 2 3 4 5; do
   git fetch -q origin dev
   git rebase -q origin/dev
@@ -23,6 +24,7 @@ for i in 1 2 3 4 5; do
   node scripts/leak-scan.mjs >/dev/null
   node scripts/check-commits.mjs origin/dev HEAD >/dev/null
   node scripts/check-signatures.mjs origin/dev HEAD >/dev/null
+  scripts/check-signatures-trusted.sh origin/dev origin/dev HEAD >/dev/null
   if git -c push.negotiate=true push -q origin HEAD:dev; then echo "released $(git rev-parse --short HEAD) to dev"; exit 0; fi
   sleep $((i * 3))
 done

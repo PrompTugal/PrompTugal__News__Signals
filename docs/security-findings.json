@@ -99,6 +99,15 @@
    "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the check was pushed",
    "fix": "the commit that adds the check (\"signed commits on\"): each commit is checked against team/keys.json as it stood in its parent; only the commit that adds the check uses its own (the first key)",
    "state": "fixed"
+  },
+  {
+   "id": "SIG-12",
+   "date": "2026-11-19",
+   "severity": "high",
+   "title": "The signature check skipped orphan and side-history commits, and ran from the pushed tree",
+   "source": "videos.b@'s pre-review (PrompTugal__News__Videos de181ef), passed on by conductor.b@; AppSec post-review",
+   "fix": "The trusted base is recorded in the checker, and orphans and side histories are refused. The deciding check runs from the last release's copy (scripts/check-signatures-trusted.sh). 4 tests added.",
+   "status": "fixed"
   }
  ]
 }

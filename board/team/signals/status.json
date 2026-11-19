@@ -2,7 +2,7 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-19T07:29:00Z",
+  "updated": "2026-11-19T14:04:00Z",
   "state": "handed over: this session is long; the next signals.b@ session starts from board/team/signals/handovers/2026-11-19-0735.md",
   "passes": {
     "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -36,7 +36,8 @@
     "2026-11-19T04:51Z: the shared tz-country table v1.0.0 replaces this site's own; pinned against the registry at build",
     "2026-11-19T05:10Z: tz-country 1.1.0; a newer registry version no longer fails the build (no country / no bar until upgraded)",
     "2026-11-19T05:14Z: leak scan: private key headers never exempt; OpenSSH public keys flagged outside ssh_signing.public_key; 33 tests in release and CI. Degrade notes read '<piece> <version> off: the registry names <newer>'",
-    "2026-11-19T07:16Z: sites bar 1.2.0; pins read from the registry's per-version lists (bar.versions, obs_tz.versions)"
+    "2026-11-19T07:16Z: sites bar 1.2.0; pins read from the registry's per-version lists (bar.versions, obs_tz.versions)",
+    "2026-11-19T14:04Z: signing check controls 6 (orphans and side histories refused, trusted base recorded) and 7 (the deciding check runs from the last release's copy); 16 tests"
   ],
   "blocked": [],
   "next": [
