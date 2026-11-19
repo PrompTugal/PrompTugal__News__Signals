@@ -1,7 +1,7 @@
 // Every commit is signed by its agent's published key (Dinis, 19 Nov 2026, PrompTugal__News__Website
 // board/guidance/2026-11-19-signed-commits-paid-search-and-free-embeds.md, section 2; signals.b@PrompTugal.dinis).
 // Usage: node scripts/check-signatures.mjs <before> <after>   (the pushed range, before..after)
-// For each non-merge commit in the range, from the commit that added this file on (history is never rewritten), it
+// For every commit in the range (merges and side branches included: security@'s ruling of 19 Nov 2026 about 01:30 UTC), from the commit that added this file on (history is never rewritten), it
 // fails unless: the commit has a good SSH signature by a key in team/keys.json (entries with git_signing); the key's
 // agent is the commit's Agent: trailer; and the commit's Claude-Session: trailer names the session recorded with that
 // key. Each commit is checked against team/keys.json as it stood in its parent, so no commit can authorise its own key;
@@ -48,7 +48,7 @@ function signersAt(rev) {
 try {
   const zero = /^0+$/;
   const before = beforeArg && !zero.test(beforeArg) && tryGit('rev-parse', '--verify', '--quiet', `${beforeArg}^{commit}`);
-  const added = lines(git('rev-list', '--no-merges', ...(before ? [`${before}..${after}`] : [after])));
+  const added = lines(git('rev-list', ...(before ? [`${before}..${after}`] : [after])));   // every commit, merges included
   const errors = []; let checked = 0, exempt = 0;
   for (const c of added) {
     if (!descendants.has(c)) continue;
@@ -59,13 +59,15 @@ try {
     if (!signers || !keys.length) { errors.push(`${c.slice(0, 7)}: no signing key was published before this commit`); continue; }
     const [status, fp] = lines(git('-c', `gpg.ssh.allowedSignersFile=${signers}`, '-c', 'gpg.ssh.program=ssh-keygen', 'log', '-1', '--format=%G?%n%GF', c)).concat(['', '']);
     const agent = lines(git('log', '-1', '--format=%(trailers:key=Agent,valueonly)', c)).map(s => s.trim());
-    const sessions = lines(git('log', '-1', '--format=%(trailers:key=Claude-Session,valueonly)', c)).map(s => (s.match(/session_[A-Za-z0-9]+/) || [''])[0]);
+    const sessions = lines(git('log', '-1', '--format=%(trailers:key=Claude-Session,valueonly)', c)).map(s => s.trim());
     const subject = git('log', '-1', '--format=%s', c).slice(0, 70);
     const key = keys.find(k => k.fp === fp);
     if (status !== 'G' || !key) { errors.push(`${c.slice(0, 7)} ${subject}: not signed by a key in team/keys.json (status ${status || 'none'})`); continue; }
     if (agent.length !== 1 || agent[0].toLowerCase() !== key.agent.toLowerCase()) errors.push(`${c.slice(0, 7)} ${subject}: signed by ${key.agent}'s key but its Agent: is ${agent.join(', ') || 'missing'}`);
-    if (sessions.length !== 1 || sessions[0] !== key.session) errors.push(`${c.slice(0, 7)} ${subject}: Claude-Session: ${sessions.join(', ') || 'missing'}, not ${key.session} (the session recorded with the key)`);
+    const want = `https://claude.ai/code/${key.session}`;   // the full session URL, compared exactly
+    if (sessions.length !== 1 || sessions[0] !== want) errors.push(`${c.slice(0, 7)} ${subject}: Claude-Session: ${sessions.join(', ') || 'missing'}, not ${want} (the session recorded with the key)`);
   }
-  if (errors.length) { console.error(errors.join('\n')); console.error(`FAILED: ${errors.length} problem(s)`); process.exit(1); }
+  // one failing commit refuses the whole range: CI then stops before the deploy job, which depends on this one
+  if (errors.length) { console.error(errors.join('\n')); console.error(`FAILED: ${errors.length} problem(s); the whole range is refused`); process.exit(1); }
   console.log(`OK (${checked} commits checked, ${exempt} CI commits exempt)`);
 } finally { rmSync(tmp, { recursive: true, force: true }); }

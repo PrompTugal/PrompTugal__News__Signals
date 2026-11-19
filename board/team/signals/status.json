@@ -2,7 +2,7 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-19T01:51Z",
+ "updated": "2026-11-19T01:52Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -29,7 +29,8 @@
   "signed commits on (19 Nov ~01:40 UTC): an SSH signing key (ECDSA P-256) published with this session's ID in team/keys.json; every commit signed with it (repo-local gpg.ssh.program); scripts/check-signatures.mjs in release.sh and CI fails an unsigned commit, one signed by someone other than its Agent:, or one naming another Claude-Session: (from the commit that adds it on)",
   "data in the browser (19 Nov ~01:50 UTC, Dinis's 01:13 decision): every list (home, places, topics, accounts) loads the latest file from data.promptugal.news on open and every 10 minutes, replaces the built list only with a newer file that passes the build's checks, shows live or built, its read time and stale; home counts update; no cookie, no referrer; CSP unchanged",
   "no timer (Dinis, 19 Nov ~01:20 UTC, every run starts from a commit): the 6-hourly schedule removed from the Pages workflow; push builds, workflow_dispatch by hand only; pages stay fresh from the browser",
-  "sites bar 1.1.1 installed (2026-11-19T01:51Z, from date -u) (security@ go, 19 Nov about 01:30 UTC): files byte-identical to the Website repo, checked at every build against the registry's full SRI pins (bar.integrity); 1.1.0 removed"
+  "sites bar 1.1.1 installed (2026-11-19T01:51Z, from date -u) (security@ go, 19 Nov about 01:30 UTC): files byte-identical to the Website repo, checked at every build against the registry's full SRI pins (bar.integrity); 1.1.0 removed",
+  "2026-11-19T01:52Z (date -u): signed-commit check meets security@'s five controls (no exemption, parent keys, every commit incl. merges, whole range refused before deploy, Agent: and the full Claude-Session: URL exact); each loaded list shows its file's licence"
  ],
  "blocked": [],
  "next": [

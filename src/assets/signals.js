@@ -94,6 +94,9 @@
       if (ps.length) { const ol = el('ol', 'posts'); for (const p of ps.slice(0, max)) ol.append(item(p, nm, src)); list.replaceChildren(ol) }
       else list.replaceChildren(el('p', 'empty', 'No post from a listed organisation matches this in the latest file. An empty list means none of the accounts we read posted about it, not that nothing is happening.'))
       box.__readAt = readAt; note(box, true, readAt)
+      // the file's own licence, next to what it loaded (security@, 19 Nov 2026): only a Creative Commons link is shown
+      const fl = d.license || {}, flx = parse(fl.url), ln = box.querySelector('.live-note')
+      if (ln && flx && flx.hostname === 'creativecommons.org' && /^[A-Za-z0-9 .]{1,20}$/.test(fl.name || '')) { ln.append(' Licence of the file: '); ln.append(link(flx.href, fl.name)); ln.append((fl.holder ? ', ' + clean(fl.holder, 60) : '') + '; each post stays under its platform\'s terms, linked on each.') }
       if (filter === 'all') for (const [k, v] of [['posts', ps.length], ['accounts', new Set(ps.map(p => p.r.platform + ':' + p.account)).size]]) { const c = document.querySelector('[data-live-count="' + k + '"]'); if (c) c.textContent = String(v) }
       box.__fails = 0; box.__next = 0
     } catch (e) { box.__fails = Math.min(6, (box.__fails || 0) + 1); box.__next = Date.now() + EVERY_MS * 2 ** box.__fails } finally { box.__busy = false }   // back off after each failure

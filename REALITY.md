@@ -46,3 +46,4 @@
 - About 02:00 UTC 19 Nov: the Pages workflow has no timer: push builds and deploys, workflow_dispatch is for a person by hand.
 - 2026-11-19 01:51Z (date -u): the sites bar is 1.1.1 (`src/assets/sites-bar/1.1.1/`, `scripts/vendor/sites-bar-1.1.1/`), checked at every build against the registry's full SRI pins; 1.1.0 removed.
 - Times: the hours written in this file's 19 Nov entries before this line were partly estimates and ran up to about 20 minutes ahead; git's commit times are the true ones. From now on every time is taken from `date -u`.
+- 2026-11-19 01:52Z (date -u): `scripts/check-signatures.mjs` checks every commit in the range, merges included, and the full Claude-Session: URL exactly; each list shows its file's licence (CC BY 4.0, PrompTugal.news; each post under its platform's terms).
