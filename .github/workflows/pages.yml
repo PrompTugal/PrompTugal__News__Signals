@@ -86,6 +86,7 @@ jobs:
     # and checks A..AFTER. The built site reaches it only as the Pages artifact (data). Deploy and tag need this job.
     # The workflow file itself still comes from the pushed tree: Dinis's branch protection closes that.
     needs: build
+    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -113,9 +114,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           api="https://api.github.com/repos/${GITHUB_REPOSITORY}"
-          A=$(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" -H "User-Agent: signals-verify" \
+          # a run counts only if its verify job, by name, passed (live.b@'s finding: a pushed workflow without that job still
+          # "succeeds"); a workflow that keeps the name but weakens the job is closed only by branch protection
+          A=""
+          runs=$(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" -H "User-Agent: signals-verify" \
             "${api}/actions/workflows/pages.yml/runs?branch=dev&event=push&status=success&per_page=20" \
-            | jq -r '[.workflow_runs[] | select(.path == ".github/workflows/pages.yml" and .head_branch == "dev" and .event == "push" and .conclusion == "success")][0].head_sha // empty')
+            | jq -r '.workflow_runs[] | select(.path == ".github/workflows/pages.yml" and .head_branch == "dev" and .event == "push" and .conclusion == "success") | "\(.id) \(.head_sha)"')
+          while read -r rid sha; do
+            [ -n "$rid" ] || continue
+            ok=$(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" -H "User-Agent: signals-verify" "${api}/actions/runs/${rid}/jobs?per_page=50" \
+              | jq -r '[.jobs[] | select(.name == "verify" and .conclusion == "success")] | length')
+            if [ "${ok:-0}" -ge 1 ]; then A="$sha"; break; fi
+          done <<< "$runs"
           echo "anchor=${A}" >> "$GITHUB_OUTPUT"
           echo "anchor: ${A:-none}"
       - name: The deciding security checks, from the anchor's copy (controls 1 to 9)
@@ -135,6 +145,7 @@ jobs:
           git cat-file -e "${A}^{commit}" 2>/dev/null || { echo "deciding: the anchor ${A} is not in this history" >&2; exit 1; }
           git merge-base --is-ancestor "${A}" "${AFTER}" || { echo "deciding: the anchor is not an ancestor of AFTER: refused" >&2; exit 1; }
           for p in scripts _site; do [ ! -L "$p" ] || { echo "deciding: ${p} is a symlink: refused" >&2; exit 1; }; done
+          [ -z "$(git ls-tree --name-only "${AFTER}" -- _site)" ] || { echo "deciding: the pushed tree holds _site: refused" >&2; exit 1; }
           # the built site first, before any trusted file exists (events.b@'s finding): the listing is vetted (plain files and
           # directories only, no absolute path, no ..), then unpacked, then checked again for links
           rm -rf _site; mkdir _site
@@ -156,7 +167,7 @@ jobs:
           # deciding-step:end
   deploy:
     needs: [build, verify]
-    if: needs.build.outputs.deploy == 'true'
+    if: github.ref == 'refs/heads/dev' && needs.build.outputs.deploy == 'true'
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -169,7 +180,7 @@ jobs:
         uses: actions/deploy-pages@v4
   tag:
     needs: [build, verify, deploy]
-    if: ${{ always() && needs.build.result == 'success' && needs.verify.result == 'success' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') }}
+    if: ${{ always() && github.ref == 'refs/heads/dev' && needs.build.result == 'success' && needs.verify.result == 'success' && (needs.deploy.result == 'success' || needs.deploy.result == 'skipped') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write

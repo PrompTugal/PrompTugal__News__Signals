@@ -56,5 +56,8 @@ n=$((n+1)); out=$(git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGE
 # a .. path is refused
 python3 -c "import tarfile,io,sys; t=tarfile.open(sys.argv[1],'w'); b=b'x'; i=tarfile.TarInfo('../escape'); i.size=1; t.addfile(i, io.BytesIO(b)); i2=tarfile.TarInfo('index.html'); i2.size=1; t.addfile(i2, io.BytesIO(b)); t.close()" "$dir/pages4.tar"
 n=$((n+1)); out=$(git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/pages4.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a .. path passed" >&2; fails=$((fails+1)); } || grep -q 'absolute or .. path' <<<"$out" || { echo "FAIL dotdot: $out" >&2; fails=$((fails+1)); }
+# live.b@'s finding: a pushed _site path is refused
+git checkout -q --force "$AFTER"; git checkout -q -b pushedsite; mkdir -p _site; echo x > _site/index.html; git add -f _site; git commit -qm 'pushed _site'; ps=$(git rev-parse HEAD)
+case_ 'a pushed _site path is refused' "$A" "$ps" 'pushed tree holds _site'
 [ "$fails" = 0 ] || { echo "FAILED: $fails of $n cases" >&2; exit 1; }
 echo "OK ($n cases)"

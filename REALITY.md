@@ -65,6 +65,11 @@
 - 2026-11-19 14:23Z (date -u): control 9 (security@'s fifth ruling, 16402a95c). The deciding checks run in their own `verify` job, which runs no pushed code.
 - 2026-11-19 14:27Z (date -u): the anchor is now the head_sha of the newest successful push run of pages.yml on dev, read from GitHub's API with actions: read (security@'s sixth ruling, 0ba439611). Only GitHub Actions creates runs, whereas anyone with write access can create a deployment. The verify job no longer reads deployments.
 - 2026-11-19 14:32Z (date -u): peers' findings, passed on by conductor.b@ at 14:30 UTC.
+- 2026-11-19 16:16Z (date -u): live.b@'s findings (a4c6fce), passed on by conductor.b@ at 16:15 UTC.
+  - The anchor is now the head_sha of the newest successful push run on dev whose job named verify passed. Checked through the run's jobs: runs from before the verify job do not count.
+  - The verify, deploy and tag jobs run only for refs/heads/dev.
+  - A pushed _site path is refused. The artifact was already downloaded into RUNNER_TEMP and vetted there, and .gitattributes is replaced by A's.
+  - 15 deciding-step tests.
   - events.b@: the Pages artifact's listing is vetted (plain files and directories only, no absolute or .. path) and unpacked before any trusted file is written, then checked again for links.
   - library.b@: the verify job scans the exact artifact that is deployed. The leak scan now scans files with a NUL byte for exact shapes and key headers, and refuses symbolic links instead of following them. The step test reads the real step by parsing the workflow, not by matching text.
   - Every config file already comes from A (75a59d0).
