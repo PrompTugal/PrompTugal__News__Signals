@@ -7,8 +7,18 @@
 # by an earlier step (as a pushed build step could, through GITHUB_ENV) changes nothing; a symlinked scripts/ is refused.
 set -euo pipefail
 here=$(cd "$(dirname "$0")/.." && pwd)
-block=$(sed -n '/# deciding-step:begin/,/# deciding-step:end/p' "$here/.github/workflows/pages.yml" | sed 's/^          //')
-[ -n "$block" ] || { echo "FAILED: the deciding step's markers are missing from pages.yml" >&2; exit 1; }
+# the real step, read by parsing the workflow (jobs.verify, the step named "The deciding ..."), not by matching text, so a
+# comment cannot satisfy it (library.b@'s finding); it must also be the job that deploy and tag depend on
+block=$(python3 - "$here/.github/workflows/pages.yml" <<'PY'
+import sys, yaml
+d = yaml.safe_load(open(sys.argv[1]))
+j = d["jobs"]
+assert "verify" in j["deploy"]["needs"] and "verify" in j["tag"]["needs"], "deploy and tag must need verify"
+steps = [x for x in j["verify"]["steps"] if str(x.get("name", "")).startswith("The deciding")]
+assert len(steps) == 1, "exactly one deciding step in jobs.verify"
+print(steps[0]["run"])
+PY
+) || { echo "FAILED: the deciding step is missing from jobs.verify, or deploy and tag do not need it" >&2; exit 1; }
 dir=$(mktemp -d); trap 'rm -rf "$dir"' EXIT
 cd "$dir"; git init -q -b dev; git config user.name t; git config user.email t@example.invalid; git config commit.gpgsign false
 mkdir scripts; for f in check-commits check-signatures leak-scan; do echo "console.log('anchor-copy ${f}', process.argv.slice(2).join(' '))" > scripts/$f.mjs; done
@@ -39,6 +49,12 @@ n=$((n+1)); out=$(cd "$dir" && git checkout -q --force "$AFTER" && A="$A" AFTER=
 git checkout -q --force "$AFTER"; git checkout -q -b exempt; echo '{"commits":["x"]}' > scripts/commit-exemptions.json; printf '* -diff\n' > .gitattributes; git add -A; git commit -qm 'pushed exemptions and attributes'; ex=$(git rev-parse HEAD)
 n=$((n+1)); git checkout -q --force "$ex"; A="$A" AFTER="$ex" PAGES_TAR="$dir/pages.tar" bash -e -c "$block" >/dev/null 2>&1 || true; if [ -e scripts/commit-exemptions.json ] || [ -e .gitattributes ]; then echo "FAIL a pushed config file stayed beside the anchor's checks" >&2; fails=$((fails+1)); fi
 mkdir -p "$dir/site2" && echo x > "$dir/site2/index.html" && ln -s /etc/passwd "$dir/site2/link" && tar -cf "$dir/pages2.tar" -C "$dir/site2" .
-n=$((n+1)); out=$(git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/pages2.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a site with a symlink passed" >&2; fails=$((fails+1)); } || grep -q 'holds a symlink' <<<"$out" || { echo "FAIL site symlink: $out" >&2; fails=$((fails+1)); }
+n=$((n+1)); out=$(git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/pages2.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a site with a symlink passed" >&2; fails=$((fails+1)); } || grep -q 'holds a link or a special file' <<<"$out" || { echo "FAIL site symlink: $out" >&2; fails=$((fails+1)); }
+# events.b@'s finding: a link member followed by a file written through it is refused from the listing, before unpacking
+mkdir -p "$dir/site3" && echo x > "$dir/site3/index.html" && ln -s ../scripts "$dir/site3/s" && (cd "$dir/site3" && tar -cf "$dir/pages3.tar" index.html s) && mkdir -p "$dir/t3/s" && echo "console.log('planted')" > "$dir/t3/s/check-signatures.mjs" && tar -rf "$dir/pages3.tar" -C "$dir/t3" s/check-signatures.mjs
+n=$((n+1)); out=$(git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/pages3.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a write-through link passed" >&2; fails=$((fails+1)); } || { grep -q 'holds a link or a special file' <<<"$out" && ! grep -q planted <<<"$out"; } || { echo "FAIL write-through: $out" >&2; fails=$((fails+1)); }
+# a .. path is refused
+python3 -c "import tarfile,io,sys; t=tarfile.open(sys.argv[1],'w'); b=b'x'; i=tarfile.TarInfo('../escape'); i.size=1; t.addfile(i, io.BytesIO(b)); i2=tarfile.TarInfo('index.html'); i2.size=1; t.addfile(i2, io.BytesIO(b)); t.close()" "$dir/pages4.tar"
+n=$((n+1)); out=$(git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/pages4.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a .. path passed" >&2; fails=$((fails+1)); } || grep -q 'absolute or .. path' <<<"$out" || { echo "FAIL dotdot: $out" >&2; fails=$((fails+1)); }
 [ "$fails" = 0 ] || { echo "FAILED: $fails of $n cases" >&2; exit 1; }
 echo "OK ($n cases)"

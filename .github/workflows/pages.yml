@@ -135,16 +135,21 @@ jobs:
           git cat-file -e "${A}^{commit}" 2>/dev/null || { echo "deciding: the anchor ${A} is not in this history" >&2; exit 1; }
           git merge-base --is-ancestor "${A}" "${AFTER}" || { echo "deciding: the anchor is not an ancestor of AFTER: refused" >&2; exit 1; }
           for p in scripts _site; do [ ! -L "$p" ] || { echo "deciding: ${p} is a symlink: refused" >&2; exit 1; }; done
+          # the built site first, before any trusted file exists (events.b@'s finding): the listing is vetted (plain files and
+          # directories only, no absolute path, no ..), then unpacked, then checked again for links
+          rm -rf _site; mkdir _site
+          [ -n "${PAGES_TAR:-}" ] && [ -f "${PAGES_TAR}" ] || { echo "deciding: the built site did not arrive as data" >&2; exit 1; }
+          tar -tvf "${PAGES_TAR}" | awk '{ t = substr($1, 1, 1); if (t != "-" && t != "d") bad = 1 } END { exit bad }' || { echo "deciding: the built site holds a link or a special file: refused" >&2; exit 1; }
+          ! tar -tf "${PAGES_TAR}" | grep -Eq '(^/|(^|/)\.\.(/|$))' || { echo "deciding: the built site holds an absolute or .. path: refused" >&2; exit 1; }
+          tar -xf "${PAGES_TAR}" -C _site --no-same-owner --no-same-permissions
+          [ -z "$(find _site -type l)" ] || { echo "deciding: the built site holds a symlink: refused" >&2; exit 1; }
+          [ -f _site/index.html ] || { echo "deciding: the built site did not arrive as data" >&2; exit 1; }
           # the anchor's whole scripts/ (checks and their config, such as commit-exemptions.json) and its .gitattributes, so no
           # pushed file sits beside the checks or changes how git shows history (AppSec post-review)
           rm -rf scripts; mkdir scripts
           git archive "${A}" scripts | tar -x || { echo "deciding: the anchor has no scripts/: refused" >&2; exit 1; }
           for f in check-commits.mjs check-signatures.mjs leak-scan.mjs; do [ -f "scripts/${f}" ] && [ ! -L "scripts/${f}" ] || { echo "deciding: the anchor has no scripts/${f}: refused" >&2; exit 1; }; done
           rm -f .gitattributes; git show "${A}:.gitattributes" > .gitattributes 2>/dev/null || rm -f .gitattributes
-          rm -rf _site; mkdir _site
-          if [ -n "${PAGES_TAR:-}" ] && [ -f "${PAGES_TAR}" ]; then tar -xf "${PAGES_TAR}" -C _site; fi
-          [ -z "$(find _site -type l)" ] || { echo "deciding: the built site holds a symlink: refused" >&2; exit 1; }
-          [ -f _site/index.html ] || { echo "deciding: the built site did not arrive as data" >&2; exit 1; }
           "$NODE" scripts/check-commits.mjs "${A}" "${AFTER}"
           "$NODE" scripts/check-signatures.mjs "${A}" "${AFTER}"
           "$NODE" scripts/leak-scan.mjs

@@ -4,7 +4,7 @@
 // at run time from parts and random bytes, so this file does not match the scan itself and holds no real key.
 // Usage: node scripts/test-leak-scan.mjs   (prints OK or the failing cases and exits 1)
 import { randomBytes } from 'node:crypto';
-import { scanText } from './leak-scan.mjs';
+import { scanText, scanBinary } from './leak-scan.mjs';
 
 const D = '-'.repeat(5), b64 = n => randomBytes(n).toString('base64');
 const pem = label => `${D}BEGIN ${label}${D}\n${b64(48)}\n${b64(48)}\n${D}END ${label}${D}`;
@@ -35,7 +35,13 @@ expect('ssh_signing field in a file that is not team/keys fails', 'docs/keys.jso
 expect('PEM public key in team/keys.json passes', 'team/keys.json', `{ "pem": "${pem('PUBLIC KEY').replace(/\n/g, '\\n')}" }`, 'public key outside team/keys', false);
 expect('PEM public key in a plain file fails', 'notes.md', pem('PUBLIC KEY'), 'public key outside team/keys', true);
 
+// 4. a file with a NUL byte is still scanned for exact shapes (LIB-2026-067)
+{ const tok = 'gh' + 'p_' + randomBytes(27).toString('hex').slice(0, 36); const buf = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0, 0]), Buffer.from(' ' + tok + ' ')]);
+  const kinds = scanBinary('src/assets/x.png', buf).map(f => f.kind); results.push({ name: 'a token inside a binary file fails', pass: kinds.some(k => k.startsWith('GitHub token')), kinds });
+  const k2 = scanBinary('src/assets/x.png', Buffer.concat([Buffer.from([0]), Buffer.from(pem('OPENSSH PRIVATE KEY'))])).map(f => f.kind); results.push({ name: 'a private key inside a binary file fails', pass: k2.some(k => k.startsWith('private key block')), kinds: k2 });
+  const k3 = scanBinary('src/assets/x.png', Buffer.concat([Buffer.from([0]), randomBytes(4000)])).map(f => f.kind); results.push({ name: 'random binary data passes', pass: !k3.length, kinds: k3 }); }
+
 const bad = results.filter(r => !r.pass);
 for (const r of bad) console.error(`FAIL ${r.name}: found ${r.kinds.join(', ') || 'nothing'}`);
-if (bad.length || results.length < 30) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
+if (bad.length || results.length < 50) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
 console.log(`OK (${results.length} cases)`);

@@ -64,6 +64,11 @@
 - 2026-11-19 14:19Z (date -u): the anchor, per security@'s fourth ruling (948820a7e). CI's deciding checks, and their configs, come from A: the sha of the newest successful github-pages deployment, read with the run's own read token (deployments: read). They check the whole range A..AFTER, so commits from dropped pushes are covered. The run fails if A is missing, is not an ancestor of AFTER, or lacks a copy of a check. Tags are not used. scripts/test-deciding-step.sh has 7 cases. Waiting on Dinis: branch protection, and a tag ruleset (until then tags are not trusted).
 - 2026-11-19 14:23Z (date -u): control 9 (security@'s fifth ruling, 16402a95c). The deciding checks run in their own `verify` job, which runs no pushed code.
 - 2026-11-19 14:27Z (date -u): the anchor is now the head_sha of the newest successful push run of pages.yml on dev, read from GitHub's API with actions: read (security@'s sixth ruling, 0ba439611). Only GitHub Actions creates runs, whereas anyone with write access can create a deployment. The verify job no longer reads deployments.
+- 2026-11-19 14:32Z (date -u): peers' findings, passed on by conductor.b@ at 14:30 UTC.
+  - events.b@: the Pages artifact's listing is vetted (plain files and directories only, no absolute or .. path) and unpacked before any trusted file is written, then checked again for links.
+  - library.b@: the verify job scans the exact artifact that is deployed. The leak scan now scans files with a NUL byte for exact shapes and key headers, and refuses symbolic links instead of following them. The step test reads the real step by parsing the workflow, not by matching text.
+  - Every config file already comes from A (75a59d0).
+  - Tests: 14 for the deciding step, 50 for the leak scan.
   - The pushed tree is checked out as data. The anchor's whole scripts/ (checks and config) and its .gitattributes replace the pushed ones, and symlinks are refused.
   - NODE_OPTIONS is cleared, GIT_NO_REPLACE_OBJECTS=1 is set, and node runs by absolute path.
   - The built site arrives only as the Pages artifact, and a symlink inside it is refused.
