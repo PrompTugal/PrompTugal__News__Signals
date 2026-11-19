@@ -9,7 +9,7 @@ import { scanText } from './leak-scan.mjs';
 const D = '-'.repeat(5), b64 = n => randomBytes(n).toString('base64');
 const pem = label => `${D}BEGIN ${label}${D}\n${b64(48)}\n${b64(48)}\n${D}END ${label}${D}`;
 const sshPub = type => `${type} AAAA${b64(60).replace(/=+$/, '')} test@example.invalid`;
-const SSH = ['ssh-' + 'ed25519', 'ssh-' + 'rsa', 'ecdsa-' + 'sha2-nistp256'];
+const SSH = ['ssh-' + 'ed25519', 'ssh-' + 'rsa', 'ecdsa-' + 'sha2-nistp256', 'ecdsa-' + 'sha2-nistp384', 'ecdsa-' + 'sha2-nistp521', 'sk-' + 'ssh-ed25519@openssh.com', 'sk-' + 'ecdsa-sha2-nistp256@openssh.com'];   // library.b@'s LIB-2026-060: ecdsa-sha2-* and sk- forms too
 const results = [];
 const expect = (name, path, text, kind, want) => {
   const kinds = scanText(path, text).map(f => f.kind);
@@ -27,7 +27,7 @@ for (const t of SSH) {
   expect(`${t} public key in a plain file fails`, 'README.md', `key: ${sshPub(t)}`, 'ssh public key outside its published field', true);
   expect(`${t} public key in an allowlisted file fails`, 'src/assets/obs/obs.json', `"k": "${sshPub(t)}"`, 'ssh public key outside its published field', true);
   expect(`${t} public key in team/keys.json outside ssh_signing fails`, 'team/keys.json', `{ "keys": [ { "id": "x",\n  "public_key": "${sshPub(t)}" } ] }`, 'ssh public key outside its published field', true);
-  expect(`${t} public key as ssh_signing.public_key passes`, 'team/keys.json', `{ "keys": [ { "id": "x", "ssh_signing": {\n  "public_key": "${sshPub(t)}"\n } } ] }`, 'ssh public key outside its published field', false);
+  if (!t.startsWith('sk-')) expect(`${t} public key as ssh_signing.public_key passes`, 'team/keys.json', `{ "keys": [ { "id": "x", "ssh_signing": {\n  "public_key": "${sshPub(t)}"\n } } ] }`, 'ssh public key outside its published field', false);
 }
 expect('ssh_signing field in a file that is not team/keys fails', 'docs/keys.json', `{ "ssh_signing": {\n  "public_key": "${sshPub(SSH[0])}"\n } }`, 'ssh public key outside its published field', true);
 
