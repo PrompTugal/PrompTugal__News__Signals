@@ -2,7 +2,7 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-19T02:10Z",
+ "updated": "2026-11-19T01:51Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -28,7 +28,8 @@
   "sites bar 1.1.0 installed (19 Nov ~01:00 UTC): vendored and checked by sha256 at every build against the registry, rendered first in <body> from promptugal.news/api/v1/sites.json, the old rail removed; /preview.svg 320x180 from designer@'s template; the 1200x630 infographic moved to /card.svg (source of /preview.png)",
   "signed commits on (19 Nov ~01:40 UTC): an SSH signing key (ECDSA P-256) published with this session's ID in team/keys.json; every commit signed with it (repo-local gpg.ssh.program); scripts/check-signatures.mjs in release.sh and CI fails an unsigned commit, one signed by someone other than its Agent:, or one naming another Claude-Session: (from the commit that adds it on)",
   "data in the browser (19 Nov ~01:50 UTC, Dinis's 01:13 decision): every list (home, places, topics, accounts) loads the latest file from data.promptugal.news on open and every 10 minutes, replaces the built list only with a newer file that passes the build's checks, shows live or built, its read time and stale; home counts update; no cookie, no referrer; CSP unchanged",
-  "no timer (Dinis, 19 Nov ~01:20 UTC, every run starts from a commit): the 6-hourly schedule removed from the Pages workflow; push builds, workflow_dispatch by hand only; pages stay fresh from the browser"
+  "no timer (Dinis, 19 Nov ~01:20 UTC, every run starts from a commit): the 6-hourly schedule removed from the Pages workflow; push builds, workflow_dispatch by hand only; pages stay fresh from the browser",
+  "sites bar 1.1.1 installed (2026-11-19T01:51Z, from date -u) (security@ go, 19 Nov about 01:30 UTC): files byte-identical to the Website repo, checked at every build against the registry's full SRI pins (bar.integrity); 1.1.0 removed"
  ],
  "blocked": [],
  "next": [
@@ -61,5 +62,6 @@
   "on_this_site": "none today: every post and release shown has already happened",
   "nearest": "the place pages count events Perplexity named for the next 30 days (claims, linked to events.promptugal.news); they are events.b@'s to keep and check, and this site shows counts only",
   "first_plan": "show the past: a daily count of organisations' posts per place and topic over time, built from the social files data.b@ now commits hourly, drawn with gaps as gaps; to start once 7 days of committed files exist"
- }
+ },
+ "times_note": "From 19 Nov 01:55 UTC every time here is taken from date -u (security@'s ruling). Some earlier stamps in this file (e.g. 'updated' 02:00Z and 02:10Z, and 'about 01:40', '01:50' and '02:00' in done items) were estimates and ran up to about 20 minutes ahead of the real time; the commit times in git are the true ones."
 }

@@ -8,13 +8,14 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
-// The PrompTugal sites bar v1.1.0 (dev@PrompTugal.dinis, designer@'s spec; security@ post-review 18 Nov 2026 23:55: go),
+// The PrompTugal sites bar v1.1.1 (dev@PrompTugal.dinis, designer@'s spec; security@ 19 Nov 2026 about 01:30 UTC: go),
 // vendored: its three files were checked by hand against the registry's sha256 before they were committed, and at every build
-// they are checked again against the sha256 the registry publishes (bar.sha256); a mismatch fails the build. The pins are not
+// they are checked again against the full SRI pins the registry publishes (bar.integrity, sha256-<base64>); a mismatch fails the build. The pins are not
 // kept in this repository, whose leak scan reads a sha256 as a possible secret.
-const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.1.0/sites-bar-render.mjs', css: 'src/assets/sites-bar/1.1.0/sites-bar.css', js: 'src/assets/sites-bar/1.1.0/sites-bar.js' };
-const sha = f => createHash('sha256').update(readFileSync(f)).digest('hex');
-const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.1.0/sites-bar-render.mjs');
+const BAR_VERSION = '1.1.1';
+const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.1.1/sites-bar-render.mjs', css: 'src/assets/sites-bar/1.1.1/sites-bar.css', js: 'src/assets/sites-bar/1.1.1/sites-bar.js' };
+const sri = f => 'sha256-' + createHash('sha256').update(readFileSync(f)).digest('base64');
+const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.1.1/sites-bar-render.mjs');
 const SITES_API = 'https://promptugal.news/api/v1/';
 let BAR_HTML = '';
 
@@ -124,9 +125,9 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
 <meta property="og:image" content="https://signals.promptugal.news/preview.png">
 <meta property="og:title" content="${esc(title)}">
-<link rel="stylesheet" href="/assets/sites-bar/1.1.0/sites-bar.css">
+<link rel="stylesheet" href="/assets/sites-bar/1.1.1/sites-bar.css">
 <link rel="stylesheet" href="/assets/signals.css">
-<script defer src="/assets/sites-bar/1.1.0/sites-bar.js"></script>
+<script defer src="/assets/sites-bar/1.1.1/sites-bar.js"></script>
 <script defer src="/assets/signals.js"></script>
 <script defer src="/assets/obs/obs.js" data-lane="signals"></script>
 </head>
@@ -184,9 +185,9 @@ async function snapshot() {
 async function main() {
   const notes = [];
   { let reg = await read('sites.json', notes, SITES_API);
-    if (reg && reg.bar && reg.bar.sha256) { if (reg.bar.version !== '1.1.0') notes.push(`the registry lists sites bar ${clean(reg.bar.version, 20)}; this site has 1.1.0`);
-      else for (const [k, f] of Object.entries(BAR_FILES)) if (sha(f) !== reg.bar.sha256[k]) throw new Error(`sites bar: ${f} does not match the sha256 the registry publishes`); }
-    else if (reg && !notes.some(n => n.startsWith('sites.json'))) { notes.push('the live sites registry publishes no sha256 for the bar: the bar is left out of this build'); reg = null; }
+    if (reg && reg.bar && reg.bar.integrity) { if (reg.bar.version !== BAR_VERSION) notes.push(`the registry lists sites bar ${clean(reg.bar.version, 20)}; this site has ${BAR_VERSION}`);
+      else for (const [k, f] of Object.entries(BAR_FILES)) if (typeof reg.bar.integrity[k] !== 'string' || sri(f) !== reg.bar.integrity[k]) throw new Error(`sites bar: ${f} does not match the full pin the registry publishes`); }
+    else if (reg && !notes.some(n => n.startsWith('sites.json'))) { notes.push('the live sites registry publishes no pins for the bar: the bar is left out of this build'); reg = null; }
     else if (reg) notes.push('the sites bar files were not checked against the registry at this build (snapshot in use)');
     BAR_HTML = reg ? renderBar(reg, { here: 'signals.promptugal.news' }) : '';
     if (!BAR_HTML && reg) { notes.push('the sites registry failed the bar\'s check; the last good one was used'); try { BAR_HTML = renderBar(JSON.parse(readFileSync(join(SNAP, 'sites_sites.json'), 'utf8')), { here: 'signals.promptugal.news' }); } catch { BAR_HTML = ''; } } }

@@ -10,7 +10,7 @@
  "about": "Every source PrompTugal knows of, read or not. For each one we do not read, the reason, quoted from its terms or robots.txt with the page and the date read. We respect whatever a source says; a request on the record is drafted by outreach@ and sent by a person, and the answer is kept here as written.",
  "counts": {
   "read": 36,
-  "not-read": 128,
+  "not-read": 129,
   "asked": 0,
   "allowed": 0,
   "refused": 0,
@@ -1724,6 +1724,14 @@
     "europe"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/google-web-risk.json"
+  },
+  {
+   "id": "first-epss",
+   "name": "EPSS (Exploit Prediction Scoring System), FIRST",
+   "kind": "cyber data source",
+   "status": "not-read",
+   "places": [],
+   "url": "https://data.promptugal.news/api/v1/sources/first-epss.json"
   }
  ]
 }

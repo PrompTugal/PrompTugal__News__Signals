@@ -1,4 +1,14 @@
 {
+ "data_read_at": "2026-11-18T23:49:06Z",
+ "expected_cadence": {
+  "name": "every 6 hours",
+  "seconds": 21600
+ },
+ "schema": {
+  "openapi": "https://data.promptugal.news/api/v1/social/openapi.json",
+  "path": "/api/v1/social/latest.json",
+  "version": "v1"
+ },
  "license": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
