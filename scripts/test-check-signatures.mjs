@@ -101,11 +101,16 @@ try {
   branch('rewrite'); writeFileSync(join(repo, 'scripts/check-signatures.mjs'), "console.log('OK'); process.exit(0)\n"); git('add', '-A'); commit({ allowEmpty: false });
   expect("the pushed tree's own rewritten checker would pass", check(base), true, /^OK/);
   expect('the trusted copy refuses the same push', checkTrusted(base, base), false, /not signed by a key in team\/keys\.json \(status N\)/);
+
+  // control 6: a shallow checkout is refused
+  branch('good2'); commit({ signWith: A }); commit({ signWith: A });
+  const shallow = join(dir, 'shallow'); run('git', ['clone', '-q', '--depth', '1', '--branch', 'good2', `file://${repo}`, shallow]);
+  { const r = spawnSync(process.execPath, [join(shallow, 'scripts/check-signatures.mjs'), 'HEAD~0', 'HEAD'], { cwd: shallow, encoding: 'utf8', env: { ...ENV, SIGNATURES_TRUSTED_BASE: BASE } }); expect('a shallow checkout is refused', { ok: r.status === 0, out: (r.stdout || '') + (r.stderr || '') }, false, /a shallow checkout is refused/); }
 } catch (e) {
   results.push({ name: 'setup', pass: false, out: String(e.stderr || e.message).slice(0, 300) });
 } finally { rmSync(dir, { recursive: true, force: true }); }
 
 const bad = results.filter(r => !r.pass);
 for (const r of bad) console.error(`FAIL ${r.name}: ${r.out}`);
-if (bad.length || results.length < 16) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
+if (bad.length || results.length < 17) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
 console.log(`OK (${results.length} cases)`);
