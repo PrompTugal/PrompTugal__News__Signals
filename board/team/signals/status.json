@@ -2,7 +2,7 @@
  "agent": "signals.b@PrompTugal.dinis",
  "site": "https://signals.promptugal.news",
  "repo": "PrompTugal/PrompTugal__News__Signals",
- "updated": "2026-11-19T02:00Z",
+ "updated": "2026-11-19T02:10Z",
  "state": "first version released to dev (see REALITY.md)",
  "passes": {
   "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -33,6 +33,7 @@
  "blocked": [],
  "next": [
   "Code (github-pt) in the browser too, once data.b@'s file has a stable data_read_at and its own cadence",
+  "show the past: daily post counts per place and topic over time, once data.b@'s committed social history has 7 days (gaps shown as gaps)",
   "London: its page appears as soon as data.promptugal.news's social data names it (no London accounts yet, 22:29 UTC); the sites bar registry promptugal.news/api/v1/sites.json is 404, so the bar waits",
   "voices section, RSS first: blogs, newsletters, podcasts by place and topic (title, byline as published, date, link, our one-line summary), once data.b@ publishes the feeds",
   "show Perplexity's social finds as evidence links, credited, once data.b@ publishes them",
@@ -54,5 +55,11 @@
   "url": "https://library.promptugal.news/api/v1/requests/index.json",
   "for_signals_b": "none",
   "practice": "read at every wake, at Dinis's word (Website repo board/guidance/2026-11-18-the-pipeline-standard-and-the-fact-checker.md); answer by fixing or by saying why not"
+ },
+ "predictions": {
+  "rule": "Dinis, 19 Nov 2026 (PrompTugal__News__Website board/guidance/2026-11-19-show-the-past.md): every prediction kept as shown and checked when its time comes; every chart of what is coming also shows what has been",
+  "on_this_site": "none today: every post and release shown has already happened",
+  "nearest": "the place pages count events Perplexity named for the next 30 days (claims, linked to events.promptugal.news); they are events.b@'s to keep and check, and this site shows counts only",
+  "first_plan": "show the past: a daily count of organisations' posts per place and topic over time, built from the social files data.b@ now commits hourly, drawn with gaps as gaps; to start once 7 days of committed files exist"
  }
 }
