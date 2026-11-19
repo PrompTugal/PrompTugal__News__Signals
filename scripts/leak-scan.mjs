@@ -31,6 +31,12 @@ const DASHES = '-'.repeat(5);
 const PRIVATE_BLOCK = new RegExp(`${DASHES}BEGIN [A-Z0-9 ]*PRIVATE KEY( BLOCK)?${DASHES}`);
 const PUBLIC_BLOCK = new RegExp(`${DASHES}BEGIN (?:RSA |EC )?PUBLIC KEY${DASHES}[\\s\\S]*?${DASHES}END (?:RSA |EC )?PUBLIC KEY${DASHES}`, 'g');
 const PUBLIC_BEGIN = new RegExp(`${DASHES}BEGIN (?:RSA |EC |PGP )?PUBLIC KEY( BLOCK)?${DASHES}`);
+// An OpenSSH public key line (security@'s ruling, 19 Nov 2026, Website 1acd10498: the entropy rule alone missed about 1 in 75).
+// Allowed only as the value of ssh_signing.public_key in team/keys.json or team/keys/*.json; flagged everywhere else.
+const SSH_PUBLIC = /(?:^|[^A-Za-z0-9-])(?:ssh-ed25519|ssh-rsa|ssh-dss|ecdsa-sha2-nistp(?:256|384|521)|sk-ssh-ed25519@openssh\.com|sk-ecdsa-sha2-nistp256@openssh\.com)\s+AAAA[A-Za-z0-9+\/]{16,}/;
+const SSH_PUBLIC_FIELD = /^\s*"public_key"\s*:\s*"(?:ssh-ed25519|ssh-rsa|ecdsa-sha2-nistp(?:256|384|521)) AAAA[A-Za-z0-9+\/]+={0,2}(?: [^"\\]{0,100})?"\s*,?\s*$/;
+// Kinds that no allowlist entry can ever exempt (security@'s ruling: a private key header fails everywhere).
+const NEVER_ALLOWED = new Set(['private key block']);
 
 // Exact shapes: [kind, regex]. Order matters only for the report.
 const SHAPES = [
@@ -92,7 +98,7 @@ const ALLOW = [
   ['_site/assets/obs/obs.json', 'long high-entropy string', 'the built copy of src/assets/obs/obs.json (same reason)'],
   ['_site/assets/obs/obs.json', 'public key outside team/keys', 'the built copy of src/assets/obs/obs.json (same reason)'],
 ];
-const allowed = (path, kind) => ALLOW.some(([p, k]) => p === path && k === kind);
+const allowed = (path, kind) => !NEVER_ALLOWED.has(kind) && ALLOW.some(([p, k]) => p === path && k === kind);
 
 const PUBLIC_KEY_FILES = (p) => p === 'team/keys.json' || /^team\/keys\/[a-z0-9-]+\.json$/.test(p);
 
@@ -110,6 +116,11 @@ export function scanText(path, text) {
     const n = i + 1;
     for (const [kind, re] of SHAPES) if (re.test(line)) add(n, kind);
     if (PUBLIC_BEGIN.test(line)) add(n, 'public key outside team/keys');
+    if (SSH_PUBLIC.test(line)) {
+      // in a published key file, only inside an ssh_signing object, on its own "public_key" line
+      const inField = PUBLIC_KEY_FILES(path) && SSH_PUBLIC_FIELD.test(line) && /"ssh_signing"\s*:\s*\{[^{}]*$/.test(body.split('\n').slice(Math.max(0, i - 8), i).join('\n'));
+      if (!inField) add(n, 'ssh public key outside its published field');
+    }
     if (vaultPair(line)) add(n, 'sgit vault key shape (passphrase:vault_id)');
     for (const m of line.matchAll(ASSIGN)) {
       const v = m[1];

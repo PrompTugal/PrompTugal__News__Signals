@@ -35,7 +35,7 @@ function writeTz(notes, reg) {
   if (reg && reg.obs_tz && typeof reg.obs_tz.integrity === 'string') {
     // the registry naming a newer version is not a failure (data.b@'s trap, 19 Nov 2026): this build ships no table, so no
     // country is sent, and the vendored copy is upgraded at the next wake. The same version with different bytes stops the build.
-    if (reg.obs_tz.version !== TZ_VERSION) { notes.push(`the registry lists tz-country ${clean(reg.obs_tz.version, 20)}; this site has ${TZ_VERSION}: no country is sent until it is upgraded`); table = {}; }
+    if (reg.obs_tz.version !== TZ_VERSION) { notes.push(`tz-country ${TZ_VERSION} off: the registry names ${clean(reg.obs_tz.version, 20)} (no country is sent until this site upgrades)`); table = {}; }
     else if (sri(TZ_FILE) !== reg.obs_tz.integrity) throw new Error(`${TZ_FILE} does not match the full pin the registry publishes (obs_tz)`);
   } else notes.push('tz-country.json was not checked against the registry at this build');
   const f = join(OUT, 'assets/obs/obs.js'), s = readFileSync(f, 'utf8');
@@ -212,7 +212,7 @@ async function snapshot() {
 async function main() {
   const notes = [];
   { let reg = await read('sites.json', notes, SITES_API); const regRead = reg;
-    if (reg && reg.bar && reg.bar.integrity) { if (reg.bar.version !== BAR_VERSION) { notes.push(`the registry lists sites bar ${clean(reg.bar.version, 20)}; this site has ${BAR_VERSION}: no bar until it is upgraded`); reg = null; }
+    if (reg && reg.bar && reg.bar.integrity) { if (reg.bar.version !== BAR_VERSION) { notes.push(`sites bar ${BAR_VERSION} off: the registry names ${clean(reg.bar.version, 20)} (no bar until this site upgrades)`); reg = null; }
       else for (const [k, f] of Object.entries(BAR_FILES)) if (typeof reg.bar.integrity[k] !== 'string' || sri(f) !== reg.bar.integrity[k]) throw new Error(`sites bar: ${f} does not match the full pin the registry publishes`); }
     else if (reg && !notes.some(n => n.startsWith('sites.json'))) { notes.push('the live sites registry publishes no pins for the bar: the bar is left out of this build'); reg = null; }
     else if (reg) notes.push('the sites bar files were not checked against the registry at this build (snapshot in use)');

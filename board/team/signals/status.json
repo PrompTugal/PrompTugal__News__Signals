@@ -2,7 +2,7 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-19T05:10:00Z",
+  "updated": "2026-11-19T05:14:00Z",
   "state": "first version released to dev (see REALITY.md)",
   "passes": {
     "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -34,7 +34,8 @@
     "2026-11-19T02:18Z: tests for scripts/check-signatures.mjs (12 cases, reasons asserted), run in release and CI",
     "2026-11-19T03:21Z: no IP-based location: obs.js sends the country only, from the browser's time zone, no network call; ipapi.co and ipwho.is out of the CSP and obs.json (Dinis, 19 Nov 2026)",
     "2026-11-19T04:51Z: the shared tz-country table v1.0.0 replaces this site's own; pinned against the registry at build",
-    "2026-11-19T05:10Z: tz-country 1.1.0; a newer registry version no longer fails the build (no country / no bar until upgraded)"
+    "2026-11-19T05:10Z: tz-country 1.1.0; a newer registry version no longer fails the build (no country / no bar until upgraded)",
+    "2026-11-19T05:14Z: leak scan: private key headers never exempt; OpenSSH public keys flagged outside ssh_signing.public_key; 33 tests in release and CI. Degrade notes read '<piece> <version> off: the registry names <newer>'"
   ],
   "blocked": [],
   "next": [
@@ -69,5 +70,6 @@
     "nearest": "the place pages count events Perplexity named for the next 30 days (claims, linked to events.promptugal.news); they are events.b@'s to keep and check, and this site shows counts only",
     "first_plan": "show the past: a daily count of organisations' posts per place and topic over time, built from the social files data.b@ now commits hourly, drawn with gaps as gaps; to start once 7 days of committed files exist"
   },
-  "times_note": "From 19 Nov 01:55 UTC every time here is taken from date -u (security@'s ruling). Some earlier stamps in this file (e.g. 'updated' 02:00Z and 02:10Z, and 'about 01:40', '01:50' and '02:00' in done items) were estimates and ran up to about 20 minutes ahead of the real time; the commit times in git are the true ones."
+  "times_note": "From 19 Nov 01:55 UTC every time here is taken from date -u (security@'s ruling). Some earlier stamps in this file (e.g. 'updated' 02:00Z and 02:10Z, and 'about 01:40', '01:50' and '02:00' in done items) were estimates and ran up to about 20 minutes ahead of the real time; the commit times in git are the true ones.",
+  "degraded": []
 }
