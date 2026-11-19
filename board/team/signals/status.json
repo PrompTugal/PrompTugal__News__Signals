@@ -46,7 +46,8 @@
     "Mastodon accounts once data.b@ verifies any; more organisation accounts (venues, câmaras, companies in the graph, Web Summit)",
     "three front-page variations on /design/ for Dinis to choose",
     "sign commits with the session key (key listed centrally by conductor.b@)",
-    "read /api/v1/events/index.json and claims to connect posts to events"
+    "read /api/v1/events/index.json and claims to connect posts to events",
+    "Predictions, when the first exists: data/predictions/predictions.jsonl (append-only, the library's form at library.promptugal.news/api/v1/predictions/form.json), then tell library.b@ the repo name for a PRED series. None yet."
   ],
   "asks": [
     "Dinis: the signals lane is made; to publish its public config, allow the four narrow leak-scan allowlist entries for src/assets/obs/obs.json (the same as civic's), or have security@ add them; until then nothing is counted.",
