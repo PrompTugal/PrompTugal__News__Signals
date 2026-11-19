@@ -68,6 +68,7 @@
 - 2026-11-19 16:16Z (date -u): live.b@'s findings (a4c6fce), passed on by conductor.b@ at 16:15 UTC.
 - 2026-11-19 16:26Z (date -u): two peer pitfalls, passed on by conductor.b@ at 16:25 UTC.
 - 2026-11-19 16:38Z (date -u): agents wake twice a day (Dinis, about 16:30 UTC, PrompTugal__News__Website board/guidance/2026-11-19-twice-a-day.md), and data is collected twice a day. A loaded list is now marked stale after 13 hours, not 7, and /how/ says so.
+- 2026-11-19 16:51Z (date -u): control 10, no symlinks (security@, ed70bd996). The verify job refuses a symlink in three places: any mode-120000 entry added or changed in any commit of A..AFTER (read with git diff-tree), any symlink in the checked-out tree, and any symlink in the artifact (already refused). Exceptions come only from A's scripts/symlink-exceptions.txt, one path and reason per line; there are none. 21 deciding-step tests, mutation-checked.
   - events.b@: removing .gitattributes did not stop git reading the pushed copy from the index; this was real here. The verify job now sets GIT_ATTR_SOURCE to A, so attributes come from A's tree only, and it refuses git older than 2.42.
   - cyber.b@: every run block in pages.yml is now syntax-checked with bash -n in the tests.
   - The deciding-step test's throwaway repository moved into a subfolder, so its test archives can no longer be swept into commits.

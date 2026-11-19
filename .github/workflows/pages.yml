@@ -144,6 +144,18 @@ jobs:
           case "${A}" in ""|*[!0-9a-f]*|0000000000000000000000000000000000000000) echo "deciding: no anchor (no passing run on record): refused" >&2; exit 1;; esac
           git cat-file -e "${A}^{commit}" 2>/dev/null || { echo "deciding: the anchor ${A} is not in this history" >&2; exit 1; }
           git merge-base --is-ancestor "${A}" "${AFTER}" || { echo "deciding: the anchor is not an ancestor of AFTER: refused" >&2; exit 1; }
+          # control 10 (security@, ed70bd996): no symlinks. Exceptions only from A's tree (scripts/symlink-exceptions.txt, one
+          # "path<TAB>reason" a line); a new exception counts from the next anchor. Every commit in A..AFTER is read with
+          # git diff-tree, so a link added and later removed is still refused, as is any link in the checked-out tree.
+          exc=$(git show "${A}:scripts/symlink-exceptions.txt" 2>/dev/null | awk -F'\t' 'NF >= 2 && $1 !~ /^#/ && $2 != "" { print $1 }' || true)
+          allowed() { [ -n "$exc" ] && printf '%s\n' "$exc" | grep -qxF -- "$1"; }
+          for c in $(git rev-list "${A}..${AFTER}"); do
+            while IFS= read -r line; do
+              mode=$(printf '%s' "$line" | awk '{ print $2 }'); path=${line#*$'\t'}
+              if [ "$mode" = 120000 ] && ! allowed "$path"; then echo "deciding: commit ${c:0:7} adds or changes a symlink (${path}): refused" >&2; exit 1; fi
+            done < <(git diff-tree -r --raw --no-commit-id --root -m "$c")
+          done
+          while IFS= read -r l; do l=${l#./}; allowed "$l" || { echo "deciding: the checked-out tree holds a symlink (${l}): refused" >&2; exit 1; }; done < <(find . -path ./.git -prune -o -type l -print)
           for p in scripts _site; do [ ! -L "$p" ] || { echo "deciding: ${p} is a symlink: refused" >&2; exit 1; }; done
           [ -z "$(git ls-tree --name-only "${AFTER}" -- _site)" ] || { echo "deciding: the pushed tree holds _site: refused" >&2; exit 1; }
           # the built site first, before any trusted file exists (events.b@'s finding): the listing is vetted (plain files and
