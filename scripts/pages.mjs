@@ -8,13 +8,13 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
-// The PrompTugal sites bar v1.2.0 (dev@PrompTugal.dinis, designer@'s spec, the one switcher Dinis asked for on 19 Nov about 03:18 UTC;
-// security@'s go, Website 055e6c1430, 19 Nov 07:03 UTC; earlier versions: 1.1.1 at security@'s go of 01:30 UTC),
+// The PrompTugal sites bar v1.2.1 (dev@PrompTugal.dinis, designer@'s spec, the one switcher Dinis asked for on 19 Nov about 03:18 UTC;
+// security@'s go, Website 055e6c1430, 19 Nov 07:03 UTC; earlier versions: 1.1.1 at security@'s go of 01:30 UTC; 1.2.0 at 07:03 UTC; 1.2.1 at 07:54 UTC, Website 2d812d6da),
 // vendored: its three files were checked by hand against the registry's sha256 before they were committed, and at every build
 // they are checked again against the full SRI pins the registry publishes (bar.integrity, sha256-<base64>); a mismatch fails the build. The pins are not
 // kept in this repository, whose leak scan reads a sha256 as a possible secret.
-const BAR_VERSION = '1.2.0';
-const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.2.0/sites-bar-render.mjs', css: 'src/assets/sites-bar/1.2.0/sites-bar.css', js: 'src/assets/sites-bar/1.2.0/sites-bar.js' };
+const BAR_VERSION = '1.2.1';
+const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.2.1/sites-bar-render.mjs', css: 'src/assets/sites-bar/1.2.1/sites-bar.css', js: 'src/assets/sites-bar/1.2.1/sites-bar.js' };
 // this site's own version's pin: bar.versions["<v>"] / obs_tz.versions["<v>"] (append-only, dev@ 19 Nov 2026), else the
 // current entry when it names this version. No pin for this version means the registry no longer lists it: the piece is off.
 // Two shapes are read (civic.b@ and security@, 19 Nov 2026: "reshape, don't widen"): today bar.versions[v] is the map
@@ -31,7 +31,7 @@ const pinOf = (entry, v) => {
 };
 const tzPin = pin => { const x = own(pin, 'integrity') ?? own(pin, 'tz-country.json') ?? own(pin, 'file') ?? own(pin, 'json'); return typeof x === 'string' ? x : (Object.values(pin).length === 1 && typeof Object.values(pin)[0] === 'string' ? Object.values(pin)[0] : undefined); };
 const sri = f => 'sha256-' + createHash('sha256').update(readFileSync(f)).digest('base64');
-const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.2.0/sites-bar-render.mjs');
+const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.2.1/sites-bar-render.mjs');
 const SITES_API = 'https://promptugal.news/api/v1/';
 // The one shared time-zone-to-country table (dev@PrompTugal.dinis, v1.1.0; Dinis, 19 Nov 2026: the country from the time zone,
 // no IP lookup), vendored as src/assets/obs/tz-country.json. Checked against the registry's full pin (obs_tz.integrity) when the
@@ -167,9 +167,9 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
 <meta property="og:image" content="https://signals.promptugal.news/preview.png">
 <meta property="og:title" content="${esc(title)}">
-<link rel="stylesheet" href="/assets/sites-bar/1.2.0/sites-bar.css">
+<link rel="stylesheet" href="/assets/sites-bar/1.2.1/sites-bar.css">
 <link rel="stylesheet" href="/assets/signals.css">
-<script defer src="/assets/sites-bar/1.2.0/sites-bar.js"></script>
+<script defer src="/assets/sites-bar/1.2.1/sites-bar.js"></script>
 <script defer src="/assets/signals.js"></script>
 <script defer src="/assets/obs/obs.js" data-lane="signals"></script>
 </head>
