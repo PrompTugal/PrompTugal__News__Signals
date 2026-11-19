@@ -9,6 +9,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  deployments: read   # the anchor: CI's own record of the last passing deployment (security@'s fourth ruling)
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -72,29 +73,42 @@ jobs:
       - run: node scripts/validate.mjs
       - name: Leak scan (tracked files and the built site)
         run: node scripts/leak-scan.mjs
-      - name: The deciding security checks, from BEFORE's copy (security@'s rulings, controls 7 and 8)
-        # Every security check and its config (keys, exemptions, trusted base) comes from BEFORE, the commit dev pointed to
-        # before this push, which was already checked; never from the pushed tree, a tag or the trusted base's copy. The run
-        # fails if BEFORE is missing, is not an ancestor of AFTER (a force push), or has no copy of a check. The range starts
-        # at the last release tag below BEFORE, so a push whose own run GitHub dropped is still checked. The steps above ran
-        # the pushed tree's copies as tests only. The workflow file itself still comes from the pushed tree: Dinis's branch
-        # protection closes that. scripts/test-deciding-step.sh tests this block as written here.
+      - name: The anchor, the last commit a passing run deployed (security@'s fourth ruling, 948820a7e)
+        # CI's own record, which a pusher cannot write: the sha of the newest successful github-pages deployment, read with
+        # this run's own read-only token. Tags are not used.
+        id: anchor
         env:
-          BEFORE: ${{ github.event.before }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}"
+          A=""
+          for id in $(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" "${api}/deployments?environment=github-pages&per_page=50" | jq -r '.[].id'); do
+            st=$(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" "${api}/deployments/${id}/statuses?per_page=1" | jq -r '.[0].state // empty')
+            if [ "$st" = success ]; then A=$(curl -fsS -H "Authorization: Bearer ${GH_TOKEN}" "${api}/deployments/${id}" | jq -r '.sha'); break; fi
+          done
+          echo "anchor=${A}" >> "$GITHUB_OUTPUT"
+          echo "anchor: ${A:-none}"
+      - name: The deciding security checks, from the anchor's copy (security@'s rulings, controls 1 to 8)
+        # Every security check and its config (keys, exemptions, trusted base) comes from the anchor A's tree, never from the
+        # pushed tree, a tag or the trusted base's copy, and checks the whole range A..AFTER, so the commits of a push whose
+        # own run was dropped are checked too. The run fails if A is missing, is not an ancestor of AFTER, or has no copy of a
+        # check. The steps above ran the pushed tree's copies as tests only. The workflow file itself still comes from the
+        # pushed tree: Dinis's branch protection closes that. scripts/test-deciding-step.sh tests this block as written here.
+        env:
+          A: ${{ steps.anchor.outputs.anchor }}
           AFTER: ${{ github.sha }}
         run: |
           # deciding-step:begin
           test "$(git rev-parse --is-shallow-repository)" = false || { echo "deciding: shallow checkout refused" >&2; exit 1; }
-          case "${BEFORE}" in ""|*[!0-9a-f]*|0000000000000000000000000000000000000000) echo "deciding: no BEFORE (a new branch, a manual run or a zero id): refused" >&2; exit 1;; esac
-          git cat-file -e "${BEFORE}^{commit}" 2>/dev/null || { echo "deciding: BEFORE ${BEFORE} is not in this history" >&2; exit 1; }
-          git merge-base --is-ancestor "${BEFORE}" "${AFTER}" || { echo "deciding: BEFORE is not an ancestor of AFTER (a force push): refused" >&2; exit 1; }
-          from=$(git describe --tags --abbrev=0 --match "v${VERSION_BASE}.*" "${BEFORE}" 2>/dev/null || echo "${BEFORE}")
+          case "${A}" in ""|*[!0-9a-f]*|0000000000000000000000000000000000000000) echo "deciding: no anchor (no passing deployment on record): refused" >&2; exit 1;; esac
+          git cat-file -e "${A}^{commit}" 2>/dev/null || { echo "deciding: the anchor ${A} is not in this history" >&2; exit 1; }
+          git merge-base --is-ancestor "${A}" "${AFTER}" || { echo "deciding: the anchor is not an ancestor of AFTER: refused" >&2; exit 1; }
           for f in check-commits.mjs check-signatures.mjs leak-scan.mjs; do
-            git show "${BEFORE}:scripts/${f}" > "scripts/${f}.trusted" 2>/dev/null || { echo "deciding: BEFORE has no scripts/${f}: refused" >&2; exit 1; }
+            git show "${A}:scripts/${f}" > "scripts/${f}.trusted" 2>/dev/null || { echo "deciding: the anchor has no scripts/${f}: refused" >&2; exit 1; }
             mv "scripts/${f}.trusted" "scripts/${f}"
           done
-          node scripts/check-commits.mjs "${from}" "${AFTER}"
-          node scripts/check-signatures.mjs "${from}" "${AFTER}"
+          node scripts/check-commits.mjs "${A}" "${AFTER}"
+          node scripts/check-signatures.mjs "${A}" "${AFTER}"
           node scripts/leak-scan.mjs
           # deciding-step:end
       - if: steps.mode.outputs.deploy == 'true'
