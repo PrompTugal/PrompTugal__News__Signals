@@ -1,4 +1,17 @@
 {
+ "data_read_at": "2026-11-19T18:15:16Z",
+ "expected_cadence": {
+  "name": "twice a day",
+  "seconds": 43200,
+  "stale_after_seconds": 46800,
+  "collected_as": "hourly",
+  "why": "data.b@ collects twice a day (07:03 and 18:03 Lisbon) since 19 Nov 2026"
+ },
+ "schema": {
+  "openapi": "https://data.promptugal.news/api/v1/openapi.json",
+  "path": "/api/v1/social/by-place/index.json",
+  "version": "v1"
+ },
  "license": {
   "name": "CC BY 4.0",
   "url": "https://creativecommons.org/licenses/by/4.0/",
@@ -8,8 +21,8 @@
   "commercial_note": "With credit to PrompTugal.news; values taken from a source keep that source's licence."
  },
  "about": "The places with a social-signals file and how many posts each holds.",
- "read_at": "2026-11-19T01:34:24Z",
- "source_read_at": "2026-11-18T23:49:06Z",
+ "read_at": "2026-11-19T18:15:16Z",
+ "source_read_at": "2026-11-19T18:14:49Z",
  "by": "collect/social-by-place.mjs (code, no model; data.b@PrompTugal.dinis), from data/social/latest.json",
  "places": [
   {
@@ -34,15 +47,15 @@
   },
   {
    "place": "vila-real-de-santo-antonio",
-   "count": 1
-  },
-  {
-   "place": "portimao",
    "count": 0
   },
   {
+   "place": "portimao",
+   "count": 2
+  },
+  {
    "place": "lagos",
-   "count": 1
+   "count": 0
   },
   {
    "place": "olhao",
@@ -58,7 +71,7 @@
   },
   {
    "place": "monchique",
-   "count": 1
+   "count": 0
   },
   {
    "place": "aljezur",
@@ -70,7 +83,7 @@
   },
   {
    "place": "castro-marim",
-   "count": 0
+   "count": 1
   },
   {
    "place": "alcoutim",
@@ -82,7 +95,7 @@
   },
   {
    "place": "lisboa",
-   "count": 8
+   "count": 11
   },
   {
    "place": "algarve",

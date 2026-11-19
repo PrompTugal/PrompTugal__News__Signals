@@ -1,8 +1,11 @@
 {
- "data_read_at": "2026-11-18T23:43:57Z",
+ "data_read_at": "2026-11-19T18:12:11Z",
  "expected_cadence": {
-  "name": "every 6 hours",
-  "seconds": 21600
+  "name": "twice a day",
+  "seconds": 43200,
+  "stale_after_seconds": 46800,
+  "collected_as": "every 6 hours",
+  "why": "data.b@ collects twice a day (07:03 and 18:03 Lisbon) since 19 Nov 2026"
  },
  "schema": {
   "openapi": "https://data.promptugal.news/api/v1/github-pt/openapi.json",
@@ -18,27 +21,27 @@
  },
  "source": "github-pt",
  "title": "Code from Portuguese organisations on GitHub",
- "read_at": "2026-11-18T23:43:57Z",
+ "read_at": "2026-11-19T18:12:11Z",
  "provenance": {
   "source": "https://api.github.com",
   "page": "https://github.com/",
-  "read_at": "2026-11-18T23:43:57Z",
+  "read_at": "2026-11-19T18:12:11Z",
   "by": "sources/github-pt/collect.mjs (code, no model; run by data.b.dev@PrompTugal.dinis)",
   "terms": "GitHub's terms allow this use: reading public data through the API is permitted; excessive requests may be suspended; data must not be used for spam or to sell users' personal information. We read organisations' public repositories and releases only, collect no personal data, stay well under the rate limits, and keep each repository's own licence (or a link to its terms) on every item. Not reviewed by a person.",
   "terms_page": "https://docs.github.com/en/site-policy/github-terms/github-terms-of-service#h-api-terms",
   "authenticated": true,
-  "requests": 171,
-  "rate_remaining_at_end": 4828,
+  "requests": 21,
+  "rate_remaining_at_end": 15000,
   "orgs_list": "sources/github-pt/orgs.json"
  },
  "about": "Public repositories and latest releases (last 3 per repository, for repositories pushed in the last 90 days) of 21 Portuguese organisations on GitHub, read through GitHub's official REST API. Each organisation was verified as Portuguese by hand (verified_how). Forks are left out. Descriptions are the repositories' own words, shortened to 200 characters, plain text, untrusted. Each item carries its own licence: the repository's licence where it declares one, otherwise a link to the repository, whose terms apply. No contributors, emails, user profiles or organisation members are collected. A signal of activity, not a ranking.",
  "counts": {
   "orgs": 21,
-  "orgs_stale": 0,
+  "orgs_stale": 21,
   "repos": 849,
   "repos_with_releases": 39,
   "releases": 89,
-  "requests": 171,
+  "requests": 21,
   "authenticated": true
  },
  "orgs": [
@@ -2235,7 +2238,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "subvisual",
@@ -3888,7 +3892,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "ubiwhere",
@@ -4280,7 +4285,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "mindera",
@@ -5552,7 +5558,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "farfetch",
@@ -5871,7 +5878,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "glintt",
@@ -5902,7 +5910,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "criticalsoftware",
@@ -5933,7 +5942,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "sapo",
@@ -6091,7 +6101,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "amagovpt",
@@ -7929,7 +7940,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "fccn",
@@ -9134,7 +9146,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "rcaap",
@@ -9146,7 +9159,8 @@
    "source": "https://api.github.com/orgs/rcaap/repos",
    "read_at": "2026-11-18T23:43:57Z",
    "forks_skipped": 2,
-   "repos": []
+   "repos": [],
+   "stale": true
   },
   {
    "login": "inesctec",
@@ -10774,7 +10788,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "inesc-id",
@@ -11147,7 +11162,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "ieeta-pt",
@@ -12027,7 +12043,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "haslab",
@@ -12710,7 +12727,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "LasigeBioTM",
@@ -13877,7 +13895,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "lip-computing",
@@ -14574,7 +14593,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "ipleiria",
@@ -14641,7 +14661,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "fenixedu",
@@ -15600,7 +15621,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "centraldedados",
@@ -16423,7 +16445,8 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   },
   {
    "login": "transparenciahackday",
@@ -16940,49 +16963,115 @@
      "read_at": "2026-11-18T23:43:57Z",
      "releases": []
     }
-   ]
+   ],
+   "stale": true
   }
  ],
  "gaps": [
   {
    "what": "repositories of codacy",
-   "why": "only the 100 most recently pushed were read",
-   "read_at": "2026-11-18T23:43:57Z"
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   },
   {
    "what": "repositories of subvisual",
-   "why": "only the 100 most recently pushed were read",
-   "read_at": "2026-11-18T23:43:57Z"
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of ubiwhere",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   },
   {
    "what": "repositories of mindera",
-   "why": "only the 100 most recently pushed were read",
-   "read_at": "2026-11-18T23:43:57Z"
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of farfetch",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of glintt",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of criticalsoftware",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of sapo",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of amagovpt",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   },
   {
    "what": "repositories of fccn",
-   "why": "only the 100 most recently pushed were read",
-   "read_at": "2026-11-18T23:43:57Z"
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of rcaap",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   },
   {
    "what": "repositories of inesctec",
-   "why": "only the 100 most recently pushed were read",
-   "read_at": "2026-11-18T23:43:57Z"
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   },
   {
-   "what": "releases of older repositories",
-   "why": "releases were read for the 150 most recently pushed repositories only",
-   "read_at": "2026-11-18T23:43:57Z"
+   "what": "repositories of inesc-id",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   },
   {
-   "what": "left out by the leak scan rules",
-   "why": "0 field values and 1 repositories or release reads (long mixed-case names in addresses) match the leak scan's high-entropy rule; they are left out, not altered",
-   "read_at": "2026-11-18T23:43:57Z"
+   "what": "repositories of ieeta-pt",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   },
   {
-   "what": "fields dropped",
-   "why": "4 repository or release text fields held an em dash, which the site's wording check refuses; they are left out, not altered",
-   "read_at": "2026-11-18T23:43:57Z"
+   "what": "repositories of haslab",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of LasigeBioTM",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of lip-computing",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of ipleiria",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of fenixedu",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of centraldedados",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
+  },
+  {
+   "what": "repositories of transparenciahackday",
+   "why": "not read (HTTP 403; see reads.json)",
+   "read_at": "2026-11-19T18:12:11Z"
   }
  ]
 }

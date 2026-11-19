@@ -9,8 +9,8 @@
  },
  "about": "Every source PrompTugal knows of, read or not. For each one we do not read, the reason, quoted from its terms or robots.txt with the page and the date read. We respect whatever a source says; a request on the record is drafted by outreach@ and sent by a person, and the answer is kept here as written.",
  "counts": {
-  "read": 36,
-  "not-read": 129,
+  "read": 37,
+  "not-read": 130,
   "asked": 0,
   "allowed": 0,
   "refused": 0,
@@ -200,6 +200,16 @@
     "portugal"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/nvd-cve.json"
+  },
+  {
+   "id": "nvd-kev",
+   "name": "NVD's record of every CVE on CISA's KEV list",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/nvd-kev.json"
   },
   {
    "id": "open-meteo-london",
@@ -1732,6 +1742,17 @@
    "status": "not-read",
    "places": [],
    "url": "https://data.promptugal.news/api/v1/sources/first-epss.json"
+  },
+  {
+   "id": "skylinewebcams",
+   "name": "SkylineWebcams",
+   "kind": "public live camera",
+   "status": "not-read",
+   "places": [
+    "faro",
+    "portimao"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/skylinewebcams.json"
   }
  ]
 }

@@ -6,7 +6,7 @@
   "note": "What the library makes: the catalogue, its cards, indexes and graph. Each item keeps its source's licence, linked on its card."
  },
  "about": "Every item in the library, one line each: enough to search and to find its card. The full record is at each item's api address.",
- "count": 80,
+ "count": 82,
  "items": [
   {
    "id": "WS26-2026-0001",
@@ -14,7 +14,7 @@
    "title": "Web Summit 2026 | Day Three",
    "kind": "replay-day",
    "publisher": "Web Summit (its YouTube channel, @websummit)",
-   "published": null,
+   "published": "2026-11-12",
    "collection": "ws26",
    "url": "https://www.youtube.com/watch?v=-MGZdAtbTrs",
    "licence": "https://www.youtube.com/t/terms",
@@ -1194,7 +1194,7 @@
    "title": "Web Summit 2026 | Opening Night",
    "kind": "replay-day",
    "publisher": "Web Summit (YouTube channel @websummit)",
-   "published": "2026-11-09",
+   "published": "2026-11-10",
    "collection": "ws26",
    "url": "https://www.youtube.com/watch?v=dJi_pXLxwno",
    "licence": "https://www.youtube.com/t/terms",
@@ -1731,6 +1731,44 @@
    "status": "held",
    "page": "/item/WS26-2026-0080/",
    "api": "/api/v1/items/WS26-2026-0080.json"
+  },
+  {
+   "id": "WS26-2026-0081",
+   "call_number": "WS26 2026/0081",
+   "title": "Is NVIDIA bigger than its founder?",
+   "kind": "talk-video",
+   "publisher": "Web Summit (YouTube channel @websummit)",
+   "published": "2026-11-12",
+   "collection": "ws26",
+   "url": "https://www.youtube.com/watch?v=c4nlV5UByTk",
+   "licence": "https://www.youtube.com/t/terms",
+   "tags": [],
+   "about": [
+    "event:web-summit-lisbon-2026",
+    "organisation:web-summit"
+   ],
+   "status": "held",
+   "page": "/item/WS26-2026-0081/",
+   "api": "/api/v1/items/WS26-2026-0081.json"
+  },
+  {
+   "id": "WS26-2026-0082",
+   "call_number": "WS26 2026/0082",
+   "title": "Web Summit 2026 | Event Highlights",
+   "kind": "recording",
+   "publisher": "Web Summit (YouTube channel @websummit)",
+   "published": "2026-11-18",
+   "collection": "ws26",
+   "url": "https://www.youtube.com/watch?v=dMEvephN1mg",
+   "licence": "https://www.youtube.com/t/terms",
+   "tags": [],
+   "about": [
+    "event:web-summit-lisbon-2026",
+    "organisation:web-summit"
+   ],
+   "status": "held",
+   "page": "/item/WS26-2026-0082/",
+   "api": "/api/v1/items/WS26-2026-0082.json"
   }
  ]
 }

@@ -1,8 +1,11 @@
 {
- "data_read_at": "2026-11-18T23:49:06Z",
+ "data_read_at": "2026-11-19T18:14:49Z",
  "expected_cadence": {
-  "name": "every 6 hours",
-  "seconds": 21600
+  "name": "twice a day",
+  "seconds": 43200,
+  "stale_after_seconds": 46800,
+  "collected_as": "every 6 hours",
+  "why": "data.b@ collects twice a day (07:03 and 18:03 Lisbon) since 19 Nov 2026"
  },
  "schema": {
   "openapi": "https://data.promptugal.news/api/v1/social/openapi.json",
@@ -19,11 +22,11 @@
  },
  "source": "social",
  "title": "Social signals: organisations' public posts, by link",
- "read_at": "2026-11-18T23:49:06Z",
+ "read_at": "2026-11-19T18:14:49Z",
  "provenance": {
   "source": "https://public.api.bsky.app/xrpc/",
   "page": "https://bsky.app/",
-  "read_at": "2026-11-18T23:49:06Z",
+  "read_at": "2026-11-19T18:14:49Z",
   "by": "sources/social/collect.mjs (code, no model; run by data.b@PrompTugal.dinis)",
   "terms": "Organisations only, official interfaces only, by link. Bluesky: robots.txt of the public API allows crawling it and asks for backoff on 429; the Terms of Service (14 Aug 2025) leave each post's content with its author, so we store link and metadata only and credit the organisation. Mastodon: mastodon.social's terms (effective 2026-08-31) say whoever owns the content retains ownership and allow API access; its robots.txt disallows only /media_proxy/, /interact/ and a domain-blocks path. Licence on each post: the platform's terms, holder the organisation. Not reviewed by a person.",
   "sources": [
@@ -44,42 +47,23 @@
  },
  "about": "Links to recent public posts (last 30 days) by the official accounts of organisations (câmaras, public bodies, venues, organisers, news outlets, companies) listed in register/social-accounts.json. Each record is the post's public web address plus metadata: who, when, which topics and places its text matched, language, whether it has media. The post text and media are not stored: open the link, or use the platform's own embed, to see the post. Every post stays its author's content under the platform's terms; show it by link, credited to the organisation. A signal to check, not a verified fact. Never a private person's account.",
  "counts": {
-  "posts": 147,
+  "posts": 146,
   "accounts": 5,
   "by_platform": {
-   "bluesky": 147,
+   "bluesky": 146,
    "mastodon": 0
   },
-  "with_topic": 17,
-  "with_place": 28
+  "with_topic": 18,
+  "with_place": 22
  },
  "posts": [
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mq3ykceg2y",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T23:38:59.6278697Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2modcrtv72t",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2onh3x74z24",
    "account": "lusa.pt",
    "organisation": "Agência Lusa",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T23:07:17.1718200+00:00",
+   "posted_at": "2026-11-19T17:56:49.9734841+00:00",
    "topics": [],
    "places": [],
    "lang": null,
@@ -90,72 +74,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Agência Lusa"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mo5j3t3f2v",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T23:04:03.0490423Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mo5gox4n2v",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T23:04:00.5298298Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mmld4luf2i",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T22:35:59.060424Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mmg5iedf2u",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2onds5kgr2j",
    "account": "lusa.pt",
    "organisation": "Agência Lusa",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T22:33:04.6376804+00:00",
+   "posted_at": "2026-11-19T17:54:59.0554453+00:00",
    "topics": [],
    "places": [],
    "lang": null,
@@ -166,91 +93,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Agência Lusa"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mm6frcdj2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T22:28:44.9177355+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mlzm7rvz2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T22:26:03.8745244+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2ml52pyxx2p",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T22:10:06.0890269+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mjmyk2ei24",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T21:43:13.3096412+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mix3v26o2x",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2oms25zif25",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T21:30:59.1605233Z",
+   "posted_at": "2026-11-19T17:45:04.0294758Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -261,15 +112,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mifck2rp2a",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2omryrlqu2a",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T21:21:02.1609294Z",
+   "posted_at": "2026-11-19T17:45:02.5716429Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -280,15 +131,521 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mifarus62i",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2omrxfz7u2a",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T21:21:00.3199196Z",
+   "posted_at": "2026-11-19T17:45:01.1437776Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2omrwbdf62t",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:44:59.9437175Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2omh6bxo62n",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:38:58.7034401+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2om3tlwcc2q",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:32:38.262Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2olkht7as2j",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:22:55.303Z",
+   "topics": [],
+   "places": [
+    "algarve",
+    "portimao"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2olgyxgdx24",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:20:59.9253803Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2ol6mn5ma2t",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:16:18.1371422+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2okvm4jku2q",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:11:15.353Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2okexzgco23",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T17:01:57.5303043+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ok2gt7wu24",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:56:04.4257261Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ok2fj6vb2i",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:56:03.1384851Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ok2du6lz2i",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:56:01.3990153Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ok2c5jfk2a",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:55:59.5948262Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2ojyzhzjg2t",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:55:16.5578274+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2oj7xbntj2j",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:41:15.051Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oiwgffam2n",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:35:55.6925997+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2oijh2xky23",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:28:39.778Z",
+   "topics": [],
+   "places": [
+    "lisboa",
+    "algarve"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oiiqe7ct2u",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:28:16.2248421+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oidxiclz2k",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:25:35.9530926+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oi76bxcb2u",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:22:55.2935588+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2oi3xlcwl2d",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:21:07.391Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oi3uw3uu2d",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:21:04.9514152+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ohl3fw3c22",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T16:11:40.960Z",
+   "topics": [],
+   "places": [
+    "lisboa",
+    "algarve"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2ogtdn3zq2p",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T15:58:24.4956519+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ofzkkgqw2i",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T15:43:59.9012258Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ofywkkyl2j",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T15:43:38.019Z",
+   "topics": [],
+   "places": [
+    "algarve",
+    "portimao"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ofotbml32x",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T15:37:59.9522403Z",
    "topics": [],
    "places": [
     "lisboa"
@@ -301,91 +658,380 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mhezqukg2a",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T21:02:59.2048902Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mh2ftn442v",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T20:57:02.7812555Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mh2dyiog2b",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T20:57:00.8422605Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mh2cwifg2q",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T20:56:59.7296835Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mfez4jwv2y",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2ofdea5xe2d",
    "account": "lusa.pt",
    "organisation": "Agência Lusa",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T20:27:10.5037154+00:00",
+   "posted_at": "2026-11-19T15:31:34.5228824+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ofbyy5ol2g",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T15:30:48.797Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2of2437d32t",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T15:26:23.9862921+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2oeehqvzr23",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T15:14:17.750Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2ode4lsy22b",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:56:12.5931260+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oczepbgp2t",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:50:12.1127355+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ocuiakik2k",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:47:27.635Z",
+   "topics": [],
+   "places": [
+    "algarve"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ocoas7qf2i",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:43:59.34739Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oclvpipp2k",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:42:40.1789141+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2ochgk43e2p",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:40:10.0855338+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2occoxq3h2a",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:37:31.1357497+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2obauoxxm2k",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:18:35.956Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2ob24ge472i",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:14:49.4051960+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2oaxdw5yi2t",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:13:16.140Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oawsqelw23",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:12:58.5766572+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2oakcduhi2t",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:05:59.2727372Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oahmlaea2j",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:04:28.8033852+00:00",
+   "topics": [
+    "events"
+   ],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2oaedjynx24",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T14:02:38.6537653+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2o7davi3423",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T13:44:08.5883667+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2o6pf2mdo2z",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T13:33:02.4038816Z",
    "topics": [],
    "places": [
     "lisboa"
@@ -396,17 +1042,17 @@
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
+    "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2melmppus2x",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2o6pdduhi2v",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T20:12:59.1929533Z",
+   "posted_at": "2026-11-19T13:33:00.6100692Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -417,15 +1063,216 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mejuhbuw2i",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2o6pcakxl2i",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T20:12:00.1960999Z",
+   "posted_at": "2026-11-19T13:32:59.4416897Z",
+   "topics": [
+    "mobility"
+   ],
+   "places": [
+    "lisboa"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2o65of5r72y",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T13:23:07.6758260+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2o5ufka7c2k",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T13:17:56.4166428+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2o5bv3xfh2t",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T13:07:34.988Z",
+   "topics": [],
+   "places": [
+    "algarve",
+    "castro-marim"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2o57ancia2d",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T13:06:06.6077473+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2o4wcqvc423",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T13:01:06.784Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2o4eecjel23",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T12:51:04.6292894+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2o463jcrr2f",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T12:47:33.9509753+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/lusa.pt/post/3n2o44cdusw2j",
+   "account": "lusa.pt",
+   "organisation": "Agência Lusa",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T12:46:34.0000333+00:00",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Agência Lusa"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2o3pjb5ec2u",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T12:39:24.918Z",
+   "topics": [
+    "mobility"
+   ],
+   "places": [
+    "lisboa"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2o3dzhzad2i",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T12:32:59.9350232Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -436,15 +1283,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2me74xgjh25",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2o2fm3tma24",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T20:06:00.0138515Z",
+   "posted_at": "2026-11-19T12:15:59.2722516Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -455,72 +1302,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2me5utizc2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T20:05:17.3625457+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mdq646ix2k",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T19:57:37.3361394+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mddxb6m22y",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T19:50:47.5356592+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mcn27gk42q",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2o2acuzfi2q",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:37:59.4090506Z",
+   "posted_at": "2026-11-19T12:13:01.8392202Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -531,15 +1321,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mcfsf5gf2i",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2o2ab2kci2q",
+   "account": "publico.pt",
+   "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:33:55.7685043+00:00",
+   "posted_at": "2026-11-19T12:12:59.9245103Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -548,17 +1338,17 @@
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
+    "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mc7kpgxm2k",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2o25zy2ac2g",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:30:26.5091759+00:00",
+   "posted_at": "2026-11-19T12:11:44.831Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -567,17 +1357,169 @@
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
+    "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mbxrpg3y2u",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2nzb4ubyf2v",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:26:05.2791259+00:00",
+   "posted_at": "2026-11-19T11:55:34.586Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2nza25kul2y",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T11:54:58.9407667Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ny7vr5tg2b",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T11:37:00.5953639Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ny7uoha425",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T11:36:59.4572393Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ny5nsetg2u",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T11:35:44.447Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ny2yzka423",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T11:34:15.652Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2nxaqpeb22o",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T11:19:34.318Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2nweugnoz25",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T11:03:59.4926697Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Público"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2nuqyvwsc24",
+   "account": "publico.pt",
+   "organisation": "Público",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T10:34:59.3555704Z",
    "topics": [],
    "places": [
     "lisboa"
@@ -588,17 +1530,17 @@
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
+    "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2mbq2ipjb2d",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2nufyopol2t",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:21:46.0804262+00:00",
+   "posted_at": "2026-11-19T10:28:49.237Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -607,17 +1549,36 @@
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
+    "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mbdycphl2i",
+   "url": "https://bsky.app/profile/visitportugal.com/post/3n2nu4hdgms26",
+   "account": "visitportugal.com",
+   "organisation": "Turismo de Portugal (Visit Portugal)",
+   "kind": "public body",
+   "posted_at": "2026-11-19T10:23:29.895Z",
+   "topics": [],
+   "places": [],
+   "lang": "en",
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "Turismo de Portugal (Visit Portugal)"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2nu3kwf5d2b",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:15:01.6892444Z",
+   "posted_at": "2026-11-19T10:23:00.0480652Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -628,15 +1589,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mbdxahr32i",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2ntw6gika2i",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:15:00.566859Z",
+   "posted_at": "2026-11-19T10:19:59.1715625Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -647,15 +1608,34 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mbdwia7p2b",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ntgfttlu2g",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T10:11:09.231Z",
+   "topics": [],
+   "places": [],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2nt56yf2z2x",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T19:14:59.7727381Z",
+   "posted_at": "2026-11-19T10:06:00.8949423Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -666,15 +1646,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mafkn2nj2v",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2nt55myap24",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T18:58:00.7131574Z",
+   "posted_at": "2026-11-19T10:05:59.4760082Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -685,16 +1665,18 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2mafjdpzl2a",
+   "url": "https://bsky.app/profile/publico.pt/post/3n2nrsa5p6f2v",
    "account": "publico.pt",
    "organisation": "Público",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T18:57:59.3600572Z",
-   "topics": [],
+   "posted_at": "2026-11-19T09:41:59.2800669Z",
+   "topics": [
+    "security"
+   ],
    "places": [],
    "lang": null,
    "has_media": true,
@@ -704,15 +1686,15 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Público"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2ma6itskt2p",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2nrhjo2r72d",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T18:54:03.4213403+00:00",
+   "posted_at": "2026-11-19T09:35:59.078Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -721,17 +1703,38 @@
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
+    "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2m7zrojum2k",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2nqu5raef2k",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T18:51:24.8831832+00:00",
+   "posted_at": "2026-11-19T09:25:09.290Z",
+   "topics": [],
+   "places": [
+    "algarve"
+   ],
+   "lang": null,
+   "has_media": true,
+   "source": "author feed",
+   "license": {
+    "name": "the platform's terms",
+    "url": "https://bsky.social/about/support/tos",
+    "holder": "The Portugal Resident"
+   },
+   "read_at": "2026-11-19T18:14:49Z"
+  },
+  {
+   "platform": "bluesky",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2npyzocvf2j",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
+   "kind": "news outlet",
+   "posted_at": "2026-11-19T09:09:59.015Z",
    "topics": [],
    "places": [],
    "lang": null,
@@ -740,294 +1743,31 @@
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
+    "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m7mkl2xv2v",
-   "account": "publico.pt",
-   "organisation": "Público",
+   "url": "https://bsky.app/profile/portugalresident.com/post/3n2nosc5zkd2q",
+   "account": "portugalresident.com",
+   "organisation": "The Portugal Resident",
    "kind": "news outlet",
-   "posted_at": "2026-11-18T18:44:01.7896043Z",
+   "posted_at": "2026-11-19T08:48:19.335Z",
    "topics": [],
-   "places": [],
+   "places": [
+    "algarve",
+    "loule"
+   ],
    "lang": null,
    "has_media": true,
    "source": "author feed",
    "license": {
     "name": "the platform's terms",
     "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
+    "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m7mindvq2i",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T18:43:59.7644059Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m6gy35rr2x",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T18:23:00.8748974Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m6gwjy6b2i",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T18:22:59.2664227Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2m6dryxvb2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T18:21:13.3008787+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2m5w2c2dr2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T18:13:32.2506222+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m5tao2nj2a",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T18:11:58.7943305Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2m5icxajh2b",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T18:05:51.6835084+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m53ziybu2t",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:58:59.5383592Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2m4k6rbdw2d",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:49:00.5205679+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m3sxqddk2x",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:36:01.9517058Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m3swkoco2q",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:36:00.71779Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m3svdl2m24",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:35:59.4272083Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2m2fbicdw2p",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:10:28.2312969+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/publico.pt/post/3n2m2engzek2t",
-   "account": "publico.pt",
-   "organisation": "Público",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:10:07.6526989Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Público"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1048,64 +1788,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lzxkp6vj2j",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T17:02:48.0025754+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lzlchsdx24",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:55:56.7085321+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lzdknms42i",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:51:36.8834867+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1127,7 +1810,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1150,389 +1833,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "The Portugal Resident"
    },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lxv2ao3k2k",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:25:36.1532550+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lxnbwcoh23",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:21:15.9089851+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lxbwpy3n2q",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:14:54.282Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lxb2rw6l2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:14:25.6567025+00:00",
-   "topics": [
-    "security"
-   ],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lwxs25wd2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:09:14.5154430+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lwq3lwjy2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T16:04:56.2295589+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/lusa.pt/post/3n2lwdtqayy2t",
-   "account": "lusa.pt",
-   "organisation": "Agência Lusa",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T15:58:05.1990541+00:00",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Agência Lusa"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lvud4wgp2z",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T15:49:24.120Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lv2yusbw2t",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T15:35:14.629Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2ltgjkwgc2q",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T15:05:53.707Z",
-   "topics": [],
-   "places": [
-    "algarve",
-    "loule"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lsn7235y2j",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T14:51:43.592Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lp5ymgxx2g",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T13:49:32.347Z",
-   "topics": [
-    "events"
-   ],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lnyfc3xr2o",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T13:28:30.757Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lk2vymgj2q",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T12:18:20.380Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2liwtrdhv2d",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T11:58:10.234Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lh3ahx2v23",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T11:24:50.131Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lgafpgix2g",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T11:09:49.705Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lfoduna22v",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T10:59:43.670Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lcut6gbb2j",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T10:09:39.879Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1551,294 +1852,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lbcgvkjm2j",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T09:41:29.322Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2lainbzc722",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-18T09:27:03.568Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jm5tdmwy2t",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T17:50:26.081Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jlxxr4rq2o",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T17:47:09.193Z",
-   "topics": [],
-   "places": [
-    "lisboa"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jkvn2db62j",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T17:27:55.948Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jjzl6fdd2j",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T17:12:15.604Z",
-   "topics": [],
-   "places": [
-    "algarve",
-    "vila-real-de-santo-antonio"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jjgcy4vp2v",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T17:01:29.353Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jjaabdii2j",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T16:58:05.724Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jfry7gsi22",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T15:56:26.092Z",
-   "topics": [],
-   "places": [
-    "algarve",
-    "lagos"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jexsytb72o",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T15:41:48.243Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jdx2hoyv2q",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T15:23:28.509Z",
-   "topics": [
-    "events"
-   ],
-   "places": [
-    "algarve",
-    "monchique"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jbkcd3ts2k",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T14:40:33.878Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jbatx23f22",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T14:35:15.745Z",
-   "topics": [],
-   "places": [
-    "algarve"
-   ],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/portugalresident.com/post/3n2jal4ian42j",
-   "account": "portugalresident.com",
-   "organisation": "The Portugal Resident",
-   "kind": "news outlet",
-   "posted_at": "2026-11-17T14:23:06.787Z",
-   "topics": [],
-   "places": [],
-   "lang": null,
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "The Portugal Resident"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1859,7 +1873,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1880,7 +1894,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1901,7 +1915,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1923,7 +1937,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1942,7 +1956,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1961,7 +1975,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1980,7 +1994,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -1999,7 +2013,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2022,7 +2036,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2041,7 +2055,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2062,7 +2076,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2081,7 +2095,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2104,7 +2118,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2125,7 +2139,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2144,7 +2158,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2163,7 +2177,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2185,7 +2199,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2204,7 +2218,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2223,7 +2237,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2242,7 +2256,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2261,7 +2275,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2282,7 +2296,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2301,7 +2315,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2320,7 +2334,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2339,7 +2353,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2358,7 +2372,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2377,7 +2391,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2398,7 +2412,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2417,7 +2431,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2436,7 +2450,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2455,7 +2469,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2476,7 +2490,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2495,7 +2509,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2514,7 +2528,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2535,7 +2549,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2554,7 +2568,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2573,7 +2587,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2592,7 +2606,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2611,7 +2625,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2630,7 +2644,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2649,7 +2663,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2668,7 +2682,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2687,7 +2701,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2708,7 +2722,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2727,7 +2741,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2748,7 +2762,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2769,7 +2783,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2788,7 +2802,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "SAPO"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2809,7 +2823,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2828,7 +2842,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2847,7 +2861,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2866,7 +2880,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2885,7 +2899,7 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "platform": "bluesky",
@@ -2906,77 +2920,39 @@
     "url": "https://bsky.social/about/support/tos",
     "holder": "Turismo de Portugal (Visit Portugal)"
    },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/visitportugal.com/post/3myhy3zwuac2c",
-   "account": "visitportugal.com",
-   "organisation": "Turismo de Portugal (Visit Portugal)",
-   "kind": "public body",
-   "posted_at": "2026-10-22T15:28:29.133Z",
-   "topics": [],
-   "places": [],
-   "lang": "en",
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Turismo de Portugal (Visit Portugal)"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
-  },
-  {
-   "platform": "bluesky",
-   "url": "https://bsky.app/profile/visitportugal.com/post/3myhbk32irc2u",
-   "account": "visitportugal.com",
-   "organisation": "Turismo de Portugal (Visit Portugal)",
-   "kind": "public body",
-   "posted_at": "2026-10-22T08:44:44.001Z",
-   "topics": [],
-   "places": [],
-   "lang": "en",
-   "has_media": true,
-   "source": "author feed",
-   "license": {
-    "name": "the platform's terms",
-    "url": "https://bsky.social/about/support/tos",
-    "holder": "Turismo de Portugal (Visit Portugal)"
-   },
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   }
  ],
  "gaps": [
   {
    "what": "Bluesky keyword search \"\"Web Summit\"\"",
    "why": "not read: the public search was refused or failed (see reads.json); the author feeds above still cover the listed accounts",
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "what": "Bluesky keyword search \"Lisboa\"",
    "why": "not read: the public search was refused or failed (see reads.json); the author feeds above still cover the listed accounts",
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "what": "Bluesky keyword search \"Algarve\"",
    "why": "not read: the public search was refused or failed (see reads.json); the author feeds above still cover the listed accounts",
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "what": "Bluesky keyword search \"startup Portugal\"",
    "why": "not read: the public search was refused or failed (see reads.json); the author feeds above still cover the listed accounts",
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "what": "Bluesky keyword search \"IA Portugal\"",
    "why": "not read: the public search was refused or failed (see reads.json); the author feeds above still cover the listed accounts",
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   },
   {
    "what": "Mastodon",
    "why": "no organisation account could be verified yet (register/social-accounts.json notes); the collector reads Mastodon as soon as one is listed",
-   "read_at": "2026-11-18T23:49:06Z"
+   "read_at": "2026-11-19T18:14:49Z"
   }
  ]
 }
