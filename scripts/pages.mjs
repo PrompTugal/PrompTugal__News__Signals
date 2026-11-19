@@ -200,7 +200,9 @@ async function snapshot() {
   const idx = await getJSON('social/by-place/index.json');
   for (const p of (idx.places || [])) if (okSlug(p.place, 60)) paths.push(`social/by-place/${p.place}.json`);
   for (const p of paths) writeFileSync(join(SNAP, snapName(p)), JSON.stringify(await getJSON(p), null, 1) + '\n');
-  { const reg = await getJSON('sites.json', SITES_API); if (!checkBar(reg)) throw new Error('snapshot: the sites registry fails the bar\'s own check; not saved'); const { bar, ...keep } = reg; writeFileSync(join(SNAP, 'sites_sites.json'), JSON.stringify(keep, null, 1) + '\n'); }
+  { const reg = await getJSON('sites.json', SITES_API); if (!checkBar(reg)) throw new Error('snapshot: the sites registry fails the bar\'s own check; not saved'); // no pin is ever copied into this repository (security@'s ruling, 19 Nov 2026, option 1): the bar, obs_tz and any integrity field are left out
+    const noPins = v => Array.isArray(v) ? v.map(noPins) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).filter(([k]) => !/integrity/i.test(k)).map(([k, x]) => [k, noPins(x)])) : v;
+    const { bar, obs_tz, ...keep } = reg; writeFileSync(join(SNAP, 'sites_sites.json'), JSON.stringify(noPins(keep), null, 1) + '\n'); }
   for (const p of LIB_PATHS) writeFileSync(join(SNAP, snapName(p, LIB)), JSON.stringify(await getJSON(p, LIB), null, 1) + '\n');
   console.log(`snapshot: ${paths.length + LIB_PATHS.length} files in ${SNAP}/`);
 }
