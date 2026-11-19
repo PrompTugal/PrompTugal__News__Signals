@@ -44,7 +44,7 @@ case_ "the anchor's copy runs, not the pushed (weakened) one" "$A" "$AFTER" 'ok:
 out=$(A="$A" AFTER="$AFTER" PAGES_TAR="$dir/pages.tar" bash -e -c "$block" 2>&1 || true); n=$((n+1)); if grep -q 'pushed-copy\|v0.1.99' <<<"$out"; then echo "FAIL a pushed tag or the pushed checker was used: $out" >&2; fails=$((fails+1)); fi
 n=$((n+1)); if [ -e "$dir/evil-ran" ]; then echo "FAIL NODE_OPTIONS from an earlier step ran code" >&2; fails=$((fails+1)); fi
 git checkout -q --force "$AFTER"; git checkout -q -b linked; mkdir -p "$dir/elsewhere"; git rm -rq scripts; ln -s "$dir/elsewhere" scripts; git add scripts; git commit -qm 'scripts as a symlink'; linked=$(git rev-parse HEAD)
-case_ 'a symlinked scripts/ is refused' "$A" "$linked" 'symlink (scripts)'
+case_ 'a symlinked scripts/ is refused' "$A" "$linked" 'symlink: refused'
 n=$((n+1)); out=$(cd "$dir/repo" && git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/none.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a missing built site passed" >&2; fails=$((fails+1)); } || grep -q 'did not arrive' <<<"$out" || { echo "FAIL missing site: $out" >&2; fails=$((fails+1)); }
 git checkout -q --force "$AFTER"; git checkout -q -b exempt; echo '{"commits":["x"]}' > scripts/commit-exemptions.json; printf '* -diff\n' > .gitattributes; git add -A; git commit -qm 'pushed exemptions and attributes'; ex=$(git rev-parse HEAD)
 n=$((n+1)); git checkout -q --force "$ex"; A="$A" AFTER="$ex" PAGES_TAR="$dir/pages.tar" bash -e -c "$block" >/dev/null 2>&1 || true; if [ -e scripts/commit-exemptions.json ] || [ -e .gitattributes ]; then echo "FAIL a pushed config file stayed beside the anchor's checks" >&2; fails=$((fails+1)); fi
@@ -75,12 +75,15 @@ git checkout -q --force "$AFTER"; git checkout -q -b attrs; printf '*.mjs -diff\
 n=$((n+1)); git checkout -q --force "$at"; out=$(A="$A" AFTER="$at" PAGES_TAR="$dir/pages.tar" bash -e -c "$block"$'\n'"git check-attr diff scripts/leak-scan.mjs" 2>&1 || true); grep -q 'diff: unspecified' <<<"$out" || { echo "FAIL pushed index attributes were used: $out" >&2; fails=$((fails+1)); }
 # control 10: no symlinks; exceptions only from A's tree
 git checkout -q --force "$AFTER"; git checkout -q -b link1; ln -s index.txt docs-link; git add docs-link; git commit -qm 'a pushed symlink'; l1=$(git rev-parse HEAD)
-case_ 'a pushed symlink is refused' "$A" "$l1" 'adds or changes a symlink (docs-link)'
+case_ 'a pushed symlink is refused' "$A" "$l1" 'adds or changes a symlink'
 git checkout -q --force "$l1"; git checkout -q -b link2; git rm -q docs-link; git commit -qm 'link removed again'; l2=$(git rev-parse HEAD)
-case_ 'a symlink added then removed in the range is refused' "$A" "$l2" 'adds or changes a symlink (docs-link)'
+case_ 'a symlink added then removed in the range is refused' "$A" "$l2" 'adds or changes a symlink'
 git checkout -q --force "$AFTER"; git checkout -q -b link3; printf 'docs-link\tpushed reason\n' > scripts/symlink-exceptions.txt; ln -s index.txt docs-link; git add -A scripts docs-link; git commit -qm 'exception listed only in the pushed tree'; l3=$(git rev-parse HEAD)
-case_ 'an exception listed only in the pushed tree does not count' "$(git rev-parse "$l3~1")" "$l3" 'adds or changes a symlink (docs-link)'
+case_ 'an exception listed only in the pushed tree does not count' "$(git rev-parse "$l3~1")" "$l3" 'adds or changes a symlink'
 git checkout -q --force "$AFTER"; git checkout -q -b link4; printf 'docs-link\tsecurity@ reviewed\n' > scripts/symlink-exceptions.txt; git add scripts/symlink-exceptions.txt; git commit -qm 'exception in the anchor'; a4=$(git rev-parse HEAD); ln -s index.txt docs-link; git add docs-link; git commit -qm 'the listed link'; l4=$(git rev-parse HEAD)
 case_ 'a symlink listed in the anchor passes' "$a4" "$l4" 'ok:anchor-copy leak-scan'
+# events.b@'s finding: a link whose name ends in a newline and an excepted path does not match that exception
+git checkout -q --force "$a4"; git checkout -q -b link5; ln -s index.txt "$(printf 'x\ndocs-link')"; git add -A; git commit -qm 'newline name'; l5=$(git rev-parse HEAD)
+case_ 'a link named with a newline does not match an exception by its last line' "$a4" "$l5" 'adds or changes a symlink'
 [ "$fails" = 0 ] || { echo "FAILED: $fails of $n cases" >&2; exit 1; }
 echo "OK ($n cases)"

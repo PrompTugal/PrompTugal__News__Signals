@@ -147,15 +147,22 @@ jobs:
           # control 10 (security@, ed70bd996): no symlinks. Exceptions only from A's tree (scripts/symlink-exceptions.txt, one
           # "path<TAB>reason" a line); a new exception counts from the next anchor. Every commit in A..AFTER is read with
           # git diff-tree, so a link added and later removed is still refused, as is any link in the checked-out tree.
-          exc=$(git show "${A}:scripts/symlink-exceptions.txt" 2>/dev/null | awk -F'\t' 'NF >= 2 && $1 !~ /^#/ && $2 != "" { print $1 }' || true)
-          allowed() { [ -n "$exc" ] && printf '%s\n' "$exc" | grep -qxF -- "$1"; }
+          # paths are read NUL-separated and compared as whole strings, so a name holding a newline cannot match an exception
+          # by its last line (events.b@'s finding); an exception path cannot itself hold a newline or a tab
+          declare -A EXC=()
+          while IFS=$'\t' read -r ep er; do case "$ep" in ""|\#*) continue;; esac; [ -n "$er" ] && EXC["$ep"]=1; done < <(git show "${A}:scripts/symlink-exceptions.txt" 2>/dev/null || true)
+          allowed() { [ -n "${EXC[$1]+x}" ]; }
           for c in $(git rev-list "${A}..${AFTER}"); do
-            while IFS= read -r line; do
-              mode=$(printf '%s' "$line" | awk '{ print $2 }'); path=${line#*$'\t'}
-              if [ "$mode" = 120000 ] && ! allowed "$path"; then echo "deciding: commit ${c:0:7} adds or changes a symlink (${path}): refused" >&2; exit 1; fi
-            done < <(git diff-tree -r --raw --no-commit-id --root -m "$c")
+            # -z: ":old new oldsha newsha status" NUL path NUL, repeated; -m shows each parent of a merge
+            mapfile -d '' recs < <(git diff-tree -r --raw -z --no-commit-id --root -m "$c")
+            i=0; while [ $i -lt ${#recs[@]} ]; do
+              meta=${recs[$i]}; path=${recs[$((i+1))]:-}; i=$((i+2))
+              case "$meta" in *" "[RC][0-9]*) path=${recs[$i]:-}; i=$((i+1));; esac   # a rename or copy carries two paths: check the new one
+              mode=$(printf '%s' "$meta" | awk '{ print $2 }')
+              if [ "$mode" = 120000 ] && ! allowed "$path"; then echo "deciding: commit ${c:0:7} adds or changes a symlink: refused" >&2; exit 1; fi
+            done
           done
-          while IFS= read -r l; do l=${l#./}; allowed "$l" || { echo "deciding: the checked-out tree holds a symlink (${l}): refused" >&2; exit 1; }; done < <(find . -path ./.git -prune -o -type l -print)
+          while IFS= read -r -d '' l; do l=${l#./}; allowed "$l" || { echo "deciding: the checked-out tree holds a symlink: refused" >&2; exit 1; }; done < <(find . -path ./.git -prune -o -type l -print0)
           for p in scripts _site; do [ ! -L "$p" ] || { echo "deciding: ${p} is a symlink: refused" >&2; exit 1; }; done
           [ -z "$(git ls-tree --name-only "${AFTER}" -- _site)" ] || { echo "deciding: the pushed tree holds _site: refused" >&2; exit 1; }
           # the built site first, before any trusted file exists (events.b@'s finding): the listing is vetted (plain files and
