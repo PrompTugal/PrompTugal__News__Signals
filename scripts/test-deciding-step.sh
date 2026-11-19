@@ -20,7 +20,7 @@ print(steps[0]["run"])
 PY
 ) || { echo "FAILED: the deciding step is missing from jobs.verify, or deploy and tag do not need it" >&2; exit 1; }
 dir=$(mktemp -d); trap 'rm -rf "$dir"' EXIT
-cd "$dir"; git init -q -b dev; git config user.name t; git config user.email t@example.invalid; git config commit.gpgsign false
+mkdir "$dir/repo"; cd "$dir/repo"; git init -q -b dev; git config user.name t; git config user.email t@example.invalid; git config commit.gpgsign false
 mkdir scripts; for f in check-commits check-signatures leak-scan; do echo "console.log('anchor-copy ${f}', process.argv.slice(2).join(' '))" > scripts/$f.mjs; done
 git add -A; git commit -qm anchor; A=$(git rev-parse HEAD)
 git commit -q --allow-empty -m 'dropped push'; dropped=$(git rev-parse HEAD); git tag v0.1.99 "$dropped"
@@ -45,7 +45,7 @@ out=$(A="$A" AFTER="$AFTER" PAGES_TAR="$dir/pages.tar" bash -e -c "$block" 2>&1 
 n=$((n+1)); if [ -e "$dir/evil-ran" ]; then echo "FAIL NODE_OPTIONS from an earlier step ran code" >&2; fails=$((fails+1)); fi
 git checkout -q --force "$AFTER"; git checkout -q -b linked; mkdir -p "$dir/elsewhere"; git rm -rq scripts; ln -s "$dir/elsewhere" scripts; git add scripts; git commit -qm 'scripts as a symlink'; linked=$(git rev-parse HEAD)
 case_ 'a symlinked scripts/ is refused' "$A" "$linked" 'scripts is a symlink'
-n=$((n+1)); out=$(cd "$dir" && git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/none.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a missing built site passed" >&2; fails=$((fails+1)); } || grep -q 'did not arrive' <<<"$out" || { echo "FAIL missing site: $out" >&2; fails=$((fails+1)); }
+n=$((n+1)); out=$(cd "$dir/repo" && git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGES_TAR="$dir/none.tar" bash -e -c "$block" 2>&1) && { echo "FAIL a missing built site passed" >&2; fails=$((fails+1)); } || grep -q 'did not arrive' <<<"$out" || { echo "FAIL missing site: $out" >&2; fails=$((fails+1)); }
 git checkout -q --force "$AFTER"; git checkout -q -b exempt; echo '{"commits":["x"]}' > scripts/commit-exemptions.json; printf '* -diff\n' > .gitattributes; git add -A; git commit -qm 'pushed exemptions and attributes'; ex=$(git rev-parse HEAD)
 n=$((n+1)); git checkout -q --force "$ex"; A="$A" AFTER="$ex" PAGES_TAR="$dir/pages.tar" bash -e -c "$block" >/dev/null 2>&1 || true; if [ -e scripts/commit-exemptions.json ] || [ -e .gitattributes ]; then echo "FAIL a pushed config file stayed beside the anchor's checks" >&2; fails=$((fails+1)); fi
 mkdir -p "$dir/site2" && echo x > "$dir/site2/index.html" && ln -s /etc/passwd "$dir/site2/link" && tar -cf "$dir/pages2.tar" -C "$dir/site2" .
@@ -59,5 +59,19 @@ n=$((n+1)); out=$(git checkout -q --force "$AFTER" && A="$A" AFTER="$AFTER" PAGE
 # live.b@'s finding: a pushed _site path is refused
 git checkout -q --force "$AFTER"; git checkout -q -b pushedsite; mkdir -p _site; echo x > _site/index.html; git add -f _site; git commit -qm 'pushed _site'; ps=$(git rev-parse HEAD)
 case_ 'a pushed _site path is refused' "$A" "$ps" 'pushed tree holds _site'
+# cyber.b@'s finding: every run block in the workflow is valid bash
+n=$((n+1)); bad=$(python3 - "$here/.github/workflows/pages.yml" <<'PY'
+import sys, yaml, subprocess
+d = yaml.safe_load(open(sys.argv[1]))
+for jn, j in d["jobs"].items():
+    for st in j.get("steps", []):
+        if "run" in st:
+            r = subprocess.run(["bash", "-n"], input=st["run"], text=True, capture_output=True)
+            if r.returncode: print(f"{jn}/{st.get('name', '?')}: {r.stderr.strip()[:200]}")
+PY
+); [ -z "$bad" ] || { echo "FAIL a run block is not valid bash: $bad" >&2; fails=$((fails+1)); }
+# events.b@'s finding: a .gitattributes only in the pushed index cannot steer git (attributes come from A)
+git checkout -q --force "$AFTER"; git checkout -q -b attrs; printf '*.mjs -diff\n' > .gitattributes; git add .gitattributes; git commit -qm 'pushed attributes'; at=$(git rev-parse HEAD)
+n=$((n+1)); git checkout -q --force "$at"; out=$(A="$A" AFTER="$at" PAGES_TAR="$dir/pages.tar" bash -e -c "$block"$'\n'"git check-attr diff scripts/leak-scan.mjs" 2>&1 || true); grep -q 'diff: unspecified' <<<"$out" || { echo "FAIL pushed index attributes were used: $out" >&2; fails=$((fails+1)); }
 [ "$fails" = 0 ] || { echo "FAILED: $fails of $n cases" >&2; exit 1; }
 echo "OK ($n cases)"

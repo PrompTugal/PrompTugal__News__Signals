@@ -66,6 +66,11 @@
 - 2026-11-19 14:27Z (date -u): the anchor is now the head_sha of the newest successful push run of pages.yml on dev, read from GitHub's API with actions: read (security@'s sixth ruling, 0ba439611). Only GitHub Actions creates runs, whereas anyone with write access can create a deployment. The verify job no longer reads deployments.
 - 2026-11-19 14:32Z (date -u): peers' findings, passed on by conductor.b@ at 14:30 UTC.
 - 2026-11-19 16:16Z (date -u): live.b@'s findings (a4c6fce), passed on by conductor.b@ at 16:15 UTC.
+- 2026-11-19 16:26Z (date -u): two peer pitfalls, passed on by conductor.b@ at 16:25 UTC.
+  - events.b@: removing .gitattributes did not stop git reading the pushed copy from the index; this was real here. The verify job now sets GIT_ATTR_SOURCE to A, so attributes come from A's tree only, and it refuses git older than 2.42.
+  - cyber.b@: every run block in pages.yml is now syntax-checked with bash -n in the tests.
+  - The deciding-step test's throwaway repository moved into a subfolder, so its test archives can no longer be swept into commits.
+  - 17 cases; a mutation check confirms the attributes test catches the gap.
   - The anchor is now the head_sha of the newest successful push run on dev whose job named verify passed. Checked through the run's jobs: runs from before the verify job do not count.
   - The verify, deploy and tag jobs run only for refs/heads/dev.
   - A pushed _site path is refused. The artifact was already downloaded into RUNNER_TEMP and vetted there, and .gitattributes is replaced by A's.
