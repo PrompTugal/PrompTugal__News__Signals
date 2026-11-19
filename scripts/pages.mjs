@@ -166,6 +166,8 @@ function postHTML(p) {
 }
 const postMD = p => `- [Post by ${mdText(p.organisation)} on ${p.platformName}](${p.url}), ${fmt(p.at)}; account ${mdText(p.account)}; licence: ${mdText(p.licence.name)} (${p.licence.url}); evidence for: ${[...p.topics.map(topicName), ...p.places.map(placeName)].join(', ') || 'none matched'}; provenance: read by data.b@PrompTugal.dinis's collector ${p.readAt ? `at ${p.readAt.toISOString()}` : '(read time not given)'} (${API}social/latest.json), listed by signals.b@PrompTugal.dinis's build at ${BUILT.toISOString()}`;
 const list = ps => ps.length ? `<ol class="posts">${ps.map(postHTML).join('\n')}</ol>` : '<p class="empty">No post from a listed organisation matches this yet. An empty list means none of the accounts we read posted about it, not that nothing is happening.</p>';
+// a list the browser refreshes from the latest file (Dinis, 19 Nov 2026: load the data in the browser): src and filter are ours, never fetched text
+const liveList = (ps, src, filter, builtRead, max, builtCount) => `<div class="live" data-src="${esc(src)}" data-filter="${esc(filter)}" data-built-read="${builtRead ? esc(builtRead.toISOString()) : ''}" data-built-count="${Math.max(0, Math.trunc(Number(builtCount) || 0))}"${max ? ` data-max="${max}"` : ''}><p class="small live-note">${builtRead ? `Built copy, read ${esc(fmt(builtRead))}.` : 'Built copy.'}</p><div class="list">${list(ps)}</div></div>`;
 
 // ---------- main ----------
 async function snapshot() {
@@ -246,12 +248,12 @@ async function main() {
     const top = posts.slice(0, 60);
     const topicCounts = Object.keys(TOPICS).map(t => [t, posts.filter(p => p.topics.includes(t)).length]);
     const body = `<p class="lede">What organisations are saying now about the places and topics PrompTugal.news covers: the official public accounts of news outlets, public bodies, venues, organisers and companies. Each post is a link to the platform, with who posted it, when, its licence and what it is evidence for. We store no post text or media.</p>
-<div class="grid"><div class="card"><div class="stat">${posts.length}</div><p>posts in the last 30 days from ${accounts.size} organisation accounts (source: data.promptugal.news <a href="${API}social/latest.json">social/latest.json</a>, read ${esc(state.readAt)})</p></div>
+<div class="grid"><div class="card"><div class="stat" data-live-count="posts">${posts.length}</div><p>posts in the last 30 days from <span data-live-count="accounts">${accounts.size}</span> organisation accounts (source: data.promptugal.news <a href="${API}social/latest.json">social/latest.json</a>, read ${esc(state.readAt)})</p></div>
 ${topicCounts.slice(0, 4).map(([t, n]) => `<div class="card"><div class="stat">${n}</div><p><a href="/topics/${t}/">${esc(topicName(t))}</a>: posts that match the topic</p></div>`).join('')}<div class="card"><div class="stat">Code</div><p><a href="/code/">What organisations ship in public on GitHub</a>: releases and repositories</p></div></div>
 <p class="prov">Provenance of the counts: computed by signals.b@PrompTugal.dinis's build at ${esc(fmt(BUILT))} from data.promptugal.news <a href="${API}social/latest.json">social/latest.json</a> (topics matched by the collector's keywords, by code).</p>
 <h2>Latest</h2>
-<p class="small" id="live-note">The ${top.length} most recent, newest first. This list refreshes from the API in your browser when it can; the page as built is the fallback.</p>
-<div id="latest">${list(top)}</div>
+<p class="small">The ${top.length} most recent, newest first. Your browser loads the latest file from data.promptugal.news when the page opens and every 10 minutes; the list as built stays if the file is not newer or fails its checks.</p>
+${liveList(top, `${API}social/latest.json`, 'all', readAt, 60, (latest.posts || []).length)}
 <h2>Not read yet</h2>
 ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc(g.why)}</li>`).join('')}</ul>` : '<p>No gap reported by the collector.</p>'}
 <p class="prov">Provenance: the gaps reported by ${esc(COLLECTOR)} in <a href="${API}social/latest.json">social/latest.json</a>, read by this build at ${esc(fmt(BUILT))}.</p>
@@ -269,7 +271,7 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
     const d = disc.get(pl);
     const found = d && d.ok ? `<h2>Events found through Perplexity</h2><p>On ${esc(clean(d.date, 10))}, Perplexity (${esc(clean(d.model, 40))}, through OpenRouter) named ${Number(d.items) || 0} events in ${esc(placeName(pl))} and cited ${Number(d.citations) || 0} pages (source: data.promptugal.news <a href="${API}discovery/index.json">discovery/index.json</a>). Found through Perplexity: each is a claim to check, shown with its evidence on <a href="https://events.promptugal.news/" rel="noopener">events.promptugal.news</a>; nothing from the answer is published here as content.</p>` : '';
     const libItemsHere = libFor(libPlaceIds(Object.hasOwn(LIB_PLACE, pl) ? LIB_PLACE[pl] : pl));
-    const body = `<p class="lede">Posts by organisations' official accounts that name ${esc(placeName(pl))}, or (when a post names no place) by an organisation that covers it. Source: data.promptugal.news <a href="${API}social/by-place/${pl}.json">social/by-place/${pl}.json</a>.</p>${list(ps)}${found}${libSection(libItemsHere, `about ${esc(placeName(pl))}`)}`;
+    const body = `<p class="lede">Posts by organisations' official accounts that name ${esc(placeName(pl))}, or (when a post names no place) by an organisation that covers it. Source: data.promptugal.news <a href="${API}social/by-place/${pl}.json">social/by-place/${pl}.json</a>.</p>${liveList(ps, `${API}social/by-place/${pl}.json`, 'all', when(byPlace?.source_read_at) || when(byPlace?.read_at) || readAt, 0, Array.isArray(byPlace?.posts) ? byPlace.posts.length : 0)}${found}${libSection(libItemsHere, `about ${esc(placeName(pl))}`)}`;
     write(`places/${pl}/`, shell({ rel: `places/${pl}/`, title: `${placeName(pl)}: signals | PrompTugal.news Signals`, desc: `What organisations are posting about ${placeName(pl)}, by link.`, h1: placeName(pl), body, state, current: 'places/' }),
       md(placeName(pl), [...ps.map(postMD), ...libMD(libItemsHere)], state), placeName(pl), 'place');
   }
@@ -282,7 +284,7 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
   for (const t of topicList) {
     const ps = posts.filter(p => p.topics.includes(t));
     const libT = t === 'web-summit' ? [...lib.values()].filter(i => i.about.includes('event:web-summit-lisbon-2026')) : [];
-    const body = `<p class="lede">Posts by organisations' official accounts whose text matched the topic ${esc(topicName(t))} (matched by the collector's keywords, by code, no model). Source: data.promptugal.news <a href="${API}social/latest.json">social/latest.json</a>.</p>${list(ps)}${libSection(libT, 'about Web Summit Lisbon 2026')}`;
+    const body = `<p class="lede">Posts by organisations' official accounts whose text matched the topic ${esc(topicName(t))} (matched by the collector's keywords, by code, no model). Source: data.promptugal.news <a href="${API}social/latest.json">social/latest.json</a>.</p>${liveList(ps, `${API}social/latest.json`, `topic:${t}`, readAt, 0, (latest.posts || []).length)}${libSection(libT, 'about Web Summit Lisbon 2026')}`;
     write(`topics/${t}/`, shell({ rel: `topics/${t}/`, title: `${topicName(t)}: signals | PrompTugal.news Signals`, desc: `What organisations are posting about ${topicName(t)}, by link.`, h1: topicName(t), body, state, current: 'topics/' }),
       md(topicName(t), [...ps.map(postMD), ...libMD(libT)], state), topicName(t), 'topic');
   }
@@ -294,7 +296,7 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
   const accs = [...accounts.values()].sort((a, b) => a.organisation.localeCompare(b.organisation));
   for (const a of accs) {
     const prof = profileLink(a.platform, a.account);
-    const body = `<p class="lede">${esc(a.organisation)} (${esc(a.kind)}), official account ${prof ? `<a href="${esc(prof)}" rel="noopener noreferrer">@${esc(a.account)} on ${esc(a.platformName)}</a>` : `@${esc(a.account)} on ${esc(a.platformName)}`}. Listed in data.b@'s register of organisation accounts (register/social-accounts.json in PrompTugal__News__Data). ${a.posts.length} posts in the last 30 days.</p>${list(a.posts)}`;
+    const body = `<p class="lede">${esc(a.organisation)} (${esc(a.kind)}), official account ${prof ? `<a href="${esc(prof)}" rel="noopener noreferrer">@${esc(a.account)} on ${esc(a.platformName)}</a>` : `@${esc(a.account)} on ${esc(a.platformName)}`}. Listed in data.b@'s register of organisation accounts (register/social-accounts.json in PrompTugal__News__Data). ${a.posts.length} posts in the last 30 days.</p>${liveList(a.posts, `${API}social/latest.json`, `account:${a.platform}:${a.account}`, readAt, 0, (latest.posts || []).length)}`;
     write(`accounts/${a.platform}/${a.accSlug}/`, shell({ rel: `accounts/${a.platform}/${a.accSlug}/`, title: `${a.organisation} on ${a.platformName} | PrompTugal.news Signals`, desc: `Recent public posts by ${a.organisation}'s official account, by link.`, h1: `${a.organisation} on ${a.platformName}`, body, state, current: 'accounts/' }),
       md(`${mdText(a.organisation)} on ${a.platformName}`, a.posts.map(postMD), state), a.organisation, 'account');
   }
@@ -325,7 +327,7 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
 <h2>The library</h2>
 <p>The library, also read when this site is built: the catalogue of <a href="${LIB_SITE}/">library.promptugal.news</a> (<a href="${LIB}items/index.json">items/index.json</a> and <a href="${LIB}index/place.json">index/place.json</a>), library.b@PrompTugal.dinis's. Read at every build (every push and every 6 hours), with the same checks as the data; a committed snapshot is used if a read fails. We show each item's title, kind and publisher and link only to its library card, which shows the source and its licence. The catalogue is CC BY 4.0; each item keeps its source's licence. ${lib.size} items read at this build.</p>
 <h2>When it was read</h2>
-<p>Social data read by the collector ${esc(state.readAt)}; collected every 6 hours. This site rebuilds every 6 hours and the front page also refreshes from the API in your browser. ${notes.length ? `This build: ${notes.map(esc).join('; ')}.` : 'This build read every file live.'}</p>
+<p>Social data read by the collector ${esc(state.readAt)}; collected every 6 hours. Every list (the front page, places, topics and accounts) is loaded by your browser from data.promptugal.news when the page opens and every 10 minutes (Dinis Cruz, 19 November 2026: "load the data in the browser"), with no cookie and no referrer; it replaces the built list only with a file that passes the same checks and is newer, and says whether it shows the live file or the built copy, when that was read, and whether it is stale (older than 7 hours). The site also rebuilds every 6 hours as a backup. ${notes.length ? `This build: ${notes.map(esc).join('; ')}.` : 'This build read every file live.'}</p>
 <p>Dropped by this build's checks: ${Object.entries(dropped).map(([k, v]) => `${v} for ${k.replace('_', ' ')}`).join(', ')}.</p>
 <h2>Not read, and why</h2>
 ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc(g.why)}</li>`).join('')}</ul>` : ''}

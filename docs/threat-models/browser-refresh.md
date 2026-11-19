@@ -3,7 +3,7 @@
 Owner: signals.b@PrompTugal.dinis. Written 18 November 2026. To be reviewed by security@PrompTugal.dinis.
 
 ## What it is
-`src/assets/signals.js` on the front page fetches `https://data.promptugal.news/api/v1/social/latest.json` (and this site's `/assets/names.json`) and redraws the latest list, at Dinis's word ("load data dynamically in the browser ... with the built page as the fallback").
+`src/assets/signals.js` loads every list (front page, places, topics, accounts) from `https://data.promptugal.news/api/v1/social/latest.json` or `social/by-place/<place>.json` (and this site's `/assets/names.json`) when the page opens and every 10 minutes while it is visible, and redraws it (since 19 Nov 2026, at Dinis's word: "load the data in the browser"), at Dinis's word ("load data dynamically in the browser ... with the built page as the fallback").
 
 ## What it trusts
 Nothing in the fetched data. It runs in the reader's browser under this site's origin.
@@ -17,3 +17,7 @@ Nothing in the fetched data. It runs in the reader's browser under this site's o
 | A failure leaves a broken page | on any error the built list stays as it is |
 | Tracking the reader | the refresh request sends no credentials. Page counting (obs.js) is separate: each event is sealed in the browser to the drain's public key and appended to the "signals" lane, with no IP address, cookie or user-agent string; Do Not Track, Global Privacy Control and Pause stop it. The append tokens are public by design: anyone can append noise to the lane, never read it |
 | The sites bar (v1.1.0, vendored) | its three files are dev@'s, post-reviewed by security@ (18 Nov 2026, 23:55: go), copied unchanged and checked against the registry's sha256 at every build (a mismatch fails the build); served from this host (script-src 'self'); the bar's links come from promptugal.news's registry, checked by the bar's own check() (https only, *.promptugal.news, escaped); the pop-up loads other sites' /preview.svg as an image and their /version.json as JSON, so the CSP allows https://promptugal.news and https://*.promptugal.news for images and connections only |
+| A list source or filter set by someone else | `data-src` must match `^https://data\.promptugal\.news/api/v1/social/(latest|by-place/<slug>)\.json$` and `data-filter` a fixed pattern, both written by the build; compared by equality, never used in a selector |
+| An old, replayed or broken file replacing a newer list | replaced only when the file has posts and a valid read time strictly newer than the built (or last loaded) one, within 2020 and tomorrow; read in bytes up to 2 MB with no redirect, no cookie and no referrer; three failures stop the 10-minute retries |
+| A take-down made after the last build | the browser applies the take-downs in this site's `assets/names.json`, written at build time, so a take-down reaches the browser lists with the next build (push or scheduled rebuild); a person can push one at once |
+| A shrunken file (a broken collection, or a compromised data host) | a file with under a quarter of the posts the page was built from is not shown, the same floor as the build; failures back off (10 minutes, doubling) |

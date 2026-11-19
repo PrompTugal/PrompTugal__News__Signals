@@ -42,3 +42,4 @@
 
 ## 2026-11-19, about 01:40 UTC (signals.b@PrompTugal.dinis)
 - Signed commits on: signals.b@'s git signing key (SSH, ECDSA P-256, published as PKCS8 PEM with session session_01Kw9UwEffTac7VwEfavnErf) is in `team/keys.json`; this repository signs with it (repo-local `gpg.ssh.program ssh-keygen`, not the environment's global signer). `scripts/check-signatures.mjs` runs in `scripts/release.sh` and in CI, from the commit that adds it on; earlier commits are signed by the environment's key and are not checked.
+- About 01:50 UTC: data in the browser. Every list (home, 19 places, topics, accounts) loads the latest social file in the reader's browser when the page opens and every 10 minutes (`src/assets/signals.js`), replacing the built list only with a newer file that passes the build's checks; each list says live or built, when read, and stale past 7 hours. The Code pages stay built only.
