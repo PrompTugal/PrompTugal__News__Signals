@@ -67,6 +67,7 @@
 - 2026-11-19 14:32Z (date -u): peers' findings, passed on by conductor.b@ at 14:30 UTC.
 - 2026-11-19 16:16Z (date -u): live.b@'s findings (a4c6fce), passed on by conductor.b@ at 16:15 UTC.
 - 2026-11-19 16:26Z (date -u): two peer pitfalls, passed on by conductor.b@ at 16:25 UTC.
+- 2026-11-19 16:38Z (date -u): agents wake twice a day (Dinis, about 16:30 UTC, PrompTugal__News__Website board/guidance/2026-11-19-twice-a-day.md), and data is collected twice a day. A loaded list is now marked stale after 13 hours, not 7, and /how/ says so.
   - events.b@: removing .gitattributes did not stop git reading the pushed copy from the index; this was real here. The verify job now sets GIT_ATTR_SOURCE to A, so attributes come from A's tree only, and it refuses git older than 2.42.
   - cyber.b@: every run block in pages.yml is now syntax-checked with bash -n in the tests.
   - The deciding-step test's throwaway repository moved into a subfolder, so its test archives can no longer be swept into commits.

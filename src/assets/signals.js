@@ -10,7 +10,7 @@
   const boxes = [...document.querySelectorAll('div.live[data-src]')]; if (!boxes.length || !window.fetch || !window.AbortController) return
   const SRC = /^https:\/\/data\.promptugal\.news\/api\/v1\/social\/(latest|by-place\/[a-z0-9-]{1,60})\.json$/
   const FILTER = /^(all|topic:[a-z0-9-]{1,40}|account:(bluesky|mastodon):[a-z0-9.@_-]{1,100})$/
-  const MAX_BYTES = 2000000, STALE_MS = 7 * 3600000, EVERY_MS = 10 * 60000
+  const MAX_BYTES = 2000000, STALE_MS = 13 * 3600000, EVERY_MS = 10 * 60000
   const KINDS = new Set(['news outlet', 'public body', 'company', 'venue', 'organiser', 'câmara', 'council', 'university', 'association'])
   const LICENCE_HOSTS = new Set(['bsky.social', 'mastodon.social', 'creativecommons.org', 'www.perplexity.ai'])
   const MASTODON_HOSTS = new Set(['mastodon.social'])
@@ -72,7 +72,7 @@
   function note(box, live, readAt) {
     const n = box.querySelector('.live-note'); if (!n) return
     const stale = Date.now() - readAt > STALE_MS
-    n.textContent = (live ? 'Live file' : 'Built copy') + ', read ' + fmt(readAt) + (stale ? ' (stale: older than the 6-hourly collection)' : '') + '.'
+    n.textContent = (live ? 'Live file' : 'Built copy') + ', read ' + fmt(readAt) + (stale ? ' (stale: older than the twice-daily collection)' : '') + '.'
     n.classList.toggle('stale', stale)
   }
   async function refresh(box) {
