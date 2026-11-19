@@ -1,8 +1,7 @@
 // ACC-015: every non-merge commit a push adds to dev must carry a readable Agent: trailer,
 // read the way git reads it: git log --format=%(trailers:key=Agent,valueonly).
 // Usage: node scripts/check-commits.mjs <before> <after>   (the pushed range, before..after)
-// Commits older than this check are skipped: those that neither descend from the commit
-// that added this file nor were committed after it. History is not rewritten (ACC-015).
+// Only ancestors of the recorded trusted base are skipped (control 8); any other commit that does not descend from it fails.
 // Prints OK or lists each commit that fails and exits 1.
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
@@ -15,9 +14,11 @@ const [beforeArg, afterArg] = process.argv.slice(2);
 const after = afterArg || 'HEAD';
 if (!tryGit('rev-parse', '--verify', '--quiet', `${after}^{commit}`)) { console.error(`check-commits: unknown commit ${after}`); process.exit(1); }
 
-const first = lines(git('log', '--format=%H', '--diff-filter=A', '--reverse', after, '--', 'scripts/check-commits.mjs'))[0];
-if (!first) { console.error('check-commits: cannot find the commit that added scripts/check-commits.mjs'); process.exit(1); }
-const firstTime = Number(git('log', '-1', '--format=%ct', first));
+// The trusted base is recorded here, never worked out from what a tree holds (security@'s ruling, control 8, 19 Nov 2026):
+// the commit that added this file. Only its ancestors are skipped; deleting this file skips nothing.
+const first = '13f875134efd38efc4d706b5e54794123e3e295f';
+if (!tryGit('rev-parse', '--verify', '--quiet', `${first}^{commit}`)) { console.error('check-commits: the trusted base is not in this history'); process.exit(1); }
+const isAncestor = (a, b) => { try { execFileSync('git', ['merge-base', '--is-ancestor', a, b], { stdio: 'ignore' }); return true; } catch { return false; } };
 
 // A new branch, a forced push or a manual run has no usable "before": check everything since the check began.
 const zero = /^0+$/;
@@ -51,7 +52,7 @@ const errors = [];
 let checked = 0, exempted = 0;
 for (const c of added) {
   const ct = Number(git('log', '-1', '--format=%ct', c));
-  if (!descendants.has(c) && ct < firstTime) continue;
+  if (!descendants.has(c)) { if (isAncestor(c, first)) continue; errors.push(`${c.slice(0, 7)}: does not descend from the trusted base`); continue; }
   if (exempt.has(c)) { exempted++; continue; }
   checked++;
   const agents = lines(git('log', '-1', '--format=%(trailers:key=Agent,valueonly)', c)).map((s) => s.trim());

@@ -11,7 +11,7 @@ import { tmpdir } from 'node:os';
 
 const CHECK = join(dirname(fileURLToPath(import.meta.url)), 'check-signatures.mjs'), TRUSTED_RUNNER = join(dirname(fileURLToPath(import.meta.url)), 'check-signatures-trusted.sh');
 // no inherited repository or config from the caller's environment
-const ENV = Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^GIT_(DIR|WORK_TREE|INDEX_FILE|CONFIG|OBJECT_DIRECTORY|ALTERNATE|NAMESPACE|CEILING)/.test(k)));
+const ENV = Object.fromEntries(Object.entries(process.env).filter(([k]) => !/^GIT_(DIR|WORK_TREE|INDEX_FILE|CONFIG|OBJECT_DIRECTORY|ALTERNATE|NAMESPACE|CEILING)/.test(k) && k !== 'CI' && k !== 'GITHUB_ACTIONS'));   // the test repository's base override is refused under CI
 const dir = mkdtempSync(join(tmpdir(), 'sigtest-'));
 const keys = join(dir, 'keys'); mkdirSync(keys);
 const repo = join(dir, 'repo'); mkdirSync(repo);
@@ -102,6 +102,12 @@ try {
   expect("the pushed tree's own rewritten checker would pass", check(base), true, /^OK/);
   expect('the trusted copy refuses the same push', checkTrusted(base, base), false, /not signed by a key in team\/keys\.json \(status N\)/);
 
+  // control 8: a commit that deletes the checker and adds an unsigned change still fails (the trusted copy decides)
+  branch('delete'); git('rm', '-q', 'scripts/check-signatures.mjs'); commit({ allowEmpty: false }); commit({});
+  expect('a commit that removes the checker, then an unsigned change, fails', checkTrusted(base, base), false, /not signed by a key in team\/keys\.json \(status N\)/);
+  // the base override is refused under CI
+  { const r = spawnSync(process.execPath, [CHECK, base, 'HEAD'], { cwd: repo, encoding: 'utf8', env: { ...ENV, SIGNATURES_TRUSTED_BASE: BASE, CI: 'true' } }); expect('the base override is refused under CI', { ok: r.status === 0, out: (r.stdout || '') + (r.stderr || '') }, false, /SIGNATURES_TRUSTED_BASE is refused in CI/); }
+
   // control 6: a shallow checkout is refused
   branch('good2'); commit({ signWith: A }); commit({ signWith: A });
   const shallow = join(dir, 'shallow'); run('git', ['clone', '-q', '--depth', '1', '--branch', 'good2', `file://${repo}`, shallow]);
@@ -112,5 +118,5 @@ try {
 
 const bad = results.filter(r => !r.pass);
 for (const r of bad) console.error(`FAIL ${r.name}: ${r.out}`);
-if (bad.length || results.length < 17) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
+if (bad.length || results.length < 19) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
 console.log(`OK (${results.length} cases)`);

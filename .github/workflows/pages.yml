@@ -64,14 +64,29 @@ jobs:
         run: |
           last=$(git describe --tags --abbrev=0 --match "v${VERSION_BASE}.*" "$AFTER" 2>/dev/null || true)
           node scripts/check-signatures.mjs "${last:-$BEFORE}" "$AFTER"
-          # the decision: the check as it stood at the last release, never the pushed tree's own copy
-          if [ -n "$last" ]; then scripts/check-signatures-trusted.sh "refs/tags/$last" "refs/tags/$last" "$AFTER"; else echo "no release tag yet: no trusted copy" >&2; exit 1; fi
       - run: node scripts/build.mjs
         env:
           SITE_VERSION: ${{ steps.version.outputs.version }}
       - run: node scripts/validate.mjs
       - name: Leak scan (tracked files and the built site)
         run: node scripts/leak-scan.mjs
+      - name: The deciding security checks, from the last release's copy (security@'s rulings, controls 7 and 8)
+        # Every security check and its config (keys, exemptions, trusted base) comes from the last release tag, never from
+        # the pushed tree; a missing trusted copy fails, with no fallback. The steps above ran the pushed tree's own copies
+        # as tests only. The workflow file itself still comes from the pushed tree: Dinis's branch protection closes that.
+        env:
+          AFTER: ${{ github.sha }}
+        run: |
+          test "$(git rev-parse --is-shallow-repository)" = false || { echo "shallow checkout refused" >&2; exit 1; }
+          last=$(git describe --tags --abbrev=0 --match "v${VERSION_BASE}.*" "$AFTER" 2>/dev/null || true)
+          [ -n "$last" ] || { echo "no release tag: no trusted copy" >&2; exit 1; }
+          for f in check-commits.mjs check-signatures.mjs leak-scan.mjs; do
+            git show "refs/tags/${last}:scripts/${f}" > "scripts/${f}.trusted" || { echo "no trusted scripts/${f} at ${last}" >&2; exit 1; }
+            mv "scripts/${f}.trusted" "scripts/${f}"
+          done
+          node scripts/check-commits.mjs "refs/tags/${last}" "$AFTER"
+          node scripts/check-signatures.mjs "refs/tags/${last}" "$AFTER"
+          node scripts/leak-scan.mjs
       - if: steps.mode.outputs.deploy == 'true'
         uses: actions/configure-pages@v5
       - if: steps.mode.outputs.deploy == 'true'

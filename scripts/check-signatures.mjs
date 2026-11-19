@@ -27,6 +27,8 @@ if (!tryGit('rev-parse', '--verify', '--quiet', `${after}^{commit}`)) { console.
 // that adds its own copy of this file cannot become the base. A test repository names its own base in SIGNATURES_TRUSTED_BASE.
 // a shallow checkout hides history (and so parents), so it is refused (security@'s ruling on control 6, 19 Nov 2026)
 if (git('rev-parse', '--is-shallow-repository') !== 'false') { console.error('check-signatures: a shallow checkout is refused (fetch the whole history: fetch-depth 0)'); process.exit(1); }
+// the override is for the test repository only: in CI a pushed workflow could set it, so there it is refused
+if (process.env.SIGNATURES_TRUSTED_BASE && (process.env.CI || process.env.GITHUB_ACTIONS)) { console.error('check-signatures: SIGNATURES_TRUSTED_BASE is refused in CI'); process.exit(1); }
 const TRUSTED_BASE = process.env.SIGNATURES_TRUSTED_BASE || '01016393c727abca34e90fdec9cb279f438d2df4';
 if (!/^[0-9a-f]{40}$/.test(TRUSTED_BASE)) { console.error('check-signatures: the trusted base is not a full commit id'); process.exit(1); }
 const isAncestor = (a, b) => { try { execFileSync('git', ['merge-base', '--is-ancestor', a, b], { stdio: 'ignore' }); return true; } catch { return false; } };
