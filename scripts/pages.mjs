@@ -17,6 +17,29 @@ const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.1.1/sites-bar-render.mjs
 const sri = f => 'sha256-' + createHash('sha256').update(readFileSync(f)).digest('base64');
 const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.1.1/sites-bar-render.mjs');
 const SITES_API = 'https://promptugal.news/api/v1/';
+// The one shared time-zone-to-country table (dev@PrompTugal.dinis, v1.0.0; Dinis, 19 Nov 2026: the country from the time zone,
+// no IP lookup), vendored as src/assets/obs/tz-country.json. Checked against the registry's full pin (obs_tz.integrity) when the
+// live registry is read; a mismatch fails the build. Every entry is checked (zone name, two letters A to Z) and the table is
+// written into _site/assets/obs/obs.js, so the browser makes no call for it.
+const TZ_VERSION = '1.0.0', TZ_FILE = 'src/assets/obs/tz-country.json';
+function tzTable() {
+  const t = JSON.parse(readFileSync(TZ_FILE, 'utf8'));
+  if (t.version !== TZ_VERSION || !t.zones || typeof t.zones !== 'object' || Array.isArray(t.zones)) throw new Error('tz-country.json: not version ' + TZ_VERSION);
+  const out = Object.create(null);
+  for (const [z, c] of Object.entries(t.zones)) { if (!/^[A-Za-z]+(?:\/[A-Za-z0-9_+-]+){1,2}$/.test(z) || !/^[A-Z]{2}$/.test(c)) throw new Error(`tz-country.json: bad entry ${JSON.stringify(z).slice(0, 60)}`); out[z] = c; }
+  if (Object.keys(out).length < 50) throw new Error('tz-country.json: too few zones');
+  return out;
+}
+function writeTz(notes, reg) {
+  if (reg && reg.obs_tz && typeof reg.obs_tz.integrity === 'string') {
+    // a different version is not shipped unchecked: the vendored copy is updated by hand, then checked here (AppSec, 19 Nov 2026)
+    if (reg.obs_tz.version !== TZ_VERSION) throw new Error(`the registry lists tz-country ${clean(reg.obs_tz.version, 20)}; this site has ${TZ_VERSION}: update ${TZ_FILE}`);
+    if (sri(TZ_FILE) !== reg.obs_tz.integrity) throw new Error(`${TZ_FILE} does not match the full pin the registry publishes (obs_tz)`);
+  } else notes.push('tz-country.json was not checked against the registry at this build');
+  const f = join(OUT, 'assets/obs/obs.js'), s = readFileSync(f, 'utf8');
+  if (s.split('/*TZ-COUNTRY*/{}').length !== 2) throw new Error('obs.js: the table placeholder is missing or repeated');
+  writeFileSync(f, s.replace('/*TZ-COUNTRY*/{}', () => JSON.stringify(tzTable())));
+}
 let BAR_HTML = '';
 
 const API = 'https://data.promptugal.news/api/v1/';
@@ -184,11 +207,12 @@ async function snapshot() {
 
 async function main() {
   const notes = [];
-  { let reg = await read('sites.json', notes, SITES_API);
+  { let reg = await read('sites.json', notes, SITES_API); const regRead = reg;
     if (reg && reg.bar && reg.bar.integrity) { if (reg.bar.version !== BAR_VERSION) notes.push(`the registry lists sites bar ${clean(reg.bar.version, 20)}; this site has ${BAR_VERSION}`);
       else for (const [k, f] of Object.entries(BAR_FILES)) if (typeof reg.bar.integrity[k] !== 'string' || sri(f) !== reg.bar.integrity[k]) throw new Error(`sites bar: ${f} does not match the full pin the registry publishes`); }
     else if (reg && !notes.some(n => n.startsWith('sites.json'))) { notes.push('the live sites registry publishes no pins for the bar: the bar is left out of this build'); reg = null; }
     else if (reg) notes.push('the sites bar files were not checked against the registry at this build (snapshot in use)');
+    writeTz(notes, regRead);
     BAR_HTML = reg ? renderBar(reg, { here: 'signals.promptugal.news' }) : '';
     if (!BAR_HTML && reg) { notes.push('the sites registry failed the bar\'s check; the last good one was used'); try { BAR_HTML = renderBar(JSON.parse(readFileSync(join(SNAP, 'sites_sites.json'), 'utf8')), { here: 'signals.promptugal.news' }); } catch { BAR_HTML = ''; } } }
   let latest = await read('social/latest.json', notes);
