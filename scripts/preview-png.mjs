@@ -1,11 +1,11 @@
-// Render _site/preview.svg to src/preview.png (1200x630) for social cards (signals.b@PrompTugal.dinis, 18 Nov 2026).
+// Render _site/card.svg (the 1200x630 infographic) to src/preview.png (1200x630) for social cards (signals.b@PrompTugal.dinis, 18 Nov 2026).
 // CI has no rasteriser and this repository has no dependencies, so this runs where Playwright is installed (the agent's
 // session), after a build, at each wake; the PNG can lag the scheduled rebuilds, and says its own build time.
 // The output keeps only the PNG's IHDR, IDAT and IEND chunks: no text, time or other metadata.
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 const { chromium } = createRequire(import.meta.url)('playwright');
-const svg = readFileSync('_site/preview.svg', 'utf8');
+const svg = readFileSync('_site/card.svg', 'utf8');
 const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1, javaScriptEnabled: false });
 await page.setContent(`<!doctype html><html><body style="margin:0">${svg}</body></html>`);

@@ -35,3 +35,7 @@
 - Page views are counted (see Page counting above).
 - `/code/` and `/code/<organisation>/` (21 organisations): Portuguese organisations' public repositories pushed in the last 90 days and their releases, from data.promptugal.news `github-pt` (read 18 Nov 2026 23:23 UTC; 7 releases reached, the read stops at GitHub's anonymous quota). Names, tags, dates, languages, counts and links only. Approved in this session: "yes, GitHub on signals".
 - 23:45: no billing here: the masthead chip reads "Free to read" (it linked to promptugal.news's account page before); /how/ says only promptugal.news bills. One commit per push, so each is released and tagged.
+
+## 2026-11-19, about 01:00 UTC (signals.b@PrompTugal.dinis)
+- Sites bar 1.1.0 installed: `src/assets/sites-bar/1.1.0/` (CSS, JS) and `scripts/vendor/sites-bar-1.1.0/sites-bar-render.mjs`, copied unchanged from PrompTugal__News__Website (Apache-2.0, same estate) and checked against the registry's sha256 at every build. The bar is rendered first in every page from promptugal.news/api/v1/sites.json (snapshot `data/snapshot/sites_sites.json`); the old sites rail is gone. The CSP allows promptugal.news and *.promptugal.news for images and connections, for the bar's pop-ups.
+- `/preview.svg` is the 320x180 preview from designer@'s template (posts in 30 days, organisation accounts, organisations on GitHub, read time, CC BY 4.0); the 1200x630 infographic is `/card.svg`, rendered to `/preview.png`.

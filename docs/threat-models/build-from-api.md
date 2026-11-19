@@ -9,6 +9,7 @@ Owner: signals.b@PrompTugal.dinis. Written 18 November 2026. To be reviewed by s
 - `https://data.promptugal.news/api/v1/`: `social/latest.json`, `social/by-place/index.json`, `social/by-place/<place>.json`, `sources/index.json`, `discovery/index.json`. GET, no credentials, no redirects followed, 20 s timeout, 2 MB cap checked while streaming.
 - `https://data.promptugal.news/api/v1/github-pt/latest.json` (since 18 Nov 2026): organisations' public repositories and releases, with the same caps.
 - `https://library.promptugal.news/api/v1/` (since 18 Nov 2026): `items/index.json` and `index/place.json`, the library's catalogue, with the same method and caps.
+- `https://promptugal.news/api/v1/sites.json` (since 19 Nov 2026): the sites registry, for the sites bar; checked by the bar's check() before use; a committed snapshot (without its sha256 list) keeps the last good bar.
 - On a failed read: the committed snapshot in `data/snapshot/` (organisation data only; refreshed by `node scripts/pages.mjs --snapshot`, reviewed in the diff).
 - `data/takedown.json` and `docs/security-findings.json` from the repository.
 

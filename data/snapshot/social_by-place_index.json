@@ -8,8 +8,8 @@
   "commercial_note": "With credit to PrompTugal.news; values taken from a source keep that source's licence."
  },
  "about": "The places with a social-signals file and how many posts each holds.",
- "read_at": "2026-11-18T23:26:36Z",
- "source_read_at": "2026-11-18T23:26:09Z",
+ "read_at": "2026-11-19T00:29:50Z",
+ "source_read_at": "2026-11-18T23:49:06Z",
  "by": "collect/social-by-place.mjs (code, no model; data.b@PrompTugal.dinis), from data/social/latest.json",
  "places": [
   {

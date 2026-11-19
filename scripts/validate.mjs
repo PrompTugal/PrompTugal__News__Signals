@@ -33,11 +33,11 @@ for (const f of [...files, 'hub.json', 'README.md']) {
   }
 }
 // The preview for the sites bar (signals.b@PrompTugal.dinis, 18 Nov 2026): an image only, never code (security pre-review).
-if (existsSync('_site/preview.svg')) {
-  const s = readFileSync('_site/preview.svg', 'utf8');
-  if (!/^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/.test(s)) fail('_site/preview.svg: must start with <svg xmlns="http://www.w3.org/2000/svg"');
-  for (const bad of [/<script/i, /<foreignObject/i, /<image/i, /\bhref\s*=/i, /url\s*\(/i, /@import/i, /\son[a-z]+\s*=/i]) if (bad.test(s)) fail(`_site/preview.svg: forbidden ${bad}`);
-  s.split('\n').forEach((line, i) => { if (line.includes('\u2014')) fail(`_site/preview.svg:${i + 1}: em dash`); const m = line.match(hype); if (m) fail(`_site/preview.svg:${i + 1}: hype word "${m[0]}"`); });
+for (const svgFile of ['_site/preview.svg', '_site/card.svg']) if (existsSync(svgFile)) {
+  const s = readFileSync(svgFile, 'utf8');
+  if (!/^<svg xmlns="http:\/\/www\.w3\.org\/2000\/svg"/.test(s)) fail(`${svgFile}: must start with <svg xmlns="http://www.w3.org/2000/svg"`);
+  for (const bad of [/<script/i, /<foreignObject/i, /<image/i, /\bhref\s*=/i, /url\s*\(/i, /@import/i, /\son[a-z]+\s*=/i]) if (bad.test(s)) fail(`${svgFile}: forbidden ${bad}`);
+  s.split('\n').forEach((line, i) => { if (line.includes('\u2014')) fail(`${svgFile}:${i + 1}: em dash`); const m = line.match(hype); if (m) fail(`${svgFile}:${i + 1}: hype word "${m[0]}"`); });
 }
 for (const f of files.filter(f => f.endsWith('.html'))) for (const m of readFileSync(f, 'utf8').matchAll(/<meta property="og:image" content="([^"]*)"/g)) {
   if (m[1] !== 'https://signals.promptugal.news/preview.png') fail(`${f}: og:image must be https://signals.promptugal.news/preview.png`);

@@ -9,8 +9,8 @@
  },
  "about": "Every source PrompTugal knows of, read or not. For each one we do not read, the reason, quoted from its terms or robots.txt with the page and the date read. We respect whatever a source says; a request on the record is drafted by outreach@ and sent by a person, and the answer is kept here as written.",
  "counts": {
-  "read": 31,
-  "not-read": 129,
+  "read": 36,
+  "not-read": 128,
   "asked": 0,
   "allowed": 0,
   "refused": 0,
@@ -68,6 +68,16 @@
    "url": "https://data.promptugal.news/api/v1/sources/ea-flood.json"
   },
   {
+   "id": "enisa-pubs",
+   "name": "ENISA publications",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "portugal"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/enisa-pubs.json"
+  },
+  {
    "id": "eurostat-tourism",
    "name": "Tourist nights by where guests live: Portugal, Algarve, Lisbon, London (Eurostat)",
    "kind": "open-data API",
@@ -80,6 +90,16 @@
     "london"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/eurostat-tourism.json"
+  },
+  {
+   "id": "euvd",
+   "name": "EU Vulnerability Database: latest, exploited and recently updated (ENISA EUVD)",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "europe"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/euvd.json"
   },
   {
    "id": "events-pt",
@@ -210,6 +230,16 @@
     "portugal"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/tfl-jamcams.json"
+  },
+  {
+   "id": "youtube-replays",
+   "name": "Web Summit 2026 replays on YouTube",
+   "kind": "open-data API",
+   "status": "read",
+   "places": [
+    "lisboa"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/youtube-replays.json"
   },
   {
    "id": "storm-charles-archive",
@@ -721,23 +751,12 @@
    "id": "enisa",
    "name": "ENISA (European Union Agency for Cybersecurity)",
    "kind": "cyber data source",
-   "status": "not-read",
+   "status": "read",
    "places": [
     "portugal",
     "eu"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/enisa.json"
-  },
-  {
-   "id": "euvd",
-   "name": "EUVD, European Vulnerability Database",
-   "kind": "cyber data source",
-   "status": "not-read",
-   "places": [
-    "portugal",
-    "eu"
-   ],
-   "url": "https://data.promptugal.news/api/v1/sources/euvd.json"
   },
   {
    "id": "nvd",
@@ -758,6 +777,16 @@
     "portugal"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/cve-org.json"
+  },
+  {
+   "id": "youtube-data-api",
+   "name": "YouTube Data API v3: Web Summit's official channel (replays of Web Summit 2026)",
+   "kind": "events data source",
+   "status": "read",
+   "places": [
+    "lisboa"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/youtube-data-api.json"
   },
   {
    "id": "shadowserver",
@@ -1685,6 +1714,16 @@
     "uk"
    ],
    "url": "https://data.promptugal.news/api/v1/sources/ukceh-water-resources-portal.json"
+  },
+  {
+   "id": "google-web-risk",
+   "name": "Google Web Risk API",
+   "kind": "security API",
+   "status": "not-read",
+   "places": [
+    "europe"
+   ],
+   "url": "https://data.promptugal.news/api/v1/sources/google-web-risk.json"
   }
  ]
 }

@@ -7,6 +7,16 @@
 //   node scripts/pages.mjs --snapshot   refreshes data/snapshot/ from the API (a person or agent commits it)
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
+import { createHash } from 'node:crypto';
+// The PrompTugal sites bar v1.1.0 (dev@PrompTugal.dinis, designer@'s spec; security@ post-review 18 Nov 2026 23:55: go),
+// vendored: its three files were checked by hand against the registry's sha256 before they were committed, and at every build
+// they are checked again against the sha256 the registry publishes (bar.sha256); a mismatch fails the build. The pins are not
+// kept in this repository, whose leak scan reads a sha256 as a possible secret.
+const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.1.0/sites-bar-render.mjs', css: 'src/assets/sites-bar/1.1.0/sites-bar.css', js: 'src/assets/sites-bar/1.1.0/sites-bar.js' };
+const sha = f => createHash('sha256').update(readFileSync(f)).digest('hex');
+const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.1.0/sites-bar-render.mjs');
+const SITES_API = 'https://promptugal.news/api/v1/';
+let BAR_HTML = '';
 
 const API = 'https://data.promptugal.news/api/v1/';
 // The library's catalogue (Dinis, 18 Nov 2026, 16:00: "read the library as your catalogue too"; "always link, never copy").
@@ -32,7 +42,7 @@ async function getJSON(path, base = API) {
     return JSON.parse(Buffer.concat(chunks).toString('utf8'));
   } finally { clearTimeout(t); }
 }
-const snapName = (p, base = API) => (base === LIB ? 'library_' : '') + p.replace(/[^a-z0-9.-]+/gi, '_');
+const snapName = (p, base = API) => (base === LIB ? 'library_' : base === SITES_API ? 'sites_' : '') + p.replace(/[^a-z0-9.-]+/gi, '_');
 async function read(path, notes, base = API) {
   try { return await getJSON(path, base); }
   catch (e) {
@@ -104,7 +114,7 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self' https://data.promptugal.news https://promptugal.news https://dev.send.sgraph.ai https://ipapi.co https://ipwho.is; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://promptugal.news https://*.promptugal.news; connect-src 'self' https://promptugal.news https://*.promptugal.news https://dev.send.sgraph.ai https://ipapi.co https://ipwho.is; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -114,17 +124,19 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
 <meta property="og:image" content="https://signals.promptugal.news/preview.png">
 <meta property="og:title" content="${esc(title)}">
+<link rel="stylesheet" href="/assets/sites-bar/1.1.0/sites-bar.css">
 <link rel="stylesheet" href="/assets/signals.css">
+<script defer src="/assets/sites-bar/1.1.0/sites-bar.js"></script>
 <script defer src="/assets/signals.js"></script>
 <script defer src="/assets/obs/obs.js" data-lane="signals"></script>
 </head>
 <body>
+${BAR_HTML}
 <header class="mast"><div class="wrap">
 <a class="brand" href="/" aria-label="PrompTugal.news Signals, front page"><img class="light" src="/assets/brand/promptugal-wordmark-light.svg" alt="PrompTugal.news" width="184" height="30"><img class="dark" src="/assets/brand/promptugal-wordmark-dark.svg" alt="" width="184" height="30"><span class="sub">Signals</span></a>
 <nav class="main" aria-label="Sections">${NAV.map(([h, l]) => `<a href="/${h}"${current === h ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav>
 <div class="tools"><a class="free" href="/how/#billing">Free to read</a></div>
 </div></header>
-<nav class="em-net" aria-label="The PrompTugal.news sites"><span>Also from PrompTugal.news</span>${SITES.map(([h, l]) => h === 'signals' ? `<a href="/" aria-current="page">${l}</a>` : `<a href="https://${h}.promptugal.news/" rel="noopener">${l}</a>`).join('')}</nav>
 <div class="strip"><div class="wrap"><span><strong>Independent.</strong> Organisations' public posts, by link. A signal to check, not a verified fact.</span><span>Data read ${esc(state.readAt)}${state.fallback ? ' (from the last snapshot: the live read failed)' : ''}</span></div></div>
 <main><div class="wrap">
 <h1>${esc(h1)}</h1>
@@ -162,12 +174,20 @@ async function snapshot() {
   const idx = await getJSON('social/by-place/index.json');
   for (const p of (idx.places || [])) if (okSlug(p.place, 60)) paths.push(`social/by-place/${p.place}.json`);
   for (const p of paths) writeFileSync(join(SNAP, snapName(p)), JSON.stringify(await getJSON(p), null, 1) + '\n');
+  { const reg = await getJSON('sites.json', SITES_API); if (!checkBar(reg)) throw new Error('snapshot: the sites registry fails the bar\'s own check; not saved'); const { bar, ...keep } = reg; writeFileSync(join(SNAP, 'sites_sites.json'), JSON.stringify(keep, null, 1) + '\n'); }
   for (const p of LIB_PATHS) writeFileSync(join(SNAP, snapName(p, LIB)), JSON.stringify(await getJSON(p, LIB), null, 1) + '\n');
   console.log(`snapshot: ${paths.length + LIB_PATHS.length} files in ${SNAP}/`);
 }
 
 async function main() {
   const notes = [];
+  { let reg = await read('sites.json', notes, SITES_API);
+    if (reg && reg.bar && reg.bar.sha256) { if (reg.bar.version !== '1.1.0') notes.push(`the registry lists sites bar ${clean(reg.bar.version, 20)}; this site has 1.1.0`);
+      else for (const [k, f] of Object.entries(BAR_FILES)) if (sha(f) !== reg.bar.sha256[k]) throw new Error(`sites bar: ${f} does not match the sha256 the registry publishes`); }
+    else if (reg && !notes.some(n => n.startsWith('sites.json'))) { notes.push('the live sites registry publishes no sha256 for the bar: the bar is left out of this build'); reg = null; }
+    else if (reg) notes.push('the sites bar files were not checked against the registry at this build (snapshot in use)');
+    BAR_HTML = reg ? renderBar(reg, { here: 'signals.promptugal.news' }) : '';
+    if (!BAR_HTML && reg) { notes.push('the sites registry failed the bar\'s check; the last good one was used'); try { BAR_HTML = renderBar(JSON.parse(readFileSync(join(SNAP, 'sites_sites.json'), 'utf8')), { here: 'signals.promptugal.news' }); } catch { BAR_HTML = ''; } } }
   let latest = await read('social/latest.json', notes);
   // a live read far smaller than the snapshot (an empty or broken collection) is not deployed: the snapshot is used
   try { const snap = JSON.parse(readFileSync(join(SNAP, snapName('social/latest.json')), 'utf8')); const n = a => Array.isArray(a?.posts) ? a.posts.length : 0;
@@ -438,7 +458,24 @@ ${figs.map(([v, l], i) => `<text x="${60 + i * 280}" y="270" font-family="Arial,
 <text x="60" y="590" font-family="Arial, sans-serif" font-size="20" fill="#006600">signals.promptugal.news · CC BY 4.0 · version ${x(VERSION)}</text>
 </svg>
 `;
-    writeFileSync(join(OUT, 'preview.svg'), svgOut);
+    writeFileSync(join(OUT, 'card.svg'), svgOut);
+    // /preview.svg for the sites bar's pop-up: 320 by 180, designer@'s template (design/sites-bar/preview-template.svg.txt), numbers and fixed words only
+    const rd = state.readAt.replace(/ UTC$/, ' UTC');
+    const small = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180" width="320" height="180" role="img" aria-label="Signals: what organisations are saying now">
+  <rect width="320" height="180" rx="6" fill="#f6f3ec"/>
+  <rect x="0" y="0" width="320" height="4" fill="#c52830"/>
+  <text x="16" y="30" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="1.2" fill="#666860">SIGNALS · NOW</text>
+  <text x="16" y="84" font-family="Newsreader, Georgia, serif" font-size="46" fill="#121317">${n(posts.length)}</text>
+  <text x="16" y="104" font-family="IBM Plex Sans, Arial, sans-serif" font-size="12" fill="#3a3b40">posts in 30 days</text>
+  <text x="176" y="72" font-family="Newsreader, Georgia, serif" font-size="26" fill="#121317">${n(accounts.size)}</text>
+  <text x="176" y="88" font-family="IBM Plex Sans, Arial, sans-serif" font-size="11" fill="#3a3b40">organisation accounts</text>
+  <text x="176" y="120" font-family="Newsreader, Georgia, serif" font-size="26" fill="#121317">${n(codeOrgs.length)}</text>
+  <text x="176" y="136" font-family="IBM Plex Sans, Arial, sans-serif" font-size="11" fill="#3a3b40">organisations on GitHub</text>
+  <line x1="16" y1="150" x2="304" y2="150" stroke="#d8d4cb"/>
+  <text x="16" y="168" font-family="IBM Plex Mono, monospace" font-size="10" fill="#666860">read ${x(rd)} · CC BY 4.0</text>
+</svg>
+`;
+    writeFileSync(join(OUT, 'preview.svg'), small);
   }
 
   // the latest list as JSON, built only from the checked values above (never the fetched objects)
