@@ -8,14 +8,18 @@
 import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
-// The PrompTugal sites bar v1.1.1 (dev@PrompTugal.dinis, designer@'s spec; security@ 19 Nov 2026 about 01:30 UTC: go),
+// The PrompTugal sites bar v1.2.0 (dev@PrompTugal.dinis, designer@'s spec, the one switcher Dinis asked for on 19 Nov about 03:18 UTC;
+// security@'s go, Website 055e6c1430, 19 Nov 07:03 UTC; earlier versions: 1.1.1 at security@'s go of 01:30 UTC),
 // vendored: its three files were checked by hand against the registry's sha256 before they were committed, and at every build
 // they are checked again against the full SRI pins the registry publishes (bar.integrity, sha256-<base64>); a mismatch fails the build. The pins are not
 // kept in this repository, whose leak scan reads a sha256 as a possible secret.
-const BAR_VERSION = '1.1.1';
-const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.1.1/sites-bar-render.mjs', css: 'src/assets/sites-bar/1.1.1/sites-bar.css', js: 'src/assets/sites-bar/1.1.1/sites-bar.js' };
+const BAR_VERSION = '1.2.0';
+const BAR_FILES = { render: 'scripts/vendor/sites-bar-1.2.0/sites-bar-render.mjs', css: 'src/assets/sites-bar/1.2.0/sites-bar.css', js: 'src/assets/sites-bar/1.2.0/sites-bar.js' };
+// this site's own version's pin: bar.versions["<v>"] / obs_tz.versions["<v>"] (append-only, dev@ 19 Nov 2026), else the
+// current entry when it names this version. No pin for this version means the registry no longer lists it: the piece is off.
+const pinOf = (entry, v) => entry && typeof entry === 'object' ? (entry.versions && typeof entry.versions === 'object' && Object.prototype.hasOwnProperty.call(entry.versions, v) ? entry.versions[v] : entry.version === v ? (entry.integrity && typeof entry.integrity === 'object' ? entry.integrity : { integrity: entry.integrity }) : null) : null;
 const sri = f => 'sha256-' + createHash('sha256').update(readFileSync(f)).digest('base64');
-const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.1.1/sites-bar-render.mjs');
+const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.2.0/sites-bar-render.mjs');
 const SITES_API = 'https://promptugal.news/api/v1/';
 // The one shared time-zone-to-country table (dev@PrompTugal.dinis, v1.1.0; Dinis, 19 Nov 2026: the country from the time zone,
 // no IP lookup), vendored as src/assets/obs/tz-country.json. Checked against the registry's full pin (obs_tz.integrity) when the
@@ -32,11 +36,12 @@ function tzTable() {
 }
 function writeTz(notes, reg) {
   let table = null;
-  if (reg && reg.obs_tz && typeof reg.obs_tz.integrity === 'string') {
-    // the registry naming a newer version is not a failure (data.b@'s trap, 19 Nov 2026): this build ships no table, so no
-    // country is sent, and the vendored copy is upgraded at the next wake. The same version with different bytes stops the build.
-    if (reg.obs_tz.version !== TZ_VERSION) { notes.push(`tz-country ${TZ_VERSION} off: the registry names ${clean(reg.obs_tz.version, 20)} (no country is sent until this site upgrades)`); table = {}; }
-    else if (sri(TZ_FILE) !== reg.obs_tz.integrity) throw new Error(`${TZ_FILE} does not match the full pin the registry publishes (obs_tz)`);
+  if (reg && reg.obs_tz && (typeof reg.obs_tz.integrity === 'string' || reg.obs_tz.versions)) {
+    // only when the registry no longer lists this version is the table off (no country), never shipped unchecked; the same
+    // version with different bytes stops the build
+    const pin = pinOf(reg.obs_tz, TZ_VERSION);
+    if (!pin) { notes.push(`tz-country ${TZ_VERSION} off: the registry names ${clean(reg.obs_tz.version, 20)} (no country is sent until this site upgrades)`); table = {}; }
+    else if (typeof pin.integrity !== 'string' || sri(TZ_FILE) !== pin.integrity) throw new Error(`${TZ_FILE} does not match the full pin the registry publishes for ${TZ_VERSION}`);
   } else notes.push('tz-country.json was not checked against the registry at this build');
   const f = join(OUT, 'assets/obs/obs.js'), s = readFileSync(f, 'utf8');
   if (s.split('/*TZ-COUNTRY*/{}').length !== 2) throw new Error('obs.js: the table placeholder is missing or repeated');
@@ -150,9 +155,9 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <link rel="icon" href="/assets/brand/favicon.svg" type="image/svg+xml">
 <meta property="og:image" content="https://signals.promptugal.news/preview.png">
 <meta property="og:title" content="${esc(title)}">
-<link rel="stylesheet" href="/assets/sites-bar/1.1.1/sites-bar.css">
+<link rel="stylesheet" href="/assets/sites-bar/1.2.0/sites-bar.css">
 <link rel="stylesheet" href="/assets/signals.css">
-<script defer src="/assets/sites-bar/1.1.1/sites-bar.js"></script>
+<script defer src="/assets/sites-bar/1.2.0/sites-bar.js"></script>
 <script defer src="/assets/signals.js"></script>
 <script defer src="/assets/obs/obs.js" data-lane="signals"></script>
 </head>
@@ -212,8 +217,9 @@ async function snapshot() {
 async function main() {
   const notes = [];
   { let reg = await read('sites.json', notes, SITES_API); const regRead = reg;
-    if (reg && reg.bar && reg.bar.integrity) { if (reg.bar.version !== BAR_VERSION) { notes.push(`sites bar ${BAR_VERSION} off: the registry names ${clean(reg.bar.version, 20)} (no bar until this site upgrades)`); reg = null; }
-      else for (const [k, f] of Object.entries(BAR_FILES)) if (typeof reg.bar.integrity[k] !== 'string' || sri(f) !== reg.bar.integrity[k]) throw new Error(`sites bar: ${f} does not match the full pin the registry publishes`); }
+    if (reg && reg.bar && (reg.bar.integrity || reg.bar.versions)) { const pin = pinOf(reg.bar, BAR_VERSION);
+      if (!pin) { notes.push(`sites bar ${BAR_VERSION} off: the registry names ${clean(reg.bar.version, 20)} (no bar until this site upgrades)`); reg = null; }
+      else for (const [k, f] of Object.entries(BAR_FILES)) if (typeof pin[k] !== 'string' || sri(f) !== pin[k]) throw new Error(`sites bar: ${f} does not match the full pin the registry publishes for ${BAR_VERSION}`); }
     else if (reg && !notes.some(n => n.startsWith('sites.json'))) { notes.push('the live sites registry publishes no pins for the bar: the bar is left out of this build'); reg = null; }
     else if (reg) notes.push('the sites bar files were not checked against the registry at this build (snapshot in use)');
     writeTz(notes, regRead);

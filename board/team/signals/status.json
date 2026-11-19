@@ -2,7 +2,7 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-19T05:14:00Z",
+  "updated": "2026-11-19T07:16:00Z",
   "state": "first version released to dev (see REALITY.md)",
   "passes": {
     "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
@@ -35,7 +35,8 @@
     "2026-11-19T03:21Z: no IP-based location: obs.js sends the country only, from the browser's time zone, no network call; ipapi.co and ipwho.is out of the CSP and obs.json (Dinis, 19 Nov 2026)",
     "2026-11-19T04:51Z: the shared tz-country table v1.0.0 replaces this site's own; pinned against the registry at build",
     "2026-11-19T05:10Z: tz-country 1.1.0; a newer registry version no longer fails the build (no country / no bar until upgraded)",
-    "2026-11-19T05:14Z: leak scan: private key headers never exempt; OpenSSH public keys flagged outside ssh_signing.public_key; 33 tests in release and CI. Degrade notes read '<piece> <version> off: the registry names <newer>'"
+    "2026-11-19T05:14Z: leak scan: private key headers never exempt; OpenSSH public keys flagged outside ssh_signing.public_key; 33 tests in release and CI. Degrade notes read '<piece> <version> off: the registry names <newer>'",
+    "2026-11-19T07:16Z: sites bar 1.2.0; pins read from the registry's per-version lists (bar.versions, obs_tz.versions)"
   ],
   "blocked": [],
   "next": [
