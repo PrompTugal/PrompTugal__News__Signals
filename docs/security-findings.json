@@ -81,6 +81,24 @@
    "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before release",
    "fix": "the commit that added the Code section: link paths must match ^[A-Za-z0-9._~/+-]*$; licence names checked against a strict pattern; the collector's gap notes are counted in our own words",
    "state": "fixed"
+  },
+  {
+   "title": "The commit-signature check exempted commits by committer address, which anyone can set",
+   "severity": "high",
+   "file": "scripts/check-signatures.mjs",
+   "found": "2026-11-19",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the check was pushed",
+   "fix": "the commit that adds the check (\"signed commits on\"): no exemption: this repository's CI makes no commits, so the exempt list is empty",
+   "state": "fixed"
+  },
+  {
+   "title": "The commit-signature check read the allowed keys from the commit being checked, so a commit could add its own key and pass",
+   "severity": "high",
+   "file": "scripts/check-signatures.mjs",
+   "found": "2026-11-19",
+   "by": "AppSec post-review (signals.appsec@, a Sonnet sub-agent of signals.b@), before the check was pushed",
+   "fix": "the commit that adds the check (\"signed commits on\"): each commit is checked against team/keys.json as it stood in its parent; only the commit that adds the check uses its own (the first key)",
+   "state": "fixed"
   }
  ]
 }

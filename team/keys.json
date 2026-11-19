@@ -16,6 +16,19 @@
     "fingerprint": "sha256:618f6465dbb2ae65",
     "signing_fingerprint": "sha256:e10f171e56b8faf6"
    }
+  },
+  {
+   "id": "signals.b-git-signing",
+   "label": "signals.b@PrompTugal.dinis git commit signing key (SSH, ECDSA P-256)",
+   "agent": "signals.b@PrompTugal.dinis",
+   "session": "session_01Kw9UwEffTac7VwEfavnErf",
+   "role": "Signs every commit signals.b@ makes in this repository, as a git SSH signature (Dinis, 19 Nov 2026: \"every then commit is signed by that key ... you should also include the session ID\"; PrompTugal__News__Website board/guidance/2026-11-19-signed-commits-paid-search-and-free-embeds.md, section 2).",
+   "how": "Made in the agent's own session on 19 November 2026 with ssh-keygen (OpenSSH 9.6), ECDSA P-256 so the public half can be published in PKCS8 form; the other half never leaves the session. scripts/check-signatures.mjs turns this entry into git's allowed signers.",
+   "added": "2026-11-19",
+   "git_signing": {
+    "format": "ssh, published as PKCS8 PEM (ssh-keygen -i -m PKCS8 converts it back)",
+    "pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEsfe6iJXSKniT52CdfCbbSQ2VOF+i\n/qLQ46DRzrepd4n153pMXrK0f3qJRUobFT7NHlxjkpshYX90gVITigg4ow==\n-----END PUBLIC KEY-----\n"
+   }
   }
  ]
 }

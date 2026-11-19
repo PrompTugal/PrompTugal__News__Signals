@@ -11,7 +11,7 @@
 - **Fallback:** `data/snapshot/` (23 files, read 18 Nov 2026 about 15:16 UTC) is used when a live read fails, and every page then says so.
 - **Rebuilds:** every push to dev, and every 6 hours at :47 (a scheduled run keeps the version and makes no tag). The front page also refreshes its list in the browser (`src/assets/signals.js`).
 - **Take-down:** `data/takedown.json` (empty), applied on every build; disclaimer on every page and at /takedown/.
-- **Security:** CSP on every page, no third-party script; threat models in `docs/threat-models/`; findings in `docs/security-findings.json` (9 from AppSec post-reviews, all fixed before release), shown on /security/.
+- **Security:** CSP on every page, no third-party script; threat models in `docs/threat-models/`; findings in `docs/security-findings.json` (11 from AppSec post-reviews, all fixed before release), shown on /security/.
 - **Commit check:** `scripts/check-commits.mjs` also accepts `role@PrompTugal.dinis` (that exact domain), at Dinis's word in board/guidance/2026-11-18-five-sites-on-account-b.md (Website repo).
 - **Key:** signals.b@'s session key, made with `sgit pki keygen` (fingerprint sha256:618f6465dbb2ae65, signing sha256:e10f171e56b8faf6); its public bundle is in `team/keys.json` (the leak scan allows public keys only there). The private half stays in the session. Listed in the Website repo's board/keys.json by conductor.b@ (18 Nov 2026).
 - **Page counting:** `src/assets/obs/obs.js` (weather's copy of promptugal.news's sender) writes to the lane "signals" of this site's own vault (daxpwzn4, 4 append lanes, drain key sha256:ccb5a3ecfb5b0050; credentials outside the repository, sealed to conductor.b@). Its public config is in `src/assets/obs/obs.json`, allowed by four narrow entries in `scripts/leak-scan.mjs` (approved in this session on 18 Nov 2026).
@@ -39,3 +39,6 @@
 ## 2026-11-19, about 01:00 UTC (signals.b@PrompTugal.dinis)
 - Sites bar 1.1.0 installed: `src/assets/sites-bar/1.1.0/` (CSS, JS) and `scripts/vendor/sites-bar-1.1.0/sites-bar-render.mjs`, copied unchanged from PrompTugal__News__Website (Apache-2.0, same estate) and checked against the registry's sha256 at every build. The bar is rendered first in every page from promptugal.news/api/v1/sites.json (snapshot `data/snapshot/sites_sites.json`); the old sites rail is gone. The CSP allows promptugal.news and *.promptugal.news for images and connections, for the bar's pop-ups.
 - `/preview.svg` is the 320x180 preview from designer@'s template (posts in 30 days, organisation accounts, organisations on GitHub, read time, CC BY 4.0); the 1200x630 infographic is `/card.svg`, rendered to `/preview.png`.
+
+## 2026-11-19, about 01:40 UTC (signals.b@PrompTugal.dinis)
+- Signed commits on: signals.b@'s git signing key (SSH, ECDSA P-256, published as PKCS8 PEM with session session_01Kw9UwEffTac7VwEfavnErf) is in `team/keys.json`; this repository signs with it (repo-local `gpg.ssh.program ssh-keygen`, not the environment's global signer). `scripts/check-signatures.mjs` runs in `scripts/release.sh` and in CI, from the commit that adds it on; earlier commits are signed by the environment's key and are not checked.
