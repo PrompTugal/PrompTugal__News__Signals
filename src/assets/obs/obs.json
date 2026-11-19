@@ -15,11 +15,7 @@
     ]
   },
   "shared_from": "https://promptugal.news/assets/obs/obs.json",
-  "geo": [
-    "https://ipapi.co/json/",
-    "https://ipwho.is/"
-  ],
-  "what": "This site counts page views and reading time, publicly, as promptugal.news does: the page, the referring site (host only), the time to the minute, the site version, a random id that ends with the tab, the screen size class, the browser's language and time zone, and the country, region and city. To find the place, the browser asks ipapi.co (or ipwho.is), which see the reader's IP address; this site keeps no IP address, no cookie, no user-agent string and no fingerprint. Do Not Track, Global Privacy Control and Pause in the footer turn it off. What is counted: https://promptugal.news/newsroom/observability/index.html",
+  "what": "This site counts page views and reading time, publicly, as promptugal.news does: the page, the referring site (host only), the time to the minute, the site version, a random id that ends with the tab, the screen size class, the browser's language and time zone, and the country, taken in the browser from its own time zone through a fixed table, with no network call (Dinis, 19 November 2026: no IP-based location). No third party is asked where a reader is; no region, city or position is kept. This site keeps no IP address, no cookie, no user-agent string and no fingerprint. Do Not Track, Global Privacy Control and Pause in the footer turn it off. What is counted: https://promptugal.news/newsroom/observability/index.html",
   "endpoint": "https://dev.send.sgraph.ai",
   "vault_id": "daxpwzn4",
   "recipient": {

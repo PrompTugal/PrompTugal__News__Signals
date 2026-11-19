@@ -115,7 +115,7 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://promptugal.news https://*.promptugal.news; connect-src 'self' https://promptugal.news https://*.promptugal.news https://dev.send.sgraph.ai https://ipapi.co https://ipwho.is; base-uri 'none'; form-action 'none'; object-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https://promptugal.news https://*.promptugal.news; connect-src 'self' https://promptugal.news https://*.promptugal.news https://dev.send.sgraph.ai; base-uri 'none'; form-action 'none'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">

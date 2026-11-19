@@ -12,9 +12,10 @@
 //   read  the first time the tab is hidden or closed: seconds the page was visible and the deepest scroll (percent).
 // Each says: the page, the referring site (host only), the time to the minute, the site version, a random id that
 // ends with the tab, the screen size class, the browser's language and time zone, an automation class if a bot
-// declares itself, and the country, region and city from the browser's own lookup (the PHP newsroom's and
-// newsroom.sgit.ai's way, at Dinis's word of 6 November: obs.json `geo`, ipapi.co then ipwho.is, once per tab, 2.5 s
-// timeout; only those three fields are read, the IP in the answer never is). No IP address, no cookie, no user-agent
+// declares itself, and the country, from the browser's own time zone through a fixed table in this file, with no
+// network call (Dinis, 19 Nov 2026, about 03:15 UTC: "remove the IP base. So we're going to keep the country still.";
+// PrompTugal__News__Website board/guidance/2026-11-19-no-ip-lookup-predictions-and-small-decisions.md). No third party is
+// asked where a reader is; no region, city or map position. No IP address, no cookie, no user-agent
 // string, no browser fingerprint. Sealed here to the drain key (sgit hybrid
 // envelope v2: RSA-OAEP-SHA256 + AES-256-GCM) and written to a write-only append lane; on 507 (a lane full) the next.
 // Do Not Track, Global Privacy Control and the footer's Pause switch stop it. Never blocks, never shows an error.
@@ -39,7 +40,7 @@
             if (dnt) { s.append(' · Page views: off (Do Not Track or Global Privacy Control is on). ', a); row.appendChild(s); return }
             const b = document.createElement('button'); b.type = 'button'; b.style.cssText = 'font:inherit;background:none;border:0;padding:0;text-decoration:underline;cursor:pointer;color:inherit'
             const t = document.createTextNode('')
-            const draw = () => { if (laneOpen === false) { t.textContent = ' · Page views: not counted yet (this site\'s lane is not open). '; b.hidden = true; return } t.textContent = paused() ? ' · Page views: paused on this device. ' : ' · Page views, reading time and your town are counted, publicly. To find the town your browser asks ipapi.co or ipwho.is, which see your IP address; we keep no IP and set no cookie. '; b.textContent = paused() ? 'Resume' : 'Pause' }
+            const draw = () => { if (laneOpen === false) { t.textContent = ' · Page views: not counted yet (this site\'s lane is not open). '; b.hidden = true; return } t.textContent = paused() ? ' · Page views: paused on this device. ' : ' · Page views, reading time and your country (from your browser\'s time zone, with no lookup) are counted, publicly. No one is asked where you are; we keep no IP address and set no cookie. '; b.textContent = paused() ? 'Resume' : 'Pause' }
             b.onclick = () => { LS.set('off', paused() ? null : '1'); draw() }
             s.append(t, b, ' · ', a); draw(); row.appendChild(s); window.__obsRedraw = draw
         }
@@ -67,27 +68,17 @@
             : /Googlebot/i.test(ua) ? 'googlebot' : /bingbot/i.test(ua) ? 'bingbot' : /bot|crawl|spider|slurp/i.test(ua) ? 'bot' : ''
         const w = window.innerWidth || 1024
         let ref = ''; try { ref = document.referrer ? new URL(document.referrer).host : '' } catch { }
-        // the place, once per tab: country, region and city only (the IP field of the answer is never read)
-        const place = async c => {
-            // no lookup on the pages that take a person's details (security@'s S34, 9 November: /contribute/)
-            if (/\/contribute\//.test(location.pathname)) return { country: '', country_code: '', region: '', city: '' }
-            const had = SS.get('geo'); if (had) { try { return JSON.parse(had) } catch { } }
-            for (const url of (c.geo || [])) {
-                try {
-                    const ac = new AbortController(), t = setTimeout(() => ac.abort(), 2500)
-                    const r = await fetch(url, { signal: ac.signal, credentials: 'omit', referrerPolicy: 'no-referrer' }); clearTimeout(t)
-                    if (!r.ok) continue
-                    const j = await r.json(); if (j.success === false || j.error) continue
-                    const g = { country: String(j.country_name || j.country || '').slice(0, 60), country_code: String(j.country_code || '').slice(0, 2).toUpperCase(),
-                        region: String(j.region || '').slice(0, 60), city: String(j.city || '').slice(0, 60) }
-                    // the city's position for the world map, rounded to 0.1 degree (about 10 km): a town, never a street
-                    const la = +(j.latitude ?? j.lat), lo = +(j.longitude ?? j.lon)
-                    if (isFinite(la) && isFinite(lo) && (la || lo)) { g.lat = Math.round(la * 10) / 10; g.lon = Math.round(lo * 10) / 10 }
-                    SS.set('geo', JSON.stringify(g)); return g
-                } catch { }
-            }
-            const g = { country: '', country_code: '', region: '', city: '' }; SS.set('geo', JSON.stringify(g)); return g
+        // the country, from the browser's own time zone through this fixed table: no network call, no region, city or
+        // position (Dinis, 19 Nov 2026). A zone not in the table gives an empty country.
+        const ZONES = 'PT:Europe/Lisbon Atlantic/Madeira Atlantic/Azores;ES:Europe/Madrid Atlantic/Canary Africa/Ceuta;GB:Europe/London;IE:Europe/Dublin;FR:Europe/Paris;DE:Europe/Berlin Europe/Busingen;NL:Europe/Amsterdam;BE:Europe/Brussels;LU:Europe/Luxembourg;CH:Europe/Zurich;AT:Europe/Vienna;IT:Europe/Rome;MT:Europe/Malta;DK:Europe/Copenhagen;NO:Europe/Oslo;SE:Europe/Stockholm;FI:Europe/Helsinki;IS:Atlantic/Reykjavik;PL:Europe/Warsaw;CZ:Europe/Prague;SK:Europe/Bratislava;HU:Europe/Budapest;RO:Europe/Bucharest;BG:Europe/Sofia;GR:Europe/Athens;CY:Asia/Nicosia Asia/Famagusta;SI:Europe/Ljubljana;HR:Europe/Zagreb;RS:Europe/Belgrade;BA:Europe/Sarajevo;ME:Europe/Podgorica;MK:Europe/Skopje;AL:Europe/Tirane;EE:Europe/Tallinn;LV:Europe/Riga;LT:Europe/Vilnius;UA:Europe/Kyiv Europe/Kiev;MD:Europe/Chisinau;BY:Europe/Minsk;RU:Europe/Moscow Asia/Yekaterinburg Asia/Novosibirsk Asia/Vladivostok;TR:Europe/Istanbul;GE:Asia/Tbilisi;AM:Asia/Yerevan;AZ:Asia/Baku;AD:Europe/Andorra;MC:Europe/Monaco;GI:Europe/Gibraltar;US:America/New_York America/Chicago America/Denver America/Phoenix America/Los_Angeles America/Anchorage Pacific/Honolulu America/Detroit;CA:America/Toronto America/Vancouver America/Edmonton America/Winnipeg America/Halifax America/St_Johns;MX:America/Mexico_City America/Tijuana America/Cancun;BR:America/Sao_Paulo America/Manaus America/Fortaleza America/Recife America/Bahia America/Belem America/Noronha;AR:America/Argentina/Buenos_Aires America/Buenos_Aires;CL:America/Santiago;CO:America/Bogota;PE:America/Lima;VE:America/Caracas;UY:America/Montevideo;PY:America/Asuncion;BO:America/La_Paz;EC:America/Guayaquil;CU:America/Havana;DO:America/Santo_Domingo;PR:America/Puerto_Rico;JM:America/Jamaica;PA:America/Panama;CR:America/Costa_Rica;GT:America/Guatemala;AO:Africa/Luanda;MZ:Africa/Maputo;CV:Atlantic/Cape_Verde;GW:Africa/Bissau;ST:Africa/Sao_Tome;ZA:Africa/Johannesburg;MA:Africa/Casablanca;DZ:Africa/Algiers;TN:Africa/Tunis;EG:Africa/Cairo;NG:Africa/Lagos;GH:Africa/Accra;SN:Africa/Dakar;KE:Africa/Nairobi;ET:Africa/Addis_Ababa;TZ:Africa/Dar_es_Salaam;UG:Africa/Kampala;RW:Africa/Kigali;CI:Africa/Abidjan;CM:Africa/Douala;ZW:Africa/Harare;ZM:Africa/Lusaka;NA:Africa/Windhoek;IL:Asia/Jerusalem Asia/Tel_Aviv;AE:Asia/Dubai;SA:Asia/Riyadh;QA:Asia/Qatar;KW:Asia/Kuwait;BH:Asia/Bahrain;OM:Asia/Muscat;JO:Asia/Amman;LB:Asia/Beirut;IR:Asia/Tehran;IQ:Asia/Baghdad;IN:Asia/Kolkata Asia/Calcutta;PK:Asia/Karachi;BD:Asia/Dhaka;LK:Asia/Colombo;NP:Asia/Kathmandu Asia/Katmandu;CN:Asia/Shanghai;HK:Asia/Hong_Kong;MO:Asia/Macau;TW:Asia/Taipei;JP:Asia/Tokyo;KR:Asia/Seoul;SG:Asia/Singapore;MY:Asia/Kuala_Lumpur;TH:Asia/Bangkok;VN:Asia/Ho_Chi_Minh Asia/Saigon;PH:Asia/Manila;ID:Asia/Jakarta Asia/Makassar Asia/Jayapura;TL:Asia/Dili;KZ:Asia/Almaty;UZ:Asia/Tashkent;AU:Australia/Sydney Australia/Melbourne Australia/Brisbane Australia/Perth Australia/Adelaide Australia/Hobart Australia/Darwin;NZ:Pacific/Auckland'
+        const zoneCountry = new Map(); for (const part of ZONES.split(';')) { const [cc, zs] = part.split(':'); for (const z of zs.split(' ')) zoneCountry.set(z, cc) }
+        const place = () => {
+            if (/\/contribute\//.test(location.pathname)) return { country: '', country_code: '' }   // security@'s S34: none on pages that take a person's details
+            let cc = ''; try { cc = zoneCountry.get(Intl.DateTimeFormat().resolvedOptions().timeZone || '') || '' } catch { }
+            let name = ''; try { name = cc ? String(new Intl.DisplayNames(['en'], { type: 'region' }).of(cc) || '').slice(0, 60) : '' } catch { }
+            return { country: name, country_code: cc }
         }
+        SS.del('geo')   // an earlier version kept a looked-up place for the tab; it is no longer used
         // a link's tag (Dinis, 6 November: "I just sent a link to somebody ... I would like to see if they open it ... and
         // forward it"): ?via=<tag> (or utm_source / utm_campaign) on the link you send. Kept for the tab, so the pages read
         // after arriving count too; a tag names the link, never the person. Letters, digits, '.', '_' and '-', 40 at most.
@@ -119,7 +110,7 @@
             const c0 = await cfg(); const L = (c0.enabled && c0.lanes && c0.lanes[LANE]) || []; if (!L.length) return false
             // the drain key, the endpoint and the vault: this file's own, else promptugal.news's published obs.json (shared)
             const c = c0.recipient && c0.endpoint && c0.vault_id ? c0 : Object.assign({}, await shared(c0), c0)
-            if (!('country' in ev)) Object.assign(ev, await place(c))
+            if (!('country' in ev)) Object.assign(ev, place())
             const payload = await seal(c.recipient.encrypt, JSON.stringify(ev))
             const start = Math.floor(Math.random() * L.length)   // a random first lane spreads the load
             for (const token of L.map((_, i) => L[(start + i) % L.length])) {
