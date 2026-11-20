@@ -108,6 +108,51 @@
    "source": "videos.b@'s pre-review (PrompTugal__News__Videos de181ef), passed on by conductor.b@; AppSec post-review",
    "fix": "The trusted base is recorded in the checker, and orphans and side histories are refused. The deciding check runs from the last release's copy (scripts/check-signatures-trusted.sh). 4 tests added.",
    "status": "fixed"
+  },
+  {
+   "title": "The map's files were copied into the site even when the map was off, so unchecked files were served",
+   "severity": "medium",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "The build removes assets/ptmap and map-init.js whenever /places/ does not draw the map; the validator fails unless the files ship exactly when /places/ uses them.",
+   "state": "fixed"
+  },
+  {
+   "title": "A review of \"passedX\" counted as passed",
+   "severity": "low",
+   "file": "scripts/map.mjs",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "The review must read \"passed (security@ <commit>)\"; a test covers \"passed-not\".",
+   "state": "fixed"
+  },
+  {
+   "title": "The validator's inline-script rule could be skipped by a quoted \" src=\" in another attribute",
+   "severity": "low",
+   "file": "scripts/validate.mjs",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "Quoted values are stripped before looking for src; one map data block at most, on /places/ only.",
+   "state": "fixed"
+  },
+  {
+   "title": "The validator matched \"ptmap\" anywhere in a page, so post text could fail a build",
+   "severity": "low",
+   "file": "scripts/validate.mjs",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "Only script src and stylesheet href are checked.",
+   "state": "fixed"
+  },
+  {
+   "title": "The tests did not cover integrity as a string, versions as an array, or inherited map and integrity keys",
+   "severity": "low",
+   "file": "scripts/test-map.mjs",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "Five cases added (30 in all), each refused or off.",
+   "state": "fixed"
   }
  ]
 }

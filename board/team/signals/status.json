@@ -2,13 +2,13 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-19T17:43:00Z",
-  "state": "handed over: this session is long; the next signals.b@ session starts from board/team/signals/handovers/2026-11-19-0735.md",
+  "updated": "2026-11-20T08:45:00Z",
+  "state": "wake 20 Nov 08:28 UTC: the shared map on /places/; the hand-over (board/team/signals/handovers/2026-11-19-0735.md) still stands for the next session",
   "passes": {
-    "opening_conductor": "ran (Sonnet): proceed; added footer links to /principles/ and /report/, pay chip, sourced numbers",
-    "security_pre_review": "ran (Sonnet): tag job skipped on schedule, exact-host allowlists, no innerHTML, CSP, slug collisions, Markdown sanitising, takedown list, narrow commit-check regex; all done",
-    "appsec_post_review": "ran (Sonnet): no XSS, path traversal or secret; 3 medium and 3 low found and fixed before release (docs/security-findings.json, shown on /security/); default branch confirmed dev, so the schedule fires",
-    "closing_conductor": "ran: status, debrief, REALITY.md, report to conductor.b@"
+    "opening_conductor": "ran (Sonnet, with the pre-review, 20 Nov 08:30 UTC): proceed; the map's source is Dinis's word (2026-11-19-cameras-as-links-and-the-map.md line 22)",
+    "security_pre_review": "ran (Sonnet): 10 controls (sha384 pin, off when read from the snapshot, coordinates in view, own hrefs and names, escaped JSON block, /places/ only, no CSP change); all built",
+    "appsec_post_review": "ran (Sonnet): no high; 1 medium (unchecked map files shipped when the map was off) and 4 low, all fixed before release (docs/security-findings.json, shown on /security/)",
+    "closing_conductor": "ran: status, REALITY.md, threat model, report to conductor.b@"
   },
   "done": [
     "39 pages from data.promptugal.news's API: home, 19 places, 8 topics, 5 organisation accounts, indexes, /how/, /security/, /takedown/; Markdown twins and llms.txt",
@@ -37,11 +37,12 @@
     "2026-11-19T05:10Z: tz-country 1.1.0; a newer registry version no longer fails the build (no country / no bar until upgraded)",
     "2026-11-19T05:14Z: leak scan: private key headers never exempt; OpenSSH public keys flagged outside ssh_signing.public_key; 33 tests in release and CI. Degrade notes read '<piece> <version> off: the registry names <newer>'",
     "2026-11-19T07:16Z: sites bar 1.2.0; pins read from the registry's per-version lists (bar.versions, obs_tz.versions)",
-    "2026-11-19T14:04Z: signing check controls 6 (orphans and side histories refused, trusted base recorded) and 7 (the deciding check runs from the last release's copy); 16 tests"
+    "2026-11-19T14:04Z: signing check controls 6 (orphans and side histories refused, trusted base recorded) and 7 (the deciding check runs from the last release's copy); 16 tests",
+    "2026-11-20T08:45Z (date -u): the shared map ptmap 1.0.2 (designer@; review passed, security@ 168c14fc5) on /places/: vendored in src/assets/ptmap/1.0.2/, both files checked at every build against sites.json map.versions['1.0.2'].integrity (sha384); a differing byte fails the build, a registry without 1.0.2 or read from the snapshot leaves the map out. 18 places drawn from ontologist@'s places-registry.json (Lisboa through its alias of lisbon; the Algarve is a region with no point), sized by posts; London and Brussels insets null until this site has their data. Loaded on /places/ only (validator); scripts/test-map.mjs, 30 cases, in release and CI; the map's files ship only when the map is drawn"
   ],
   "blocked": [],
   "next": [
-    "London, and the EU through Brussels (Dinis, 19 Nov 2026 about 17:40 UTC, board/guidance/2026-11-19-cameras-as-links-and-the-map.md on promptugal.news): signals has no map yet, and data.promptugal.news has no social data for London or Brussels yet (19 places, all in Portugal, read 17:43 UTC). When it has, add London as a place, and a map with Portugal large and London and Brussels small, built from ontologist@'s data/site/places-registry.json in designer@'s shared look. Cameras do not apply to signals: it shows no video.",
+    "London, and the EU through Brussels (Dinis, 19 Nov 2026 about 17:40 UTC, board/guidance/2026-11-19-cameras-as-links-and-the-map.md): the map is on /places/ with Portugal (20 Nov); data.promptugal.news's social data names no London or Brussels place yet (19 places, all in Portugal, read 20 Nov 07:18 UTC). When it does, add London as a place and fill the map's london and eu insets.",
     "Code pages loaded in the browser: designed and pre-reviewed in board/team/signals/handovers/2026-11-19-0735.md; build it, then post-review",
     "Code (github-pt) in the browser too, once data.b@'s file has a stable data_read_at and its own cadence",
     "show the past: daily post counts per place and topic over time, once data.b@'s committed social history has 7 days (gaps shown as gaps)",

@@ -5,7 +5,7 @@
 // hosts and path shapes, slugs are made here and checked for collisions. Posts are shown by link only: no text, no media.
 //   node scripts/pages.mjs              writes the pages into _site/ (run by scripts/build.mjs after copying src/)
 //   node scripts/pages.mjs --snapshot   refreshes data/snapshot/ from the API (a person or agent commits it)
-import { mkdirSync, writeFileSync, readFileSync, existsSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, existsSync, rmSync } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
 import { createHash } from 'node:crypto';
 // The PrompTugal sites bar v1.2.1 (dev@PrompTugal.dinis, designer@'s spec, the one switcher Dinis asked for on 19 Nov about 03:18 UTC;
@@ -33,6 +33,11 @@ const tzPin = pin => { const x = own(pin, 'integrity') ?? own(pin, 'tz-country.j
 const sri = f => 'sha256-' + createHash('sha256').update(readFileSync(f)).digest('base64');
 const { render: renderBar, check: checkBar } = await import('./vendor/sites-bar-1.2.1/sites-bar-render.mjs');
 const SITES_API = 'https://promptugal.news/api/v1/';
+// ontologist@'s places registry, for the map's coordinates only (Dinis, 19 Nov 2026 about 17:40 UTC: "The places come from
+// ontologist@'s data/site/places-registry.json"); same caps and snapshot fallback as every other read
+const PLACES_BASE = 'https://promptugal.news/data/site/', PLACES_FILE = 'places-registry.json';
+const { MAP_VERSION, checkMap, mapPlaces, jsonBlock } = await import('./map.mjs');
+let MAP = { on: false, note: '' };
 // The one shared time-zone-to-country table (dev@PrompTugal.dinis, v1.1.0; Dinis, 19 Nov 2026: the country from the time zone,
 // no IP lookup), vendored as src/assets/obs/tz-country.json. Checked against the registry's full pin (obs_tz.integrity) when the
 // live registry is read; a mismatch fails the build. Every entry is checked (zone name, two letters A to Z) and the table is
@@ -85,7 +90,7 @@ async function getJSON(path, base = API) {
     return JSON.parse(Buffer.concat(chunks).toString('utf8'));
   } finally { clearTimeout(t); }
 }
-const snapName = (p, base = API) => (base === LIB ? 'library_' : base === SITES_API ? 'sites_' : '') + p.replace(/[^a-z0-9.-]+/gi, '_');
+const snapName = (p, base = API) => (base === LIB ? 'library_' : base === SITES_API ? 'sites_' : base === PLACES_BASE ? 'site_' : '') + p.replace(/[^a-z0-9.-]+/gi, '_');
 async function read(path, notes, base = API) {
   try { return await getJSON(path, base); }
   catch (e) {
@@ -150,7 +155,7 @@ function write(rel, html, md, title, desc) {
 }
 const NAV = [['', 'Latest'], ['places/', 'Places'], ['topics/', 'Topics'], ['accounts/', 'Accounts'], ['code/', 'Code'], ['how/', 'How'], ['security/', 'Security']];
 const SITES = [['weather', 'Weather'], ['civic', 'Civic'], ['startups', 'Startups'], ['travel', 'Travel'], ['events', 'Events'], ['data', 'Data'], ['signals', 'Signals']];
-function shell({ rel, title, desc, h1, body, state, current }) {
+function shell({ rel, title, desc, h1, body, state, current, head = '' }) {
   const canon = `${SITE}/${rel}`;
   return `<!doctype html>
 <html lang="en-GB">
@@ -172,7 +177,7 @@ function shell({ rel, title, desc, h1, body, state, current }) {
 <script defer src="/assets/sites-bar/1.2.1/sites-bar.js"></script>
 <script defer src="/assets/signals.js"></script>
 <script defer src="/assets/obs/obs.js" data-lane="signals"></script>
-</head>
+${head}</head>
 <body>
 ${BAR_HTML}
 <header class="mast"><div class="wrap">
@@ -223,7 +228,8 @@ async function snapshot() {
     const noPins = v => Array.isArray(v) ? v.map(noPins) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).filter(([k]) => !/integrity/i.test(k)).map(([k, x]) => [k, noPins(x)])) : v;
     const { bar, obs_tz, ...keep } = reg; writeFileSync(join(SNAP, 'sites_sites.json'), JSON.stringify(noPins(keep), null, 1) + '\n'); }
   for (const p of LIB_PATHS) writeFileSync(join(SNAP, snapName(p, LIB)), JSON.stringify(await getJSON(p, LIB), null, 1) + '\n');
-  console.log(`snapshot: ${paths.length + LIB_PATHS.length} files in ${SNAP}/`);
+  writeFileSync(join(SNAP, snapName(PLACES_FILE, PLACES_BASE)), JSON.stringify(await getJSON(PLACES_FILE, PLACES_BASE), null, 1) + '\n');
+  console.log(`snapshot: ${paths.length + LIB_PATHS.length + 1} files in ${SNAP}/`);
 }
 
 async function main() {
@@ -235,6 +241,8 @@ async function main() {
     else if (reg && !notes.some(n => n.startsWith('sites.json'))) { notes.push('the live sites registry publishes no pins for the bar: the bar is left out of this build'); reg = null; }
     else if (reg) notes.push('the sites bar files were not checked against the registry at this build (snapshot in use)');
     writeTz(notes, regRead);
+    MAP = checkMap(regRead, !!regRead && !notes.some(n => n.startsWith('sites.json')));
+    if (MAP.note) notes.push(MAP.note);
     BAR_HTML = reg ? renderBar(reg, { here: 'signals.promptugal.news' }) : '';
     if (!BAR_HTML && reg) { notes.push('the sites registry failed the bar\'s check; the last good one was used'); try { BAR_HTML = renderBar(JSON.parse(readFileSync(join(SNAP, 'sites_sites.json'), 'utf8')), { here: 'signals.promptugal.news' }); } catch { BAR_HTML = ''; } } }
   let latest = await read('social/latest.json', notes);
@@ -322,8 +330,20 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
     write(`places/${pl}/`, shell({ rel: `places/${pl}/`, title: `${placeName(pl)}: signals | PrompTugal.news Signals`, desc: `What organisations are posting about ${placeName(pl)}, by link.`, h1: placeName(pl), body, state, current: 'places/' }),
       md(placeName(pl), [...ps.map(postMD), ...libMD(libItemsHere)], state), placeName(pl), 'place');
   }
-  write('places/', shell({ rel: 'places/', title: 'Places | PrompTugal.news Signals', desc: 'Signals by place.', h1: 'Places', state, current: 'places/',
-    body: `<ul class="cols">${placeList.map(p => `<li><a href="/places/${p}/">${esc(placeName(p))}</a> <span class="n">${posts.filter(x => x.places.includes(p)).length}</span></li>`).join('')}</ul><p class="small">The number is posts that name the place in their text (source: social/latest.json); a place page also lists posts by organisations that cover it.</p>` }),
+  let mapHTML = '', mapHead = '';
+  if (MAP.on) {
+    const reg = await read(PLACES_FILE, notes, PLACES_BASE);
+    const { places, dropped } = mapPlaces(placeList, reg, placeName, p => posts.filter(x => x.places.includes(p)).length);
+    if (dropped.length) notes.push(`the map has no coordinates for ${dropped.length} place(s) (${dropped.slice(0, 5).join(', ')}): not drawn`);
+    if (places.length) {
+      mapHead = `<link rel="stylesheet" href="/assets/ptmap/${MAP_VERSION}/ptmap.css">\n<script defer src="/assets/ptmap/${MAP_VERSION}/ptmap.js"></script>\n<script defer src="/assets/map-init.js"></script>\n`;
+      mapHTML = `<figure class="map"><div id="ptmap"></div>${jsonBlock('ptmap-data', { label: 'Places with signals on this site', places, london: null, eu: null })}<figcaption class="small">${places.length} places with signals, sized by posts that name them. Coordinates from ontologist@'s <a href="${PLACES_BASE}${PLACES_FILE}">places registry</a>; outline Natural Earth (public domain) via world-atlas (ISC); map ptmap ${MAP_VERSION} by designer@PrompTugal.dinis. London and Brussels are added when this site has their data.</figcaption></figure>`;
+    } else notes.push('the map has no place to draw: left out');
+  }
+  // the map's files ship only when they were checked and are used (AppSec post-review, 20 Nov 2026, medium 1)
+  if (!mapHead) { rmSync(join(OUT, 'assets/ptmap'), { recursive: true, force: true }); rmSync(join(OUT, 'assets/map-init.js'), { force: true }); }
+  write('places/', shell({ rel: 'places/', title: 'Places | PrompTugal.news Signals', desc: 'Signals by place.', h1: 'Places', state, current: 'places/', head: mapHead,
+    body: `${mapHTML}<ul class="cols">${placeList.map(p => `<li><a href="/places/${p}/">${esc(placeName(p))}</a> <span class="n">${posts.filter(x => x.places.includes(p)).length}</span></li>`).join('')}</ul><p class="small">The number is posts that name the place in their text (source: social/latest.json); a place page also lists posts by organisations that cover it.</p>` }),
     md('Places', placeList.map(p => `- ${placeName(p)}: ${SITE}/places/${p}/`), state), 'Places', 'index');
 
   // topics

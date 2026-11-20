@@ -51,3 +51,5 @@ footer p{margin:.3rem 0}
 @media (max-width:600px){h1{font-size:1.6rem}.tools{margin-left:0}}
 .prov{font-size:.8rem;color:var(--muted)}
 .live-note.stale{color:var(--red)}
+/* the shared map on /places/ (ptmap 1.0.2's own look; this only spaces it) */
+figure.map{margin:0 0 1.5rem}figure.map figcaption{margin-top:.5rem;max-width:520px}

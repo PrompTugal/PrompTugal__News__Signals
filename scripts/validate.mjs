@@ -43,6 +43,24 @@ for (const f of files.filter(f => f.endsWith('.html'))) for (const m of readFile
   if (m[1] !== 'https://signals.promptugal.news/preview.png') fail(`${f}: og:image must be https://signals.promptugal.news/preview.png`);
   if (!existsSync('_site/preview.png')) fail(`${f}: og:image points at /preview.png, which is not built`);
 }
+// The shared map loads on /places/ only, its files ship only when /places/ uses them, and its data is one JSON block,
+// never a script that runs (security pre-review and AppSec post-review, 20 Nov 2026)
+const PLACES_PAGE = join('_site', 'places', 'index.html'), MAP_SCRIPTS = new Set(['/assets/ptmap/1.0.2/ptmap.js', '/assets/map-init.js']);
+let mapUsed = false;
+for (const f of files.filter(f => f.endsWith('.html'))) { const s = readFileSync(f, 'utf8'), places = f === PLACES_PAGE; let blocks = 0;
+  for (const m of s.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
+    const bare = m[1].replace(/"[^"]*"|'[^']*'/g, '""'), src = /\ssrc\s*=\s*"([^"]*)"/.exec(m[1]);
+    if (/\ssrc\s*=/.test(bare)) { if (!src) { fail(`${f}: a script src that is not double-quoted`); continue; }
+      if (MAP_SCRIPTS.has(src[1])) { if (places) mapUsed = true; else fail(`${f}: the shared map is loaded outside /places/`); }
+      if (m[2].trim()) fail(`${f}: a script with src and a body`); continue; }
+    if (!places || m[1] !== ' type="application/json" id="ptmap-data"') { fail(`${f}: an inline script that is not the map's data block`); continue; }
+    blocks++; if (/[<>&]/.test(m[2])) fail(`${f}: the map's data block holds a raw < > or &`);
+    try { JSON.parse(m[2]); } catch { fail(`${f}: the map's data block is not JSON`); }
+  }
+  if (blocks > 1) fail(`${f}: more than one map data block`);
+  for (const m of s.matchAll(/<link\b[^>]*\bhref="([^"]*)"/g)) if (/^\/assets\/ptmap\//.test(m[1]) && !places) fail(`${f}: the map's stylesheet outside /places/`);
+}
+if (existsSync('_site/assets/ptmap') !== mapUsed || existsSync('_site/assets/map-init.js') !== mapUsed) fail('the map files must ship exactly when /places/ uses them');
 if (!existsSync('_site/version.json')) fail('no version.json');
 if (!existsSync('_site/index.html')) fail('no index.html');
 try {
