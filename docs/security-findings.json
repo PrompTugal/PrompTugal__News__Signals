@@ -153,6 +153,51 @@
    "by": "AppSec post-review (Sonnet pass of signals.b@)",
    "fix": "Five cases added (30 in all), each refused or off.",
    "state": "fixed"
+  },
+  {
+   "title": "A newer file with no release in reach would have replaced the built releases with an empty list",
+   "severity": "medium",
+   "file": "src/assets/code.js",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "A list is replaced only when the new file has something to show (decide() in code-core.mjs); otherwise the built list stays.",
+   "state": "fixed"
+  },
+  {
+   "title": "A take-down entry github:<Login> in mixed case did not match, in the build or the browser",
+   "severity": "medium",
+   "file": "src/assets/code-core.mjs",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "Take-down accounts are compared lower-case; a test covers github:ACME.",
+   "state": "fixed"
+  },
+  {
+   "title": "A newer file that was not shown, or one dated up to a day ahead, set the mark later files are compared with",
+   "severity": "low",
+   "file": "src/assets/code.js",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "The mark moves only when a list was replaced; a file more than 10 minutes ahead is not used.",
+   "state": "fixed"
+  },
+  {
+   "title": "Every return to the tab fetched the file again",
+   "severity": "low",
+   "file": "src/assets/code.js",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "After a good read the next fetch waits for the next round; a missing code_orgs map now backs off like a failure.",
+   "state": "fixed"
+  },
+  {
+   "title": "The browser's replace rule was untested",
+   "severity": "low",
+   "file": "scripts/test-code.mjs",
+   "found": "2026-11-20",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "The rule is the pure function decide(), tested in 9 cases (49 in all); the build's output was compared with the old build's before the wrappers were added.",
+   "state": "fixed"
   }
  ]
 }

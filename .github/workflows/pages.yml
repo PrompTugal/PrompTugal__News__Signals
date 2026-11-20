@@ -56,6 +56,8 @@ jobs:
         run: node scripts/test-leak-scan.mjs
       - name: The shared map's pin check and place checks hold (security pre-review, 20 Nov 2026)
         run: node scripts/test-map.mjs
+      - name: The Code checks shared by the build and the browser hold (security pre-review, 19 Nov 2026)
+        run: node scripts/test-code.mjs
       - name: The deciding step refuses what it should (security@'s third ruling)
         run: scripts/test-deciding-step.sh
       - name: The signature check refuses what it should, for the right reason

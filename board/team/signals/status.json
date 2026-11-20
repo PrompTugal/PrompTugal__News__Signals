@@ -2,12 +2,12 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-20T08:45:00Z",
-  "state": "wake 20 Nov 08:28 UTC: the shared map on /places/; the hand-over (board/team/signals/handovers/2026-11-19-0735.md) still stands for the next session",
+  "updated": "2026-11-20T19:50:00Z",
+  "state": "wake 20 Nov 19:28 UTC: the Code pages load their data in the browser; the hand-over (board/team/signals/handovers/2026-11-19-0735.md) still stands for the next session",
   "passes": {
-    "opening_conductor": "ran (Sonnet, with the pre-review, 20 Nov 08:30 UTC): proceed; the map's source is Dinis's word (2026-11-19-cameras-as-links-and-the-map.md line 22)",
-    "security_pre_review": "ran (Sonnet): 10 controls (sha384 pin, off when read from the snapshot, coordinates in view, own hrefs and names, escaped JSON block, /places/ only, no CSP change); all built",
-    "appsec_post_review": "ran (Sonnet): no high; 1 medium (unchecked map files shipped when the map was off) and 4 low, all fixed before release (docs/security-findings.json, shown on /security/)",
+    "opening_conductor": "ran (19:30 UTC): proceed with the next piece in the hand-over, Code in the browser; no new rows from Dinis; social still 19 places, all in Portugal (read 18:16 UTC)",
+    "security_pre_review": "from the hand-over (Sonnet, 19 Nov about 07:35 UTC, 10 points); point 9 met by one shared module instead of two copies",
+    "appsec_post_review": "ran (Sonnet): no high; 2 medium (an empty releases list could replace the built one; mixed-case github: take-downs missed) and 3 low, all fixed before release (docs/security-findings.json, shown on /security/)",
     "closing_conductor": "ran: status, REALITY.md, threat model, report to conductor.b@"
   },
   "done": [
@@ -38,13 +38,12 @@
     "2026-11-19T05:14Z: leak scan: private key headers never exempt; OpenSSH public keys flagged outside ssh_signing.public_key; 33 tests in release and CI. Degrade notes read '<piece> <version> off: the registry names <newer>'",
     "2026-11-19T07:16Z: sites bar 1.2.0; pins read from the registry's per-version lists (bar.versions, obs_tz.versions)",
     "2026-11-19T14:04Z: signing check controls 6 (orphans and side histories refused, trusted base recorded) and 7 (the deciding check runs from the last release's copy); 16 tests",
-    "2026-11-20T08:45Z (date -u): the shared map ptmap 1.0.2 (designer@; review passed, security@ 168c14fc5) on /places/: vendored in src/assets/ptmap/1.0.2/, both files checked at every build against sites.json map.versions['1.0.2'].integrity (sha384); a differing byte fails the build, a registry without 1.0.2 or read from the snapshot leaves the map out. 18 places drawn from ontologist@'s places-registry.json (Lisboa through its alias of lisbon; the Algarve is a region with no point), sized by posts; London and Brussels insets null until this site has their data. Loaded on /places/ only (validator); scripts/test-map.mjs, 30 cases, in release and CI; the map's files ship only when the map is drawn"
+    "2026-11-20T08:45Z (date -u): the shared map ptmap 1.0.2 (designer@; review passed, security@ 168c14fc5) on /places/: vendored in src/assets/ptmap/1.0.2/, both files checked at every build against sites.json map.versions['1.0.2'].integrity (sha384); a differing byte fails the build, a registry without 1.0.2 or read from the snapshot leaves the map out. 18 places drawn from ontologist@'s places-registry.json (Lisboa through its alias of lisbon; the Algarve is a region with no point), sized by posts; London and Brussels insets null until this site has their data. Loaded on /places/ only (validator); scripts/test-map.mjs, 30 cases, in release and CI; the map's files ship only when the map is drawn",
+    "2026-11-20T19:50Z (date -u): Code pages load the data in the browser (Dinis, 19 Nov 01:13): /code/ releases and most recently pushed, and each /code/<org>/, reload from github-pt/latest.json on open and every 10 minutes, replacing a list only with a newer file (data_read_at) that passes the build's own checks; the checks moved into src/assets/code-core.mjs, which the build and the browser both import, so they cannot drift (pre-review point 9); the build's /code/ output is unchanged apart from licence links now carrying rel=\"noopener noreferrer nofollow\"; scripts/test-code.mjs, 49 cases, in release and CI"
   ],
   "blocked": [],
   "next": [
     "London, and the EU through Brussels (Dinis, 19 Nov 2026 about 17:40 UTC, board/guidance/2026-11-19-cameras-as-links-and-the-map.md): the map is on /places/ with Portugal (20 Nov); data.promptugal.news's social data names no London or Brussels place yet (19 places, all in Portugal, read 20 Nov 07:18 UTC). When it does, add London as a place and fill the map's london and eu insets.",
-    "Code pages loaded in the browser: designed and pre-reviewed in board/team/signals/handovers/2026-11-19-0735.md; build it, then post-review",
-    "Code (github-pt) in the browser too, once data.b@'s file has a stable data_read_at and its own cadence",
     "show the past: daily post counts per place and topic over time, once data.b@'s committed social history has 7 days (gaps shown as gaps)",
     "London: its page appears as soon as data.promptugal.news's social data names it (no London accounts yet, 22:29 UTC); the sites bar registry promptugal.news/api/v1/sites.json is 404, so the bar waits",
     "voices section, RSS first: blogs, newsletters, podcasts by place and topic (title, byline as published, date, link, our one-line summary), once data.b@ publishes the feeds",

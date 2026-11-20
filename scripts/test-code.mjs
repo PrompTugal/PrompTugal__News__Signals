@@ -1,0 +1,72 @@
+// Tests for src/assets/code-core.mjs, the github-pt checks the build and the browser share (signals.b@PrompTugal.dinis,
+// 20 Nov 2026; security pre-review of 19 Nov 2026, point 9: hostile inputs). Usage: node scripts/test-code.mjs
+import { readFileSync } from 'node:fs';
+import { checkGh, releasesOf, recentOf, fileReadAt, decide, FILE } from '../src/assets/code-core.mjs';
+const results = [], t = (name, pass) => results.push({ name, pass: !!pass });
+const now = Date.parse('2026-11-20T12:00:00Z'), iso = h => new Date(now - h * 3600000).toISOString();
+const repo = (login, name, over = {}) => ({ name, url: `https://github.com/${login}/${name}`, language: 'Go', stars: 3, forks: 1, pushed_at: iso(5), license: { name: 'MIT', url: 'https://spdx.org/licenses/MIT.html' }, releases: [], ...over });
+const org = (login, over = {}) => ({ login, name: login + ' Lda', kind: 'company', url: `https://github.com/${login}`, verified_at: '2026-11-18', repos: [repo(login, 'tool')], ...over });
+const run = (orgs, blocked) => checkGh({ orgs }, blocked, now);
+const one = (o) => run([o]).orgs;
+
+t('a good organisation passes', one(org('acme')).length === 1);
+t('a javascript: org URL is refused', !one(org('acme', { url: 'javascript:alert(1)' })).length);
+t('an org URL on another host is refused', !one(org('acme', { url: 'https://github.com.evil.example/acme' })).length);
+t('an org URL with a // path is refused', !one(org('acme', { url: 'https://github.com//acme' })).length);
+t('a user kind is refused', !one(org('acme', { kind: 'user' })).length);
+t('a login with unicode is refused', !one(org('acmé')).length);
+t('a login of 40 characters is refused', !one(org('a'.repeat(40))).length);
+t('__proto__ and constructor are refused', !run([org('constructor'), org('__proto__')]).orgs.length);
+t('a duplicate login in another case is counted once', run([org('acme'), org('ACME', { name: 'Other' })]).orgs.length === 1);
+t('a taken-down account is left out', !run([org('acme')], { accounts: ['github:acme'] }).orgs.length);
+t('a taken-down account in another case is left out', !run([org('acme')], { accounts: ['github:ACME'] }).orgs.length);
+t('a taken-down repository is left out, any case', !run([org('acme')], { urls: ['https://github.com/ACME/TOOL'] }).orgs[0].repos.length);
+const r1 = n => one(org('acme', { repos: [repo('acme', 'tool', n)] }))[0].repos;
+t('a repo URL of another organisation is refused', !r1({ url: 'https://github.com/other/tool' }).length);
+t('a repo URL with a query is refused', !r1({ url: 'https://github.com/acme/tool?x=1' }).length);
+t('a repo URL with brackets is refused', !r1({ url: 'https://github.com/acme/tool(1)' }).length);
+t('a repo named .. is refused', !one(org('acme', { repos: [repo('acme', '..')] }))[0].repos.length);
+t('a long mixed-case name is left out and counted', (r => !r.orgs[0].repos.length && r.leftOut === 1)(run([org('acme', { repos: [repo('acme', 'aB3dE5gH7j'.repeat(4))] })])));
+t('a push in the future is refused', !r1({ pushed_at: new Date(now + 3 * 86400000).toISOString() }).length);
+t('a push as a number is refused', !r1({ pushed_at: now }).length);
+t('stars as a string are dropped', r1({ stars: '9' })[0].stars === null);
+t('a language with markup is dropped', r1({ language: '<b>Go</b>' })[0].language === null);
+t('a licence on another host falls back to the repository', (r => r.licence.url === 'https://github.com/acme/tool' && r.licence.name === "the repository's terms")(r1({ license: { name: 'MIT', url: 'https://evil.example/MIT' } })[0]));
+t('a licence name with markup falls back', r1({ license: { name: '<i>MIT</i>', url: 'https://spdx.org/licenses/MIT.html' } })[0].licence.name === "the repository's terms");
+const rel = x => r1({ releases: [{ tag: 'v1.0', url: 'https://github.com/acme/tool/releases/tag/v1.0', published_at: iso(2), ...x }] })[0].releases;
+t('a good release passes', rel({}).length === 1);
+t('a release URL outside releases/tag is refused', !rel({ url: 'https://github.com/acme/tool/archive/v1.0.zip' }).length);
+t('a release URL with brackets in its path is refused', !rel({ url: 'https://github.com/acme/tool/releases/tag/v1](x)' }).length);
+t('a release tag with a space is kept as no tag', rel({ tag: 'v1 <x>' })[0].tag === null);
+t('at most 5 releases per repository', r1({ releases: Array.from({ length: 9 }, (_, i) => ({ tag: 'v' + i, url: `https://github.com/acme/tool/releases/tag/v${i}`, published_at: iso(i + 1) })) })[0].releases.length === 5);
+const big = { orgs: Array.from({ length: 300 }, (_, i) => org('o' + i)) };
+t('at most 200 organisations', checkGh(big, {}, now).orgs.length === 200);
+t('a huge name is capped at 80 characters', one(org('acme', { name: 'x'.repeat(5000) }))[0].name.length === 80);
+t('control characters in a name become spaces', one(org('acme', { name: 'A\u0000B\u2028C' }))[0].name === 'A B C');
+t('orgs as an object is read as none', !checkGh({ orgs: { a: org('acme') } }, {}, now).orgs.length);
+t('releases older than 30 days are not listed', !releasesOf(one(org('acme', { repos: [repo('acme', 'tool', { releases: [{ tag: 'v1', url: 'https://github.com/acme/tool/releases/tag/v1', published_at: iso(24 * 40) }] })] })), now).length);
+t('recent is newest first', (l => l[0][1].name === 'new')(recentOf(one(org('acme', { repos: [repo('acme', 'old', { pushed_at: iso(50) }), repo('acme', 'new', { pushed_at: iso(1) })] })))));
+t('data_read_at is preferred to read_at', fileReadAt({ data_read_at: iso(1), read_at: iso(3) }, now).toISOString() === iso(1));
+t('the file address is a constant on data.promptugal.news', FILE === 'https://data.promptugal.news/api/v1/github-pt/latest.json');
+const B = new Date(now - 6 * 3600000), O5 = Array.from({ length: 20 }, (_, i) => ({ i })), D = (o = {}) => decide({ built: B, shownAt: null, readAt: new Date(now - 3600000), orgs: O5, builtCount: 20, items: 10, now, ...o });
+t('decide: a newer good file replaces', D());
+t('decide: an older or equal file does not', !D({ readAt: B }) && !D({ readAt: new Date(B - 1) }));
+t('decide: a file more than 10 minutes ahead does not', !D({ readAt: new Date(now + 11 * 60000) }) && D({ readAt: new Date(now + 9 * 60000) }));
+t('decide: nothing to show keeps the built list', !D({ items: 0 }));
+t('decide: a file under a quarter of the built organisations does not', !D({ orgs: O5.slice(0, 4) }) && D({ orgs: O5.slice(0, 5) }));
+t('decide: the floor is off under 5 built organisations', D({ builtCount: 4, orgs: O5.slice(0, 1) }));
+t('decide: no built time never replaces', !D({ built: null }) && !D({ built: new Date('x') }));
+t('decide: compares with what is shown, not only the build', !D({ shownAt: new Date(now - 1800000) }) && D({ shownAt: new Date(now - 7200000) }));
+t('decide: no organisations does not', !D({ orgs: [] }));
+// the browser script imports the build's module and has no regex or check of its own for the data
+const js = readFileSync(new URL('../src/assets/code.js', import.meta.url), 'utf8');
+t('code.js imports its checks from code-core.mjs', /from '\.\/code-core\.mjs'/.test(js) && /checkGh\(/.test(js));
+t('code.js asks decide() before it replaces, and moves the mark only when it did', /if \(!decide\(/.test(js) && /if \(replaced\) shownAt = readAt/.test(js));
+t('code.js sets no innerHTML and reads no address from the page', !/innerHTML|insertAdjacentHTML|outerHTML|getAttribute\('data-src'\)/.test(js));
+const pages = readFileSync(new URL('./pages.mjs', import.meta.url), 'utf8');
+t('the build uses the same module', /import\('\.\.\/src\/assets\/code-core\.mjs'\)/.test(pages) && /checkGh\(gh,/.test(pages) && !/const LOGIN = /.test(pages));
+
+const bad = results.filter(r => !r.pass);
+for (const r of bad) console.error(`FAIL ${r.name}`);
+if (bad.length || results.length < 49) { console.error(`FAILED: ${bad.length} of ${results.length} cases`); process.exit(1); }
+console.log(`OK (${results.length} cases)`);
