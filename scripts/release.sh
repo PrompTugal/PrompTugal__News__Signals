@@ -13,6 +13,7 @@ node scripts/leak-scan.mjs
 node scripts/test-leak-scan.mjs
 node scripts/test-map.mjs
 node scripts/test-code.mjs
+node scripts/test-runs.mjs
 node scripts/check-commits.mjs origin/dev HEAD
 node scripts/test-check-signatures.mjs
 scripts/test-deciding-step.sh

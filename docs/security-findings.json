@@ -198,6 +198,51 @@
    "by": "AppSec post-review (Sonnet pass of signals.b@)",
    "fix": "The rule is the pure function decide(), tested in 9 cases (49 in all); the build's output was compared with the old build's before the wrappers were added.",
    "state": "fixed"
+  },
+  {
+   "title": "Failed reads with no valid name were left out, so the page could say every read worked beside a failed count",
+   "severity": "medium",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-21",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "The sentence follows the run's failed count; failed reads that cannot be listed are counted in a line of their own.",
+   "state": "fixed"
+  },
+  {
+   "title": "\"New\" counted changed responses, which are not always new posts",
+   "severity": "low",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-21",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "The column is \"Changed\" and the text says so.",
+   "state": "fixed"
+  },
+  {
+   "title": "A failure streak that starts at the file's oldest run read as a known start date (in the Markdown twin especially)",
+   "severity": "low",
+   "file": "scripts/pages.mjs",
+   "found": "2026-11-21",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "Both formats say the streak covers every run in the file and may be longer.",
+   "state": "fixed"
+  },
+  {
+   "title": "The committed snapshot copied some fields unchecked",
+   "severity": "low",
+   "file": "scripts/runs.mjs",
+   "found": "2026-11-21",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "The snapshot keeps only checked times, counts, names, statuses and a short licence and about.",
+   "state": "fixed"
+  },
+  {
+   "title": "No test for null entries, the snapshot writer, unlisted failures or 3xx",
+   "severity": "low",
+   "file": "scripts/test-runs.mjs",
+   "found": "2026-11-21",
+   "by": "AppSec post-review (Sonnet pass of signals.b@)",
+   "fix": "Five cases added (25 in all).",
+   "state": "fixed"
   }
  ]
 }

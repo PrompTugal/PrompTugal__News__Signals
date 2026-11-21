@@ -2,12 +2,12 @@
   "agent": "signals.b@PrompTugal.dinis",
   "site": "https://signals.promptugal.news",
   "repo": "PrompTugal/PrompTugal__News__Signals",
-  "updated": "2026-11-20T19:50:00Z",
-  "state": "wake 20 Nov 19:28 UTC: the Code pages load their data in the browser; the hand-over (board/team/signals/handovers/2026-11-19-0735.md) still stands for the next session",
+  "updated": "2026-11-21T08:50:00Z",
+  "state": "wake 21 Nov 08:28 UTC: the collector's recent runs on /how/; the hand-over (board/team/signals/handovers/2026-11-19-0735.md) still stands for the next session",
   "passes": {
-    "opening_conductor": "ran (19:30 UTC): proceed with the next piece in the hand-over, Code in the browser; no new rows from Dinis; social still 19 places, all in Portugal (read 18:16 UTC)",
-    "security_pre_review": "from the hand-over (Sonnet, 19 Nov about 07:35 UTC, 10 points); point 9 met by one shared module instead of two copies",
-    "appsec_post_review": "ran (Sonnet): no high; 2 medium (an empty releases list could replace the built one; mixed-case github: take-downs missed) and 3 low, all fixed before release (docs/security-findings.json, shown on /security/)",
+    "opening_conductor": "ran (08:30 UTC): no new rows from Dinis; no 7-day post history published, so 'show the past' starts with the collector's own run history, which exists (44 runs)",
+    "security_pre_review": "ran (Sonnet): 9 controls (no request addresses or hashes shown or kept, names and statuses by pattern, counts worked out here, caps, a missing file never fails the build); all built",
+    "appsec_post_review": "ran (Sonnet): no high; 1 medium (unnamed failed reads could leave 'every read worked' beside a failed count) and 4 low, all fixed before release (docs/security-findings.json, shown on /security/)",
     "closing_conductor": "ran: status, REALITY.md, threat model, report to conductor.b@"
   },
   "done": [
@@ -39,7 +39,8 @@
     "2026-11-19T07:16Z: sites bar 1.2.0; pins read from the registry's per-version lists (bar.versions, obs_tz.versions)",
     "2026-11-19T14:04Z: signing check controls 6 (orphans and side histories refused, trusted base recorded) and 7 (the deciding check runs from the last release's copy); 16 tests",
     "2026-11-20T08:45Z (date -u): the shared map ptmap 1.0.2 (designer@; review passed, security@ 168c14fc5) on /places/: vendored in src/assets/ptmap/1.0.2/, both files checked at every build against sites.json map.versions['1.0.2'].integrity (sha384); a differing byte fails the build, a registry without 1.0.2 or read from the snapshot leaves the map out. 18 places drawn from ontologist@'s places-registry.json (Lisboa through its alias of lisbon; the Algarve is a region with no point), sized by posts; London and Brussels insets null until this site has their data. Loaded on /places/ only (validator); scripts/test-map.mjs, 30 cases, in release and CI; the map's files ship only when the map is drawn",
-    "2026-11-20T19:50Z (date -u): Code pages load the data in the browser (Dinis, 19 Nov 01:13): /code/ releases and most recently pushed, and each /code/<org>/, reload from github-pt/latest.json on open and every 10 minutes, replacing a list only with a newer file (data_read_at) that passes the build's own checks; the checks moved into src/assets/code-core.mjs, which the build and the browser both import, so they cannot drift (pre-review point 9); the build's /code/ output is unchanged apart from licence links now carrying rel=\"noopener noreferrer nofollow\"; scripts/test-code.mjs, 49 cases, in release and CI"
+    "2026-11-20T19:50Z (date -u): Code pages load the data in the browser (Dinis, 19 Nov 01:13): /code/ releases and most recently pushed, and each /code/<org>/, reload from github-pt/latest.json on open and every 10 minutes, replacing a list only with a newer file (data_read_at) that passes the build's own checks; the checks moved into src/assets/code-core.mjs, which the build and the browser both import, so they cannot drift (pre-review point 9); the build's /code/ output is unchanged apart from licence links now carrying rel=\"noopener noreferrer nofollow\"; scripts/test-code.mjs, 49 cases, in release and CI",
+    "2026-11-21T08:50Z (date -u): /how/ shows the collector's recent runs from data.b@'s social/reads.json (the last 14 runs: reads that worked, failed and got a changed response; which reads fail now and since when). It shows that the 5 Bluesky keyword searches have returned HTTP 403 in every run in the file (since 18 Nov 15:07 UTC), while the organisation accounts read fine. No request address or hash is shown or kept in the snapshot; scripts/test-runs.mjs, 25 cases, in release and CI"
   ],
   "blocked": [],
   "next": [
@@ -62,7 +63,7 @@
     "Dinis: the platforms' own embeds need third-party scripts, which the gate forbids; posts stay as links unless you want embeds.",
     "Dinis: this signals.b@ session has handed over. Its git signing key lives only in its container. How should the next session's key be added to team/keys.json? Adding it needs a commit signed with a listed key. Options: this session adds it before its container goes, or you add it by hand."
   ],
-  "data_outlook": "data.b@ (via conductor.b@, 18 Nov 15:33 UTC): 41 Portuguese organisations' own sites checked; none links a Bluesky or Mastodon profile, so the open platforms stay at 5 accounts. Growth comes from Perplexity's social pass (evidence links, from 19 Nov) and RSS feeds of blogs, newsletters and podcasts (voices, RSS first).",
+  "data_outlook": "21 Nov 07:13 UTC: 146 posts, 19 places, all in Portugal; no London or Brussels data. In every run in social/reads.json the 5 Bluesky keyword searches (web-summit, lisboa, algarve, startup-portugal, ia-portugal) fail with HTTP 403; only the 5 organisation feeds are read. Passed to data.b@ through conductor.b@.",
   "library_requests": {
     "read_at": "2026-11-18T22:29Z",
     "url": "https://library.promptugal.news/api/v1/requests/index.json",

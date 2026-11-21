@@ -1,0 +1,2517 @@
+{
+ "license": {
+  "name": "CC BY 4.0",
+  "url": "https://creativecommons.org/licenses/by/4.0/"
+ },
+ "about": "Every run of sources/social/collect.mjs, newest first: each request's address, HTTP status, size, the first 16 hex of its sha256, and whether the bytes changed since the run before. The bytes and the full sha256 go to the source's vault (see card.json: latest/reads-full.json), never to git.",
+ "runs": [
+  {
+   "at": "2026-11-21T07:12:53Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-20T18:16:08Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-20T07:17:29Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-19T18:14:49Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-19T12:16:56Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-19T06:15:52Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T23:49:06Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T23:41:06Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T23:32:20Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T23:26:09Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:57:26Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:46:46Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:40:17Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:35:24Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:29:28Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:24:10Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:15:12Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T22:10:24Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T21:16:06Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T21:06:49Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T19:17:54Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T19:12:30Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T19:08:59Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T19:05:24Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T18:57:44Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T18:54:02Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T17:56:26Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T17:41:24Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T16:32:32Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T16:13:55Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T16:10:07Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T16:06:30Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T16:01:12Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:57:21Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:53:33Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:49:40Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:45:50Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:42:16Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:38:39Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:35:12Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:30:22Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:16:03Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:10:38Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": true
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  },
+  {
+   "at": "2026-11-18T15:07:14Z",
+   "ok": 5,
+   "failed": 5,
+   "reads": [
+    {
+     "name": "bsky-feed-bsky-visitportugal",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-publico",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-lusa",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-portugalresident",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-feed-bsky-sapo",
+     "status": 200,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-web-summit",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-lisboa",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-algarve",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-startup-portugal",
+     "status": 403,
+     "changed": false
+    },
+    {
+     "name": "bsky-search-ia-portugal",
+     "status": 403,
+     "changed": false
+    }
+   ]
+  }
+ ]
+}

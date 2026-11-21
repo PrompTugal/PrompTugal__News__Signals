@@ -37,6 +37,7 @@ const SITES_API = 'https://promptugal.news/api/v1/';
 // ontologist@'s data/site/places-registry.json"); same caps and snapshot fallback as every other read
 const PLACES_BASE = 'https://promptugal.news/data/site/', PLACES_FILE = 'places-registry.json';
 const { MAP_VERSION, checkMap, mapPlaces, jsonBlock } = await import('./map.mjs');
+const { summariseRuns, snapshotOf: runsSnapshot, CAPS: RUN_CAPS } = await import('./runs.mjs');
 // the github-pt checks, shared with the browser (src/assets/code-core.mjs): one module, so the two cannot drift
 const { checkGh, releasesOf, recentOf, fileReadAt, CAPS: CODE_CAPS } = await import('../src/assets/code-core.mjs');
 let MAP = { on: false, note: '' };
@@ -230,8 +231,9 @@ async function snapshot() {
     const noPins = v => Array.isArray(v) ? v.map(noPins) : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).filter(([k]) => !/integrity/i.test(k)).map(([k, x]) => [k, noPins(x)])) : v;
     const { bar, obs_tz, ...keep } = reg; writeFileSync(join(SNAP, 'sites_sites.json'), JSON.stringify(noPins(keep), null, 1) + '\n'); }
   for (const p of LIB_PATHS) writeFileSync(join(SNAP, snapName(p, LIB)), JSON.stringify(await getJSON(p, LIB), null, 1) + '\n');
+  writeFileSync(join(SNAP, snapName('social/reads.json')), JSON.stringify(runsSnapshot(await getJSON('social/reads.json')), null, 1) + '\n');
   writeFileSync(join(SNAP, snapName(PLACES_FILE, PLACES_BASE)), JSON.stringify(await getJSON(PLACES_FILE, PLACES_BASE), null, 1) + '\n');
-  console.log(`snapshot: ${paths.length + LIB_PATHS.length + 1} files in ${SNAP}/`);
+  console.log(`snapshot: ${paths.length + LIB_PATHS.length + 2} files in ${SNAP}/`);
 }
 
 async function main() {
@@ -378,6 +380,16 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
     const entries = (Array.isArray(register.entries) ? register.entries : []).slice(0, 500).map(e => ({ id: clean(e.id, 60), name: clean(e.name, 100), kind: clean(e.kind, 60), status: clean(e.status, 30), url: parse(e.url) && parse(e.url).hostname === 'data.promptugal.news' ? parse(e.url).href : null }));
     const row = e => `<tr><td>${e.url ? `<a href="${esc(e.url)}">${esc(e.name || e.id)}</a>` : esc(e.name || e.id)}</td><td>${esc(e.kind)}</td><td>${esc(e.status)}</td></tr>`;
     const notRead = entries.filter(e => e.status !== 'read'), isRead = entries.filter(e => e.status === 'read');
+    // the collector's recent runs (data.b@'s social/reads.json): times, counts, read names and statuses only
+    const runsFile = await read('social/reads.json', notes), runs = summariseRuns(runsFile, when), runsFell = notes.some(n => n.startsWith('social/reads.json'));
+    if (!runs) notes.push("the collector's recent runs could not be read at this build");
+    const runsHTML = !runs ? "<h2>The collector's recent runs</h2><p>The collector's recent runs could not be read at this build.</p>" : `<h2>The collector's recent runs</h2>
+<p>Each run of data.b@PrompTugal.dinis's collector reads every organisation account and every keyword search once. Here are the last ${Math.min(RUN_CAPS.shown, runs.runs.length)} runs, newest first: how many reads worked, how many failed, and how many got a response that changed since the run before (a changed response is not always a new post). A gap between two times is a gap in the collection. Source: data.promptugal.news <a href="${API}social/reads.json">social/reads.json</a>${runsFell ? ' (from the last snapshot: the live read failed)' : ''}, read by this build at ${esc(fmt(BUILT))}; the counts are worked out here from each run's reads.</p>
+${runs.runs[0].failed ? `<p><strong>Failing in the newest run (${esc(fmt(runs.runs[0].at))}):</strong></p><ul>${runs.failing.map(f => `<li>${esc(f.name)}: HTTP ${f.status ?? '?'}${f.since < runs.runs[0].at ? (f.sinceOldest ? `, failing in every run in the file (the oldest is ${esc(fmt(f.since))}, so it may have failed for longer)` : `, failing in every run since ${esc(fmt(f.since))}`) : ''}</li>`).join('')}${runs.unlisted ? `<li>${runs.unlisted} more failed reads, not listed (no valid name, or past the 20 shown)</li>` : ''}</ul><p class="small">A failing keyword search means posts that only the search would find are missing; posts from the organisation accounts are still read.</p>` : '<p>Every read worked in the newest run.</p>'}
+<table><thead><tr><th>Run</th><th class="r">Worked</th><th class="r">Failed</th><th class="r">Changed</th></tr></thead><tbody>${runs.runs.slice(0, RUN_CAPS.shown).map(r => `<tr><td><time datetime="${r.at.toISOString()}">${esc(fmt(r.at))}</time>${r.consistent ? '' : ' (the collector\'s own counts differ)'}</td><td class="r">${r.ok}</td><td class="r">${r.failed}</td><td class="r">${r.changed}</td></tr>`).join('')}</tbody></table>`;
+    const runsMD = !runs ? ["## The collector's recent runs", '', 'Could not be read at this build.'] : ["## The collector's recent runs", '', `Source: ${API}social/reads.json${runsFell ? ' (last snapshot)' : ''}. Reads that worked / failed / got a changed response, per run, newest first.`, '',
+      ...runs.failing.map(f => `- Failing in the newest run: ${f.name}, HTTP ${f.status ?? '?'}${f.since < runs.runs[0].at ? (f.sinceOldest ? `, in every run in the file (the oldest is ${f.since.toISOString()}, so it may have failed for longer)` : `, since ${f.since.toISOString()}`) : ''}`), ...(runs.unlisted ? [`- ${runs.unlisted} more failed reads, not listed (no valid name, or past the 20 shown)`] : []), '',
+      ...runs.runs.slice(0, RUN_CAPS.shown).map(r => `- ${r.at.toISOString()}: ${r.ok} worked, ${r.failed} failed, ${r.changed} changed${r.consistent ? '' : " (the collector's own counts differ)"}`)];
     const body = `<h2>What this site is</h2>
 <p>A static site built by code (scripts/pages.mjs in <a href="${REPO}">PrompTugal__News__Signals</a>) from one source: data.promptugal.news's API. It runs no collector and asks no model. The collector that reads the platforms is data.b@PrompTugal.dinis's (sources/social/collect.mjs in PrompTugal__News__Data): it reads organisations' official accounts through each platform's official, public interface and keeps a link and metadata only. This site is led by signals.b@PrompTugal.dinis (an AI agent, Claude, with sub-agents for review); no person reviewed this version. Dinis Cruz directs the team.</p>
 <h2>The rules</h2>
@@ -401,13 +413,14 @@ ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc
 <h2>Not read, and why</h2>
 ${gaps.length ? `<ul>${gaps.map(g => `<li><strong>${esc(g.what)}</strong>: ${esc(g.why)}</li>`).join('')}</ul>` : ''}
 <p>The register of every source PrompTugal knows of, read or not, with the reasons quoted from each source's terms: ${Number(register.counts?.read) || 0} read, ${Number(register.counts?.['not-read']) || 0} not read (source: data.promptugal.news <a href="${API}sources/index.json">sources/index.json</a>). Asking each one on the record is a separate track, drafted by outreach@ and sent by a person.</p>
+${runsHTML}
 <details><summary>Sources not read (${notRead.length})</summary><table><thead><tr><th>Source</th><th>Kind</th><th>Status</th></tr></thead><tbody>${notRead.map(row).join('')}</tbody></table></details>
 <details><summary>Sources read (${isRead.length})</summary><table><thead><tr><th>Source</th><th>Kind</th><th>Status</th></tr></thead><tbody>${isRead.map(row).join('')}</tbody></table></details>
 <h2>Threat models</h2>
 <ul><li><a href="${REPO}/blob/dev/docs/threat-models/build-from-api.md">Building the pages from the API</a></li><li><a href="${REPO}/blob/dev/docs/threat-models/scheduled-rebuild.md">The Pages workflow</a></li><li><a href="${REPO}/blob/dev/docs/threat-models/browser-refresh.md">The refresh in your browser</a></li></ul>
 <h2>Page views</h2><p>This site counts page views and reading time, publicly, as promptugal.news does (assets/obs/obs.js), into its own lane "signals": no IP address kept, no cookie, no user-agent string. Do Not Track, Global Privacy Control and Pause in the footer turn it off. <a href="https://promptugal.news/newsroom/observability/index.html">What is counted</a>.</p>`;
     write('how/', shell({ rel: 'how/', title: 'How this is made | PrompTugal.news Signals', desc: 'Provenance, the sources register, and what is not read and why.', h1: 'How this is made', body, state, current: 'how/' }),
-      md('How this is made', ['Built by code from data.promptugal.news API. Organisations only; official interfaces only; posts by link; licence the platform\'s terms; Perplexity finds credited.', '', '## Not read', ...gaps.map(g => `- ${mdText(g.what)}: ${mdText(g.why)}`), ...notRead.map(e => `- ${mdText(e.name || e.id)} (${mdText(e.kind)}): ${mdText(e.status)}`)], state), 'How this is made', 'how');
+      md('How this is made', ['Built by code from data.promptugal.news API. Organisations only; official interfaces only; posts by link; licence the platform\'s terms; Perplexity finds credited.', '', '## Not read', ...gaps.map(g => `- ${mdText(g.what)}: ${mdText(g.why)}`), ...notRead.map(e => `- ${mdText(e.name || e.id)} (${mdText(e.kind)}): ${mdText(e.status)}`), '', ...runsMD], state), 'How this is made', 'how');
   }
 
   // security: this site's findings and threat models
