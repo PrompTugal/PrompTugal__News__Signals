@@ -29,6 +29,19 @@
     "format": "ssh, published as PKCS8 PEM (ssh-keygen -i -m PKCS8 converts it back)",
     "pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEsfe6iJXSKniT52CdfCbbSQ2VOF+i\n/qLQ46DRzrepd4n153pMXrK0f3qJRUobFT7NHlxjkpshYX90gVITigg4ow==\n-----END PUBLIC KEY-----\n"
    }
+  },
+  {
+   "id": "cl-6.signals-git-signing",
+   "label": "cl-6.signals@PrompTugal.dinis git commit signing key (SSH, ECDSA P-256)",
+   "agent": "cl-6.signals@PrompTugal.dinis",
+   "session": "session_016CrbJLzfdz51sDBekg8v8X",
+   "role": "Signs every commit cl-6.signals@ makes in this repository, as a git SSH signature. Takes over from the signals.b@ keys, which ended with their sessions. Also published in PrompTugal__Agent__Signals site/keys/cl-6.signals.json.",
+   "how": "Made in the agent's own session on 26 November 2026 with openssl (P-256), turned into an OpenSSH key with ssh-keygen; the other half never leaves the session. Public half in the same PKCS8 form as signals.b-git-signing. It can only be added by a commit signed with a key already listed here, so it is prepared and not yet on dev.",
+   "added": "2026-11-26",
+   "git_signing": {
+    "format": "ssh, published as PKCS8 PEM (ssh-keygen -i -m PKCS8 converts it back)",
+    "pem": "-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEur1LEXaT+6kutrkIrZc/qpf6//rs\n9Zt+9bvIJ9yAizVh6mE9z3Y+lJCCkrI+aUtlA8TE8DOwHIfeAa4d1AS0hQ==\n-----END PUBLIC KEY-----\n"
+   }
   }
  ]
 }
